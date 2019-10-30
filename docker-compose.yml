@@ -1,0 +1,33 @@
+version: "3.1"
+
+services:
+  ulearn:
+    build: .
+    ports:
+      - 9999:80
+    networks:
+      - ulearn_net
+    depends_on:
+      - db
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: ulearn
+      MYSQL_ROOT_PASSWORD: example
+    networks:
+      - ulearn_net
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - ulearn_net
+
+volumes: 
+  ulearn_src:
+networks:
+  ulearn_net:
