@@ -5,6 +5,9 @@ services:
     build: .
     ports:
       - 9999:80
+    volumes:
+      - .:/var/www/html
+      - /var/www/html/vendor
     networks:
       - ulearn_net
     depends_on:

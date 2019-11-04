@@ -19,7 +19,7 @@ class ConfigTableSeeder extends Seeder
             'id'=>1,
             'code'=>'pageHome',
             'option_key'=>'banner_title',
-            'option_value'=>'Learn courses online'
+            'option_value'=>'Universidade do Autómovel'
             ] );
                         
             Config::create( [
