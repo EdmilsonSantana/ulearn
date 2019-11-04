@@ -16,6 +16,8 @@ COPY --from=build /ulearn /var/www/html
 
 RUN a2enmod rewrite && docker-php-ext-install pdo_mysql
 
+VOLUME /var/www/html
+
 CMD php artisan migrate && php artisan db:seed && apache2-foreground
 
 
