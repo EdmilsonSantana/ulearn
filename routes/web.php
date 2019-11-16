@@ -45,6 +45,10 @@ Route::post('contact-admin', 'HomeController@contactAdmin')->name('contact.admin
 Route::get('blogs', 'HomeController@blogList')->name('blogs');
 Route::get('blog/{blog_slug}', 'HomeController@blogView')->name('blog.view');
 
+// Routes for Public API
+Route::get('api/category', 'CourseRestController@getCategories');
+Route::get('api/category/{category_id}/courses', 'CourseRestController@getCoursesByCategory');
+
 //Functions accessed by only authenticated users
 Route::group(['middleware' => 'auth'], function () {
 
@@ -53,8 +57,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('payment/success', 'PaymentController@getSuccess')->name('payment.success');
     Route::get('payment/failure', 'PaymentController@getFailure')->name('payment.failure');
-
-
 
     //Functions accessed by only students
     Route::group(['middleware' => 'role:student'], function () {

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>ULEARN LMS</title>
+        <title>Universidade do Automóvel</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="robots" content="all,follow">
@@ -22,15 +22,15 @@
     <div class="se-pre-con"></div>
     <!-- Header -->
 
-    <nav class="navbar navbar-default fixed-top">
+    <nav class="navbar navbar-default">
         <div class="row" style="flex-grow: 1;">
             <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2" id="logo">
                 <i class="fa fa-bars d-inline-block d-md-none mobile-nav"></i>
-                <a href="{{ route('home') }}" class="float-xl-right"><img src="{{ asset('frontend/img/logo.png') }}" width="100" height="23" /></a>
+                <a href="{{ route('home') }}" class="float-xl-right"><img src="{{ asset('frontend/img/logo-original.png') }}" height="60" /></a>
             </div>
-            <div class="col-md-3 col-lg-6 col-xl-6 d-none d-md-block">
-                <div class="dropdown float-left" >
-                  <span id="dropdownMenuButton" data-toggle="dropdown">Categories &nbsp;<i class="fa fa-caret-down"></i></span>
+            <div class="col-md-12 col-lg-8 col-xl-7 d-none d-md-block">
+                <div class="dropdown float-right" >
+                  <a id="dropdownMenuButton" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Categorias</a>
                     <?php 
                         $categories = SiteHelpers::active_categories();
                     ?>
@@ -45,15 +45,19 @@
                 </div>
             </div>
 
-            <div class="col-sm-5 col-md-3 col-lg-2 col-xl-2 d-none d-sm-block">
-                @if(Auth::check() && !Auth::user()->hasRole('instructor') && !Auth::user()->hasRole('admin'))
-                <span class="become-instructor" href="{{ route('login') }}" data-toggle="modal" data-target="#myModal">Become Instructor</span>
-                @endif
-            </div>
+            <div class="vertical-divider"></div>
 
-            <div class="col-6 col-sm-3 col-md-3 col-lg-2 col-xl-2">
+            <div class="no-gutters col-6 col-sm-3 col-md-3 col-lg-2 col-xl-2">
                 @guest
-                <a class="btn btn-learna" href="{{ route('login') }}">Login / Sign Up</a>
+                <div class="row float-right">
+                    <div class="col-md-6">
+                        <a class="btn btn-learna login-button" href="{{ route('login') }}">Fazer Login</a>
+
+                    </div>
+                    <div class="col-md-6">
+                        <a class="btn btn-learna register-button" href="{{ route('register') }}">Cadastre-se</a>
+                    </div>
+                </div>
                 @else
                 <div class="dropdown float-xl-left float-sm-right float-right">
                   <span id="dropdownMenuButtonRight" data-toggle="dropdown">{{ Auth::user()->first_name }} &nbsp;<i class="fa fa-caret-down"></i></span>

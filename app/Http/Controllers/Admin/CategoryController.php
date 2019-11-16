@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHP Version 7.1.7-1
  * Functions for users
@@ -10,6 +11,7 @@
  * @license   BSD Licence
  * @link      Link
  */
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -17,6 +19,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
+
 /**
  * Class contain functions for admin
  *
@@ -39,23 +42,22 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $paginate_count = 10;
-        if($request->has('search')){
+        if ($request->has('search')) {
             $search = $request->input('search');
             $categories = Category::where('name', 'LIKE', '%' . $search . '%')
-                           ->paginate($paginate_count);
-        }
-        else {
+                ->paginate($paginate_count);
+        } else {
             $categories = Category::paginate($paginate_count);
         }
-        
+
         return view('admin.categories.index', compact('categories'));
     }
 
-    public function getForm($category_id='', Request $request)
+    public function getForm($category_id = '', Request $request)
     {
-        if($category_id) {
+        if ($category_id) {
             $category = Category::find($category_id);
-        }else{
+        } else {
             $category = $this->getColumnTable('categories');
         }
         return view('admin.categories.form', compact('category'));
@@ -68,7 +70,7 @@ class CategoryController extends Controller
 
         $validation_rules = ['name' => 'required|string|max:50'];
 
-        $validator = Validator::make($request->all(),$validation_rules);
+        $validator = Validator::make($request->all(), $validation_rules);
 
         // Stop if validation fails
         if ($validator->fails()) {
@@ -94,7 +96,7 @@ class CategoryController extends Controller
 
         $category->name = $request->input('name');
         $category->icon_class = $request->input('icon_class');
-        
+
         $category->is_active = $request->input('is_active');
         $category->save();
 
@@ -106,5 +108,4 @@ class CategoryController extends Controller
         Category::destroy($category_id);
         return $this->return_output('flash', 'success', 'Category deleted successfully', 'admin/categories', '200');
     }
-
 }

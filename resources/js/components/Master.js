@@ -5,7 +5,6 @@ import SideBar from '../components/SideBar';
 import CourseContent from '../components/CourseContent';
 import Resource from '../components/Resource';
 
-
 export default class Master extends Component {
     constructor(props) {
        super(props);
