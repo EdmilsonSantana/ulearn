@@ -1,7 +1,7 @@
 @extends('layouts.frontend.index')
 @section('content')
 <!-- content start -->
-<div class="container-fluid p-0 home-content">
+<div class="container-fluid p-0">
     <!-- banner start -->
     <div class="homepage-slide-blue d-flex flex-column justify-content-center">
 
@@ -28,60 +28,38 @@
     </div>
     <!-- banner end -->
 
-    <!-- Courses by Category Start -->
 
-    <div id="course_tabs" data-site-url='{{ url("/") }}'></div>
 
-    <!-- Courses by Category Ends -->
 
-    <!-- dummy block start -->
-    <article class="learn-block">
-        <div class="container">
+    <div class="learn-block d-flex flex-nowrap">
+        <div class="p-2 about-courses-block">
+            <h3 class="dblock-heading">Uma seleção de cursos especializados</h3>
+            <p class="dblock-text">Aprenda com profissionais capacitados e especializados no assunto</p>
+        </div>
+        <div class="p-2 flex-shrink-1">
+            <!-- Courses by Category Start -->
+            <div id="course_tabs" data-site-url='{{ url("/") }}'></div>
+            <!-- Courses by Category Ends -->
+        </div>
+    </div>
+    <hr class="hr-secondary" />
+    <!-- testimonials block start -->
+    <article class="testimonials-block">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-6">
-                    <h3 class="dblock-heading">{{ Sitehelpers::get_option('pageHome', 'learn_block_title') }}</h3>
-                    <p class="dblock-text">{!! Sitehelpers::get_option('pageHome', 'learn_block_text') !!}</p>
-                    <a href="{{ route('course.list') }}" class="btn btn-ulearn">Explore Courses</a>
+                <div class="col-12 text-center mt-3">
+                    <p class="testimonials-block-title">O que dizem nossos alunos</p>
+                    <!--<p class="mt-3">{{ Sitehelpers::get_option('pageHome', 'instructor_text') }}</p>-->
                 </div>
+            </div>
 
-                <div class="col-xl-6 col-lg-6 col-md-6 vertical-align">
-                    <img class="img-fluid mt-5 mx-auto" src="{{ asset('frontend/img/landing.png') }}">
-                </div>
+            <div>
+                <div id="testimonials_list" data-site-url='{{ url("/") }}'></div>
             </div>
         </div>
     </article>
-    <!-- dummy block end -->
 
-    <!-- instructor block start -->
-    <article class="instructor-block">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center seperator-head mt-3">
-                    <h3>Our Instructors</h3>
-                    <p class="mt-3">{{ Sitehelpers::get_option('pageHome', 'instructor_text') }}</p>
-                </div>
-            </div>
-
-            <div class="row mt-4 mb-5">
-                @foreach ($instructors as $instructor)
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                    <div class="instructor-box mx-auto text-center">
-                        <a href="{{ route('instructor.view', $instructor->instructor_slug) }}">
-                            <main>
-                                <img src="@if(Storage::exists($instructor->instructor_image)){{ Storage::url($instructor->instructor_image) }}@else{{ asset('backend/assets/images/course_detail_thumb.jpg') }}@endif">
-                                <div class="col-md-12">
-                                    <h6 class="instructor-title">{{ $instructor->first_name.' '.$instructor->last_name }}</h6>
-                                    <p>{!! mb_strimwidth($instructor->biography, 0, 120, ".....") !!}</p>
-                                </div>
-                            </main>
-                        </a>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </article>
-    <!-- instructor block end -->
+    <!-- testimonials block end -->
 
 </div>
 <!-- content end -->

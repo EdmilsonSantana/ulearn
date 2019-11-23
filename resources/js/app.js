@@ -13,8 +13,11 @@ require("./bootstrap");
  */
 
 // Components
+require("popper.js");
+
 require("./components/TopBar");
 require("./components/CourseTabs");
+require("./components/TestimonialsList")
 
 // Pages 
 require("./pages/CourseEnrollPage");

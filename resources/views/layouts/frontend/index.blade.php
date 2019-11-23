@@ -22,13 +22,12 @@
     <div class="se-pre-con"></div>
     <!-- Header -->
 
-    <nav class="navbar navbar-default">
-        <div class="row" style="flex-grow: 1;">
-            <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2" id="logo">
+    <nav class="navbar-default d-flex align-items-center justify-content-between">
+            <div class="mr-auto" id="logo">
                 <i class="fa fa-bars d-inline-block d-md-none mobile-nav"></i>
                 <a href="{{ route('home') }}" class="float-xl-right"><img src="{{ asset('frontend/img/logo-original.png') }}" height="60" /></a>
             </div>
-            <div class="col-md-12 col-lg-8 col-xl-7 d-none d-md-block">
+            <div class="p-2">
                 <div class="dropdown float-right" >
                   <a id="dropdownMenuButton" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Categorias</a>
                     <?php 
@@ -45,18 +44,13 @@
                 </div>
             </div>
 
-            <div class="vertical-divider"></div>
+            <div class="p-2 vertical-divider"></div>
 
-            <div class="no-gutters col-6 col-sm-3 col-md-3 col-lg-2 col-xl-2">
+            <div class="p-2">
                 @guest
-                <div class="row float-right">
-                    <div class="col-md-6">
-                        <a class="btn btn-learna login-button" href="{{ route('login') }}">Fazer Login</a>
-
-                    </div>
-                    <div class="col-md-6">
-                        <a class="btn btn-learna register-button" href="{{ route('register') }}">Cadastre-se</a>
-                    </div>
+                <div class="d-flex justify-content-end align-items-center">
+                    <a class="btn btn-learna login-button" href="{{ route('login') }}">Fazer Login</a>
+                    <a class="btn btn-learna register-button" href="{{ route('register') }}">Cadastre-se</a>
                 </div>
                 @else
                 <div class="dropdown float-xl-left float-sm-right float-right">
@@ -83,7 +77,6 @@
 
                 @endguest
             </div>
-        </div>
     </nav>
 
     <div id="sidebar">
@@ -102,45 +95,31 @@
     @yield('content')
 
     <!-- footer start -->
+    
     <footer id="main-footer">
-        <div class="row m-0">
-            <div class="col-lg-2 col-md-4 col-sm-4 col-6 mt-3">
-                <ul>
-                    <li class="mb-1"><b>Quick Links</b></li>
-                    <li><a href="{{ route('home') }}">Home Page</a></li>
-                    <li><a href="{{ route('course.list') }}">Courses List</a></li>
-                    <li><a href="{{ route('instructor.list') }}">Instructors List</a></li>
-                    <li><a href="{{ route('blogs') }}">Blogs List</a></li>
-                </ul>
+            <div class="container-fluid">
+                <div class="row">
+                        <ul>
+                            <li><a href="{{ route('page.about') }}">Quem Somos</a></li>
+                            <li><a href="{{ route('page.contact') }}">Contato</a></li>
+                            <li><a href="{{ route('blogs') }}">Blog</a></li>
+                        </ul>
+                </div>
             </div>
-            <div class="col-lg-2 col-md-4 col-sm-4 col-6 mt-3">
-                <ul>
-                    <li class="mb-1"><b>Resources</b></li>
-                    <li><a href="{{ route('page.about') }}">About Us</a></li>
-                    <li><a href="{{ route('page.contact') }}">Contact Us</a></li>
-                    <li><a href="{{ route('register') }}">Register Page</a></li>
-                    <li><a href="{{ route('login') }}">Login Page</a></li>
-                </ul>
+            <hr />
+            <div class="container-fluid">
+            <div class="row align-items-center">
+                    <div>
+                        <img src="{{ asset('frontend/img/logo-original.png') }}" class="img-fluid" width="105" height="24">
+                    </div>
+                    <div>
+                        <span id="c-copyright">
+                            Copyright © 2019 Universidade do Automóvel.
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-2 col-md-4 col-sm-4 mt-3 d-none d-sm-block">
-                <ul>
-                    <li class="mb-1"><b>Top Categories</b></li>
-                    @foreach ($categories as $category)
-                        @if($loop->iteration <= 4)
-                            <li><a href="{{ route('course.list','category_id[]='.$category->id) }}">{{ $category->name}}</a></li>
-                        @endif
-                    @endforeach
-                    
-                </ul>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 text-center mt-4">
-                <img src="{{ asset('frontend/img/logo_footer.png') }}" class="img-fluid" width="210" height="48">
-                <br>
-                <span id="c-copyright">
-                    Copyright © 2019, Ulearn. All rights reserved.
-                </span>
-            </div>
-        </div>
+            <hr class="hr-primary"/>
     </footer>
     <!-- footer end -->
 
@@ -202,6 +181,7 @@
     <!-- The Modal end -->
     </body>
     <script src="{{ asset('frontend/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/popper.min.js') }}"></script>
     <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('frontend/js/fancybox.min.js') }}"></script>
     <script src="{{ asset('frontend/js/modernizr.js') }}"></script>

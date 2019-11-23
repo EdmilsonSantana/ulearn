@@ -6,7 +6,7 @@ import Fade from "react-reveal/Fade";
 export default class CoursesTab extends Component {
   constructor(props) {
     super(props);
-    this.state = { categories: [], courses: { data: [], preferences: {} } };
+    this.state = {activeIndex: 0, categories: [], courses: { data: [], preferences: {} } };
   }
 
   getCategories() {
@@ -14,6 +14,7 @@ export default class CoursesTab extends Component {
       .get(`${this.props.site_url}/api/category`)
       .then(response => {
         this.setState({ categories: response.data });
+        this.getCoursesByCategory(response.data[this.state.activeIndex].id);
       })
       .catch(function(error) {
         console.log(error);
@@ -22,11 +23,9 @@ export default class CoursesTab extends Component {
   }
 
   getCoursesByCategory(categoryId) {
-    console.log(categoryId);
     axios
       .get(`${this.props.site_url}/api/category/${categoryId}/courses`)
       .then(response => {
-        console.log(response.data);
         this.setState({ courses: response.data });
       })
       .catch(function(error) {
@@ -42,22 +41,21 @@ export default class CoursesTab extends Component {
   render() {
     return (
       <React.Fragment>
-        <nav className="clearfix secondary-nav seperator-head">
-          <ul className="secondary-nav-ul list mx-auto nav">
-            {this.state.categories.map((category, index) => (
-              <li key={index} className="nav-item">
-                <a
-                  data-toggle="tab"
-                  role="tab"
-                  onClick={() => this.getCoursesByCategory(category.id)}
-                  className={`nav-link ${index == 0 ? "active" : ""}`}
-                >
-                  {category.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="d-flex justify-content-start flex-row flex-wrap course-tab-list">
+          {this.state.categories.map((category, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                console.log(index);
+                this.setState({activeIndex: index});
+                this.getCoursesByCategory(category.id);
+              }}
+              className={`btn btn-link course-tab-item ${index == this.state.activeIndex ? "active" : ""}`}
+            >
+              {category.name}
+            </button>
+          ))}
+        </div>
 
         <div className="container tab-content">
           <div className="row">
@@ -90,7 +88,9 @@ export default class CoursesTab extends Component {
                 </div>
               ))
             ) : (
-              <div className="empty-courses-message">Aguardem novos cursos em breve!</div>
+              <div className="empty-courses-message">
+                Aguardem novos cursos em breve!
+              </div>
             )}
           </div>
         </div>

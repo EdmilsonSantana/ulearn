@@ -36,7 +36,7 @@ class CourseRestController extends Controller
 
     public function getCategories()
     {
-        return response()->json(Category::where('is_active', 1)->get());
+        return response()->json(Category::where('is_active', 1)->limit(7)->get());
     }
 
     public function getCoursesByCategory($category_id)
@@ -50,7 +50,7 @@ class CourseRestController extends Controller
             ->where('courses.is_active', 1)
             ->where('courses.category_id', '=', $category_id)
             ->groupBy('courses.id')
-            ->limit(5)
+            ->limit(3)
             ->get();
 
         $courses = $courses->map(function ($course) {
