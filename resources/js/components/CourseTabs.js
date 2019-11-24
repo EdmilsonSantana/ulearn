@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import CourseCard from "./CourseCard";
-import Fade from "react-reveal/Fade";
+import Reveal from "react-reveal/Reveal";
 
 export default class CoursesTab extends Component {
   constructor(props) {
@@ -57,15 +57,15 @@ export default class CoursesTab extends Component {
           ))}
         </div>
 
-        <div className="container tab-content">
-          <div className="row">
+        <div className="tab-content">
+          <div className="d-flex">
             {this.state.courses.data.length > 0 ? (
               this.state.courses.data.map((course, index) => (
                 <div
                   key={index}
-                  className="col-xl-3 col-lg-4 col-md-6 col-sm-6"
+                  className="p-2"
                 >
-                  <Fade left>
+                  <Reveal>
                     <CourseCard
                       title={course.course_title}
                       average_rating={course.average_rating}
@@ -84,7 +84,7 @@ export default class CoursesTab extends Component {
                       }
                       strikeOutPrice={course.strike_out_price}
                     />
-                  </Fade>
+                  </Reveal>
                 </div>
               ))
             ) : (

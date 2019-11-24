@@ -389,6 +389,7 @@ li > a#loginLink {
   text-decoration: none;
 }
 
+
 .course-block {
   width: 260px;
   height: 323px;
@@ -406,6 +407,7 @@ li > a#loginLink {
 .course-block main {
   height: 281px;
 }
+
 .course-block footer {
   background-color: #ecf5f8;
   height: 40px;
@@ -466,33 +468,59 @@ footer .c-row {
   font-size: 0.8rem;
 }
 
+@media (min-width: 992px) {
+  .learn-block {
+    display: flex;
+  }
+}
+
 .learn-block {
   background-color: #fff;
-  min-height: 400px;
+  min-height: 510px;
   padding: 20px;
 }
 
 
-.about-courses-block {
-  border-right: 1px solid #dedfe0;
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: column;
-  justify-content: center;
-  margin: 15px 15px 28px 0;
-  padding: 0 32px;
+@media (min-width: 992px) {
+
+  .about-courses-block {
+    border-right: 1px solid #dedfe0;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    margin: 15px 15px 28px 0;
+    padding: 0 32px !important;
+    max-width: calc(216px + 15px);
+  }
 }
+
+@media (min-width: 1200px) {
+  .about-courses-block  {
+    max-width: calc(216px * 2 + 15px);
+  }
+}
+
 
 .dblock-heading {
   font-size: 19px;
   font-weight: 600;
   margin-top: 70px;
+  display: none;
 }
 .dblock-text {
   font-size: 16px;
   font-weight: 400;
   margin-top: 20px;
+  display: none;
 }
+
+@media (min-width: 992px) { 
+  .dblock-heading, .dblock-text {
+    display: block;
+  }
+}
+
 .learn-block .btn-ulearn {
   margin-top: 15px;
 }

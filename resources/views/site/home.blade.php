@@ -31,12 +31,12 @@
 
 
 
-    <div class="learn-block d-flex flex-nowrap">
-        <div class="p-2 about-courses-block">
+    <div class="learn-block">
+        <div class="about-courses-block">
             <h3 class="dblock-heading">Uma seleção de cursos especializados</h3>
             <p class="dblock-text">Aprenda com profissionais capacitados e especializados no assunto</p>
         </div>
-        <div class="p-2 flex-shrink-1">
+        <div class="">
             <!-- Courses by Category Start -->
             <div id="course_tabs" data-site-url='{{ url("/") }}'></div>
             <!-- Courses by Category Ends -->
