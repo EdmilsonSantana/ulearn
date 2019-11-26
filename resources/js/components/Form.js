@@ -1,15 +1,10 @@
-@extends('layouts.frontend.index')
+import React from 'react';
 
-@section('content')
-<!-- content start -->
+export default class Form extends React.Component {
 
-<!-- account block start -->
-
-<div class="login-page">
-
-    <div class="d-flex flex-row justify-content-center">
-        <div class="p-2">
-        <form id="loginForm" class="form-horizontal" method="POST" action="{{ route('login') }}">
+    render() {
+        return (
+            <form id={this.props.id} class="form-horizontal" method="POST" action={this.props.action}>
             {{ csrf_field() }}
             <h1 class="title">Já é nosso Aluno ?</h1>
             <p class="subtitle">Faça seu login e boa aula!</p>
@@ -40,38 +35,6 @@
                 <a href="{{ route('password.request') }}">Esqueci minha senha</a>
             </div>
         </form>
-        </div>
-    </div>
-
-    <!-- account block end -->
-</div>
-<!-- content end -->
-@endsection
-
-@section('javascript')
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#loginForm").validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true
-                },
-                password: {
-                    required: true
-                }
-            },
-            messages: {
-                email: {
-                    required: 'The email field is required.',
-                    email: 'The email must be a valid email address.'
-                },
-                password: {
-                    required: 'The password field is required.'
-                }
-            }
-        });
-
-    });
-</script>
-@endsection
+        );
+    }
+}
