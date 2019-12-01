@@ -134,6 +134,25 @@ if it's not present, don't show loader */
   color: white !important;
 }
 
+.btn-link {
+  font-size: 0.9rem;
+  color: #505763;
+  background-color: transparent;
+  padding: 10px 16px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  height: 45px;
+  text-align: center;
+}
+
+.btn-link:hover, btn-link:active {
+  text-decoration: none;
+  color: inherit;
+  background: rgba(20,23,28,.05);
+  border-color: rgba(20,23,28,.05);
+}
+
 .btn-ulearn-cview,
 .btn-ulearn-cview:hover,
 .btn-ulearn-cview:focus {
@@ -606,11 +625,17 @@ footer .c-row {
 
 .subpage-slide-blue {
   color: #fff;
-  background-color: #28328c;
+  background-color: #0b96e9;
   height: 150px;
   position: relative;
+  padding: 32px 0 0;
 }
 
+.subpage-slide-blue h1 {
+  font-size: 30px;
+  font-weight: 400;
+  margin: 0;
+}
 .subpage-slide-blue h1 {
   padding-top: 45px;
 }
@@ -1383,6 +1408,12 @@ a.clear-filters:hover {
 }
 #my-courses {
   min-height: 192px;
+  
+}
+
+.courses-panel {
+  background-color: #f9fbfd;
+  padding-bottom: 100px;
 }
 
 .carousel-slider-container {
@@ -1473,4 +1504,18 @@ a.clear-filters:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
   min-width: 1px;
+}
+
+.dropdown>.dropdown-menu {
+  top: 200%;
+  transition: 0.3s all ease-in-out;
+}
+.dropdown:hover>.dropdown-menu {
+  display: block;
+  top: 100%;
+}
+
+.dropdown>.dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+    pointer-events: none;
 }

@@ -29,11 +29,11 @@
             </div>
             <div class="p-2">
                 <div class="dropdown float-right" >
-                  <a id="dropdownMenuButton" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Categorias</a>
+                  <a id="dropdownMenu" class="btn btn-secondary btn-link dropdown-toggle" data-toggle="dropdown">Categorias</a>
                     <?php 
                         $categories = SiteHelpers::active_categories();
                     ?>
-                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                 <div class="dropdown-menu" aria-labelledby="dropdownMenu">
                     @foreach ($categories as $category)
                         <a class="dropdown-item" href="{{ route('course.list','category_id[]='.$category->id) }}">
                             <i class="fa {{ $category->icon_class }} category-menu-icon"></i>
@@ -46,31 +46,33 @@
 
             <div class="p-2 vertical-divider"></div>
 
-            <div class="p-2">
+            <div class="">
                 @guest
                 <div class="d-flex justify-content-end align-items-center">
                     <a class="btn btn-learna login-button" href="{{ route('login') }}">Fazer Login</a>
                     <a class="btn btn-learna btn-learna-primary" href="{{ route('register') }}">Cadastre-se</a>
                 </div>
                 @else
-                <div class="dropdown float-xl-left float-sm-right float-right">
-                  <span id="dropdownMenuButtonRight" data-toggle="dropdown">{{ Auth::user()->first_name }} &nbsp;<i class="fa fa-caret-down"></i></span>
+                <div class="d-flex justify-content-end align-items-center">
+                 <a class="btn btn-secondary btn-link" href="{{ route('my.courses') }}" >
+                     <i class="fa fa-graduation-cap"></i> Meus cursos
+                 </a>
+
+                 <a class="btn btn-secondary btn-link" href="{{ route('logOut') }}" >
+                     <i class="fa fa-sign-out-alt"></i> Sair
+                 </a>
+                 <!--
+                  <span id="dropdownMenuButtonRight" class="btn btn-secondary btn-link" data-toggle="dropdown">{{ Auth::user()->first_name }} &nbsp;<i class="fa fa-caret-down"></i></span>
                     
                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtonRight">
-                    
+                    -->
+                 <!--
                     @if(Auth::user()->hasRole('instructor'))
                     <a class="dropdown-item" href="{{ route('instructor.dashboard') }}" >
                         <i class="fa fa-sign-out-alt"></i> Instructor
                     </a>
                     @endif
-
-                    <a class="dropdown-item" href="{{ route('my.courses') }}" >
-                        <i class="fa fa-sign-out-alt"></i> My Courses
-                    </a>
-
-                    <a class="dropdown-item" href="{{ route('logOut') }}" >
-                        <i class="fa fa-sign-out-alt"></i> Logout
-                    </a>
+                    -->
                     
                   </div>
                 </div>
@@ -201,6 +203,9 @@
     <script type="text/javascript">
         $(document).ready(function()
         {   
+
+            $('#dropdownMenu:hover').dropdown('toggle');
+            
             /* Delete record */
             $('.delete-record').click(function(event)
             {
