@@ -12,9 +12,8 @@
             <div class="counter counter-md counter-inverse text-left">
               <div class="counter-number-group">
                 <span class="counter-number">{{ $metrics['students'] }}</span>
-                <span class="counter-number-related text-capitalize">students</span>
+                <span class="counter-number-related text-capitalize">{{ str_plural('aluno', $metrics['students'])}}</span>
               </div>
-              <div class="counter-label text-capitalize">in total</div>
             </div>
           </div>
           <!-- End Card -->
@@ -27,9 +26,8 @@
             <div class="counter counter-md counter-inverse text-left">
               <div class="counter-number-group">
                 <span class="counter-number">{{ $metrics['instructors'] }}</span>
-                <span class="counter-number-related text-capitalize">instructors</span>
+                <span class="counter-number-related text-capitalize">{{ str_plural('instrutor', $metrics['instructors']) }}</span>
               </div>
-              <div class="counter-label text-capitalize">in total</div>
             </div>
           </div>
           <!-- End Card -->
@@ -42,9 +40,8 @@
             <div class="counter counter-md counter-inverse text-left">
               <div class="counter-number-group">
                 <span class="counter-number">{{ $metrics['courses'] }}</span>
-                <span class="counter-number-related text-capitalize">courses</span>
+                <span class="counter-number-related text-capitalize">{{str_plural('curso', $metrics['courses'])}}</span>
               </div>
-              <div class="counter-label text-capitalize">in total</div>
             </div>
           </div>
           <!-- End Card -->
@@ -54,19 +51,19 @@
     <div class="panel">
         <div class="panel-heading">
                 <div class="panel-title">
-                <h4>Recently added courses</h4>
+                <h4>Cursos adicionados recentemente</h4>
                 </div>
         </div>
         <div class="panel-body">
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
-                    <th>Sl.no</th>
-                    <th>Title</th>
+                    <th>N.º</th>
+                    <th>Título</th>
                     <th>Slug</th>
-                    <th>Category</th>
-                    <th>Instructor</th>
-                    <th>Price</th>
+                    <th>Categoria</th>
+                    <th>Instrutor</th>
+                    <th>Preço</th>
                     <th>Status</th>
                     </tr>
                 </thead>
@@ -78,12 +75,12 @@
                     <td>{{ $course->course_slug }}</td>
                     <td>{{ $course->category_name }}</td>
                     <td>{{ $course->instructor_name }}</td>
-                    <td>{{ $course->price ? $course->price : 'Free' }}</td>
+                    <td>{{ $course->price ? $course->price : 'Grátis' }}</td>
                     <td>
                         @if($course->is_active)
-                        <span class="badge badge-success">Active</span>
+                        <span class="badge badge-success">Ativo</span>
                         @else
-                        <span class="badge badge-danger">Inactive</span>
+                        <span class="badge badge-danger">Inativo</span>
                         @endif
                     </td>
                     </tr>

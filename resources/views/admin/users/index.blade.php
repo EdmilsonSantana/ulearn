@@ -3,9 +3,9 @@
 <div class="page-header">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Users Management</li>
+    <li class="breadcrumb-item active">Usuários</li>
   </ol>
-  <h1 class="page-title">Users Management</h1>
+  <h1 class="page-title">Usuários</h1>
 </div>
 
 <div class="page-content">
@@ -13,7 +13,7 @@
 <div class="panel">
         <div class="panel-heading">
             <div class="panel-title">
-              <a href="{{ route('admin.getForm') }}" class="btn btn-success btn-sm"><i class="icon wb-plus" aria-hidden="true"></i> Add User</a>
+              <a href="{{ route('admin.getForm') }}" class="btn btn-success btn-sm"><i class="icon wb-plus" aria-hidden="true"></i> Novo</a>
             </div>
           
           <div class="panel-actions">
