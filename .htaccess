@@ -9,7 +9,7 @@ RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)/$ /$1 [L,R=301]
 
-RewriteCond %{REQUEST_URI} !(\.css|\.otf|\.eot|\.ttf|\.woff|\.woff2|\.js|\.png|\.jpeg|\.jpg|\.gif|robots\.txt)$ [NC]
+RewriteCond %{REQUEST_URI} !(\.css|\.otf|\.eot|\.ttf|\.woff|\.woff2|\.js|\.png|\.svg|\.jpeg|\.jpg|\.gif|robots\.txt)$ [NC]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [L]

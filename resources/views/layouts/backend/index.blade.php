@@ -9,7 +9,7 @@
   <meta name="author" content="">
   <meta name="_token" content="{!! csrf_token() !!}"/>
 
-  <title>ULEARN</title>
+  <title>Uniautomóvel</title>
 
   <link rel="apple-touch-icon" href="{{ asset('backend/assets/images/apple-touch-icon.png') }}">
   <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico ') }}">
@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min599c.css?v4.0.2') }}">
   <link rel="stylesheet" href="{{ asset('backend/css/bootstrap-extend.min599c.css?v4.0.2') }}">
   <link rel="stylesheet" href="{{ asset('backend/assets/css/site.min599c.css?v4.0.2') }}">
+  <link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
 
   
 
@@ -61,8 +62,8 @@
         <i class="icon wb-more-horizontal" aria-hidden="true"></i>
       </button>
       <div class="navbar-brand navbar-brand-center">
-        <img class="navbar-brand-logo" src="{{ asset('backend/assets/images/b_logo.png') }}" title="ULEARN">
-        <span class="navbar-brand-text hidden-xs-down"> ULEARN</span>
+        <img class="navbar-brand-logo" src="{{ asset('backend/assets/images/logo.png') }}" title="Uniautomóvel">
+        <span class="navbar-brand-text hidden-xs-down">Uniautomóvel</span>
       </div>
       <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-search"
         data-toggle="collapse">
@@ -86,9 +87,9 @@
               </span>
             </a>
             <div class="dropdown-menu" role="menu">
-              <a class="dropdown-item" href="{{ url('/') }}" role="menuitem"><i class="icon fas fa-home" aria-hidden="true"></i> Home Page</a>
+              <a class="dropdown-item" href="{{ url('/') }}" role="menuitem"><i class="icon fas fa-home" aria-hidden="true"></i>Home</a>
               <div class="dropdown-divider" role="presentation"></div>
-              <a class="dropdown-item" href="{{ route('logOut') }}" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
+              <a class="dropdown-item" href="{{ route('logOut') }}" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i>Sair</a>
             </div>
           </li>
           
@@ -132,7 +133,7 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="site-footer-legal">© {{ date('Y') }} <a href="javascript:void(0)">ULEARN</a></div>
+    <div class="site-footer-legal">© {{ date('Y') }} Universidade do Automóvel.</div>
   </footer>
   <!-- Core  -->
   <script src="{{ asset('backend/vendor/babel-external-helpers/babel-external-helpers599c.js?v4.0.2') }}"></script>

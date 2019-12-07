@@ -2,10 +2,10 @@
 
 @charset "UTF-8";
     .site-navbar {
-    background-color: #3e8ef7;
+    background-color: #2F4550;
 }
 .site-navbar .navbar-header {
-    color: #fff;
+    color: #526069;
     background-color: transparent;
 }
 @media (min-width:768px) {
@@ -1086,6 +1086,7 @@ body.site-gridmenu-active {
     height: 44px;
     padding: 10px 30px;
     background-color: rgba(0, 0, 0, .02);
+    color: #414146;
     border-top: 1px solid #e4eaec;
 }
 .site-footer::after {
