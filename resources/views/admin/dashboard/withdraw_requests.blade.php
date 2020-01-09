@@ -2,11 +2,7 @@
 @section('content')
 
 <div class="page-header">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('instructor.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Withdraw Requests</li>
-  </ol>
-  <h1 class="page-title">Withdraw Requests</h1>
+  <h1 class="page-title">Pedidos</h1>
 </div>
 
 <div class="page-content">
@@ -22,38 +18,44 @@
           <table class="table table-hover table-striped w-full">
             <thead>
               <tr>
-                <th>Sl.no</th>
-                <th>Instructor</th>
-                <th>PayPal ID</th>
-                <th>Amount</th>
-                <th>Requested On</th>
+                <th>N.º</th>
+                <th>Instrutor</th>
+                <th>Paypal ID</th>
+                <th>Preço</th>
+                <th>Realizado em</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($withdraw_requests as $withdraw_request)
-              <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $withdraw_request->instructor->first_name.' '.$withdraw_request->instructor->last_name }}</td>
-                <td>{{ $withdraw_request->paypal_id }}</td>
-                <td>{{ $withdraw_request->amount }}</td>
-                <td>{{ $withdraw_request->created_at->format('d/m/Y h:i A') }}</td>
-                <td>{{ $withdraw_request->status ? 'Completed' : 'Pending' }}</td>
-                <td>
-                    @if($withdraw_request->status)
-                    <button class="btn btn-primary btn-sm" >
-                        <i class="icon wb-thumb-up" aria-hidden="true"></i> 
-                        Approved
-                    </button>
-                    @else
-                    <a href="{{ route('admin.approve.withdraw.request', $withdraw_request->id) }}" class="btn btn-success btn-sm approve-request">
-                        <i class="icon wb-check" aria-hidden="true"></i>Approve
-                    </a>
-                    @endif
-                </td>
-              </tr>
-              @endforeach
+              @if(count($withdraw_requests) > 0)
+                @foreach($withdraw_requests as $withdraw_request)
+                <tr>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $withdraw_request->instructor->first_name.' '.$withdraw_request->instructor->last_name }}</td>
+                  <td>{{ $withdraw_request->paypal_id }}</td>
+                  <td>{{ $withdraw_request->amount }}</td>
+                  <td>{{ $withdraw_request->created_at->format('d/m/Y h:i A') }}</td>
+                  <td>{{ $withdraw_request->status ? 'Concluído' : 'Pendente' }}</td>
+                  <td>
+                      @if($withdraw_request->status)
+                      <button class="btn btn-primary btn-sm" >
+                          <i class="icon wb-thumb-up" aria-hidden="true"></i> 
+                          Aprovar
+                      </button>
+                      @else
+                      <a href="{{ route('admin.approve.withdraw.request', $withdraw_request->id) }}" class="btn btn-success btn-sm approve-request">
+                          <i class="icon wb-check" aria-hidden="true"></i>Aprovado
+                      </a>
+                      @endif
+                  </td>
+                </tr>
+                @endforeach
+              @else
+                <tr>
+                  <td colspan="7">Não existem pedidos realizados.</td>
+                </tr>
+              @endif
             </tbody>
           </table>
           

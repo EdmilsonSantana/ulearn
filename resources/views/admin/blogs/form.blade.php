@@ -55,28 +55,23 @@ figure figcaption {
 }
 </style>
 <div class="page-header">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('admin.blogs') }}">Blogs</a></li>
-    <li class="breadcrumb-item active">Add</li>
-  </ol>
-  <h1 class="page-title">Add Blog</h1>
+  <h1 class="page-title">Adicionar Blog</h1>
 </div>
 
 <div class="page-content">
 
 <div class="panel">
   <div class="panel-body">
-    <form method="POST" action="{{ route('admin.saveBlog') }}" id="blogForm" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.saveBlog') }}" class="register-form" id="blogForm" enctype="multipart/form-data">
       {{ csrf_field() }}
       <input type="hidden" name="blog_id" value="{{ $blog->id }}">
       <input type="hidden" name="old_blog_image" value="{{ $blog->blog_image }}">
       <div class="row">
       
         <div class="form-group col-md-7">
-          <label class="form-control-label">Blog Title <span class="required">*</span></label>
+          <label class="form-control-label">Título <span class="required">*</span></label>
           <input type="text" class="form-control" name="blog_title" 
-            placeholder="Blog Title" value="{{ $blog->blog_title }}" />
+            placeholder="Título" value="{{ $blog->blog_title }}" />
             @if ($errors->has('blog_title'))
                 <label class="error" for="blog_title">{{ $errors->first('blog_title') }}</label>
             @endif
@@ -88,11 +83,11 @@ figure figcaption {
         <div>
           <div class="radio-custom radio-default radio-inline">
             <input type="radio" id="inputBasicActive" name="is_active" value="1" @if($blog->is_active) checked @endif />
-            <label for="inputBasicActive">Active</label>
+            <label for="inputBasicActive">Ativo</label>
           </div>
           <div class="radio-custom radio-default radio-inline">
             <input type="radio" id="inputBasicInactive" name="is_active" value="0" @if(!$blog->is_active) checked @endif/>
-            <label for="inputBasicInactive">Inactive</label>
+            <label for="inputBasicInactive">Inativo</label>
           </div>
         </div>
       </div>
@@ -101,14 +96,14 @@ figure figcaption {
 
       <div class="row">
             <div class="form-group col-md-7">
-                <label class="form-control-label">Description</label>
+                <label class="form-control-label">Descrição</label>
                 <textarea name="description">
                     {{ $blog->description }}
                 </textarea>
             </div>
 
             <div class="form-group col-md-5">
-                <label class="form-control-label">Blog Image</label>
+                <label class="form-control-label">Imagem</label>
                 
                 <label class="cabinet center-block">
                     <figure class="course-image-container">
@@ -119,9 +114,9 @@ figure figcaption {
                 </label>
                 <input type="hidden" name="blog_image_base64" id="blog_image_base64">
                 <span style="font-size: 10px;">
-                    Supported File Formats: jpg,jpeg,png 
-                    <br>Dimesnion: 825px X 326px
-                    <br> Max File Size: 1MB
+                    Formatos suportados: jpg,jpeg,png 
+                    <br>Dimensões: 825px X 326px
+                    <br>Tamanho Máximo: 1MB
                 </span>
 
             </div>
@@ -131,8 +126,8 @@ figure figcaption {
       <hr>
       <div class="form-group row">
         <div class="col-md-4">
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <button type="reset" class="btn btn-default btn-outline">Reset</button>
+            @include('admin/components/button', ['type' => 'submit', 'primary' => 'true', 'text' => 'Salvar'])
+            @include('admin/components/button', ['type' => 'reset', 'primary' => '', 'text' => 'Limpar'])
         </div>
       </div>
       

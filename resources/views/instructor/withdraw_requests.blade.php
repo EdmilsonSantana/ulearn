@@ -2,11 +2,7 @@
 @section('content')
 
 <div class="page-header">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('instructor.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Withdraw Requests</li>
-  </ol>
-  <h1 class="page-title">Withdraw Requests</h1>
+  <h1 class="page-title">Compras</h1>
 </div>
 
 <div class="page-content">

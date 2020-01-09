@@ -24,7 +24,7 @@
         <li class="site-menu-item {{ request()->is('admin/withdraw-requests') ? 'active' : '' }}">
             <a href="{{ route('admin.withdraw.requests') }}">
                 <i class="site-menu-icon fas fa-hand-holding-usd" aria-hidden="true"></i>
-                <span class="site-menu-title">Compras</span>
+                <span class="site-menu-title">Pedidos</span>
             </a>
         </li>
         <li class="site-menu-item {{ request()->is('admin/blog*') ? 'active' : '' }}">
@@ -34,7 +34,7 @@
             </a>
         </li>
 
-        <li class="site-menu-item has-sub {{ request()->is('admin/config/page-*') ? 'active open' : '' }}">
+       <!-- <li class="site-menu-item has-sub {{ request()->is('admin/config/page-*') ? 'active open' : '' }}">
             <a href="javascript:void(0)">
                 <i class="site-menu-icon wb-file" aria-hidden="true"></i>
                 <span class="site-menu-title">Páginas</span>
@@ -57,7 +57,7 @@
                   </a>
                 </li>
             </ul>
-        </li>
+        </li> -->
 
         <li class="site-menu-item has-sub {{ request()->is('admin/config/setting-*') ? 'active open' : '' }}">
             <a href="javascript:void(0)">
@@ -66,11 +66,11 @@
                 <span class="site-menu-arrow"></span>
             </a>
             <ul class="site-menu-sub">
-                <li class="site-menu-item {{ request()->is('admin/config/setting-general') ? 'active' : '' }}">
+               <!-- <li class="site-menu-item {{ request()->is('admin/config/setting-general') ? 'active' : '' }}">
                   <a href="{{ route('admin.settingGeneral') }}">
                     <span class="site-menu-title">Geral</span>
                   </a>
-                </li>
+                </li> -->
                 <li class="site-menu-item {{ request()->is('admin/config/setting-payment') ? 'active' : '' }}">
                   <a href="{{ route('admin.settingPayment') }}">
                     <span class="site-menu-title">Pagamento</span>
