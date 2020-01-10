@@ -31,7 +31,7 @@
             </div>
 
             <div class="form-group col-md-3">
-                <label class="form-control-label">Modo de Teste</label>
+                <label class="form-control-label">Modo de Testes</label>
                 <div>
                   <div class="radio-custom radio-default radio-inline">
                     <input type="radio" id="inputBasicActive" name="test_mode" value="1" @if(!isset($config['test_mode'])) checked @endif @if(isset($config['test_mode']) && $config['test_mode'] == 1) checked @endif/>

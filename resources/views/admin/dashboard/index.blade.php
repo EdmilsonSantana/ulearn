@@ -5,46 +5,28 @@
 </div>
 <div class="page-content container-fluid">
     <div class="row">
-    <div class="col-md-4">
-          <!-- Card -->
-          <div class="card card-block p-30 bg-red-600">
-            <div class="card-watermark darker font-size-80 m-15"><i class="fa fa-chalkboard" aria-hidden="true"></i></div>
-            <div class="counter counter-md counter-inverse text-left">
-              <div class="counter-number-group">
-                <span class="counter-number">{{ $metrics['students'] }}</span>
-                <span class="counter-number-related text-capitalize">{{ str_plural('aluno', $metrics['students'])}}</span>
-              </div>
-            </div>
-          </div>
-          <!-- End Card -->
+        <div class="col-md-4">
+         
+
+          @include('admin/components/card', ['bg_color' => 'red', 
+                                             'icon' => 'fa fa-chalkboard',
+                                             'metric' => $metrics['students'],
+                                             'label' => 'aluno'])
         </div>
 
         <div class="col-md-4">
-          <!-- Card -->
-          <div class="card card-block p-30 bg-blue-600">
-            <div class="card-watermark darker font-size-80 m-15"><i class="fas fa-bullhorn" aria-hidden="true"></i></div>
-            <div class="counter counter-md counter-inverse text-left">
-              <div class="counter-number-group">
-                <span class="counter-number">{{ $metrics['instructors'] }}</span>
-                <span class="counter-number-related text-capitalize">{{ str_plural('instrutor', $metrics['instructors']) }}</span>
-              </div>
-            </div>
-          </div>
-          <!-- End Card -->
+          @include('admin/components/card', ['bg_color' => 'blue', 
+                                             'icon' => 'fas fa-bullhorn', 
+                                             'metric' => $metrics['instructors'],
+                                             'label' => 'instrutor'])
         </div>
 
         <div class="col-md-4">
-          <!-- Card -->
-          <div class="card card-block p-30 bg-green-600">
-            <div class="card-watermark darker font-size-60 m-15"><i class="far fa-play-circle" aria-hidden="true"></i></div>
-            <div class="counter counter-md counter-inverse text-left">
-              <div class="counter-number-group">
-                <span class="counter-number">{{ $metrics['courses'] }}</span>
-                <span class="counter-number-related text-capitalize">{{str_plural('curso', $metrics['courses'])}}</span>
-              </div>
-            </div>
-          </div>
-          <!-- End Card -->
+          
+          @include('admin/components/card', ['bg_color' => 'green', 
+                                             'icon' => 'far fa-play-circle', 
+                                             'metric' => $metrics['courses'],
+                                             'label' => 'curso'])
         </div>
     </div>
 
@@ -75,7 +57,7 @@
                     <td>{{ $course->course_slug }}</td>
                     <td>{{ $course->category_name }}</td>
                     <td>{{ $course->instructor_name }}</td>
-                    <td>{{ $course->price ? $course->price : 'Grátis' }}</td>
+                    <td>{{ $course->price ? $course->price : 'Gratuito' }}</td>
                     <td>
                         @if($course->is_active)
                         <span class="badge badge-success">Ativo</span>

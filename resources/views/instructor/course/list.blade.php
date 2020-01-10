@@ -1,11 +1,7 @@
 @extends('layouts.backend.index')
 @section('content')
 <div class="page-header">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('instructor.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Courses</li>
-  </ol>
-  <h1 class="page-title">Courses</h1>
+  <h1 class="page-title">Cursos</h1>
 </div>
 
 <div class="page-content">
@@ -13,19 +9,14 @@
 <div class="panel">
         <div class="panel-heading">
             <div class="panel-title">
-              <a href="{{ route('instructor.course.info') }}" class="btn btn-success btn-sm"><i class="icon wb-plus" aria-hidden="true"></i> Add Course</a>
+              @include('admin/components/link', 
+                      ['link' => route('instructor.course.info'), 'text' => 'Novo'])
             </div>
           
           <div class="panel-actions">
-          <form method="GET" action="{{ route('instructor.course.list') }}">
-              <div class="input-group">
-                <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ Request::input('search') }}">
-                <span class="input-group-btn">
-                  <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-original-title="Search"><i class="icon wb-search" aria-hidden="true"></i></button>
-                  <a href="{{ route('instructor.course.list') }}" class="btn btn-danger" data-toggle="tooltip" data-original-title="Clear Search"><i class="icon wb-close" aria-hidden="true"></i></a>
-                </span>
-              </div>
-          </form>
+        
+            @include('admin/components/search', ['action' => route('instructor.course.list')])
+
           </div>
         </div>
         
@@ -33,13 +24,13 @@
           <table class="table table-hover table-striped w-full">
             <thead>
               <tr>
-                <th>Sl.no</th>
-                <th>Title</th>
+                <th>N.º</th>
+                <th>Título</th>
                 <th>Slug</th>
-                <th>Category</th>
-                <th>Price</th>
+                <th>Categoria</th>
+                <th>Preço</th>
                 <th>Status</th>
-                <th>Actions</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody>
@@ -49,20 +40,20 @@
                 <td>{{ $course->course_title }}</td>
                 <td>{{ $course->course_slug }}</td>
                 <td>{{ $course->category_name }}</td>
-                <td>{{ $course->price ? $course->price : 'Free' }}</td>
+                <td>{{ $course->price ? $course->price : 'Gratuito' }}</td>
                 <td>
                   @if($course->is_active)
-                  <span class="badge badge-success">Active</span>
+                  <span class="badge badge-success">Ativo</span>
                   @else
-                  <span class="badge badge-danger">Inactive</span>
+                  <span class="badge badge-danger">Inativo</span>
                   @endif
                 </td>
                 <td>
-                  <a href="{{ route('instructor.course.info.edit', $course->id) }}" class="btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Edit" >
+                  <a href="{{ route('instructor.course.info.edit', $course->id) }}" class="btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Editar" >
                     <i class="icon wb-pencil" aria-hidden="true"></i>
                   </a>
 
-                  <a href="{{ url('instructor-course-delete/'.$course->id) }}" class="delete-record btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Delete" >
+                  <a href="{{ url('instructor-course-delete/'.$course->id) }}" class="delete-record btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Remover" >
                     <i class="icon wb-trash" aria-hidden="true"></i>
                   </a>
                 </td>

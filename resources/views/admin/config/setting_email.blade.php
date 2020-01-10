@@ -75,7 +75,7 @@
             menubar:false,
             statusbar: false,
             height: 280,
-            content_style: "#tinymce p{color:#76838f;}"
+            content_style: "#tinymce p{color:#414146;}"
         });
     });
 </script>

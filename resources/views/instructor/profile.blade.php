@@ -58,11 +58,7 @@ figure figcaption {
 }
 </style>
 <div class="page-header">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('instructor.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Profile</li>
-  </ol>
-  <h1 class="page-title">Profile</h1>
+  <h1 class="page-title">Perfil</h1>
 </div>
 
 <div class="page-content">
@@ -70,57 +66,57 @@ figure figcaption {
 <div class="panel">
   <div class="panel-body">
 
-    <form method="POST" action="{{ route('instructor.profile.save') }}" id="profileForm" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('instructor.profile.save') }}" class="register-form" id="profileForm" enctype="multipart/form-data">
       {{ csrf_field() }}
       <input type="hidden" name="instructor_id" value="{{ $instructor->id }}">
       <input type="hidden" name="old_course_image" value="{{ $instructor->instructor_image }}">
       <div class="row">
       
         <div class="form-group col-md-4">
-            <label class="form-control-label">First Name <span class="required">*</span></label>
+            <label class="form-control-label">Nome <span class="required">*</span></label>
             <input type="text" class="form-control" name="first_name" 
-                placeholder="First Name" value="{{ $instructor->first_name }}" />
+                placeholder="Nome" value="{{ $instructor->first_name }}" />
                 @if ($errors->has('first_name'))
                     <label class="error" for="first_name">{{ $errors->first('first_name') }}</label>
                 @endif
         </div>
 
         <div class="form-group col-md-4">
-            <label class="form-control-label">Last Name <span class="required">*</span></label>
+            <label class="form-control-label">Sobrenome <span class="required">*</span></label>
             <input type="text" class="form-control" name="last_name" 
-                placeholder="Last Name" value="{{ $instructor->last_name }}" />
+                placeholder="Sobrenome" value="{{ $instructor->last_name }}" />
                 @if ($errors->has('last_name'))
                     <label class="error" for="last_name">{{ $errors->first('last_name') }}</label>
                 @endif
         </div>
 
         <div class="form-group col-md-4">
-            <label class="form-control-label">Contact Email <span class="required">*</span></label>
+            <label class="form-control-label">E-mail <span class="required">*</span></label>
             <input type="text" class="form-control" name="contact_email" 
-                placeholder="Contact Email" value="{{ $instructor->contact_email }}" />
+                placeholder="E-mail" value="{{ $instructor->contact_email }}" />
                 @if ($errors->has('contact_email'))
                     <label class="error" for="contact_email">{{ $errors->first('contact_email') }}</label>
                 @endif
         </div>
 
         <div class="form-group col-md-4">
-            <label class="form-control-label">Telephone <span class="required">*</span></label>
+            <label class="form-control-label">Telefone <span class="required">*</span></label>
             <input type="text" class="form-control" name="telephone" 
-                placeholder="Telephone" value="{{ $instructor->telephone }}" />
+                placeholder="Telefone" value="{{ $instructor->telephone }}" />
                 @if ($errors->has('telephone'))
                     <label class="error" for="telephone">{{ $errors->first('telephone') }}</label>
                 @endif
         </div>
 
         <div class="form-group col-md-4">
-            <label class="form-control-label">Mobile </label>
+            <label class="form-control-label">Celular </label>
             <input type="text" class="form-control" name="mobile" 
-                placeholder="Mobile" value="{{ $instructor->mobile }}" />
+                placeholder="Celular" value="{{ $instructor->mobile }}" />
                 @if ($errors->has('mobile'))
                     <label class="error" for="mobile">{{ $errors->first('mobile') }}</label>
                 @endif
         </div>
-
+<!--
         <div class="form-group col-md-4">
             <label class="form-control-label">Paypal ID <span class="required">*</span></label>
             <input type="text" class="form-control" name="paypal_id" 
@@ -129,25 +125,25 @@ figure figcaption {
                     <label class="error" for="paypal_id">{{ $errors->first('paypal_id') }}</label>
                 @endif
         </div>
-
+-->
         <div class="form-group col-md-6">
-            <label class="form-control-label">Facebook Link </label>
+            <label class="form-control-label">Facebook </label>
             <input type="text" class="form-control" name="link_facebook" 
-                placeholder="Facebook Link" value="{{ $instructor->link_facebook }}" />
+                placeholder="Facebook" value="{{ $instructor->link_facebook }}" />
                 @if ($errors->has('link_facebook'))
                     <label class="error" for="link_facebook">{{ $errors->first('link_facebook') }}</label>
                 @endif
         </div>
 
         <div class="form-group col-md-6">
-            <label class="form-control-label">Linkedin Link </label>
+            <label class="form-control-label">Linkedin </label>
             <input type="text" class="form-control" name="link_linkedin" 
-                placeholder="Linkedin Link" value="{{ $instructor->link_linkedin }}" />
+                placeholder="Linkedin" value="{{ $instructor->link_linkedin }}" />
                 @if ($errors->has('link_linkedin'))
                     <label class="error" for="link_linkedin">{{ $errors->first('link_linkedin') }}</label>
                 @endif
         </div>
-
+<!--
         <div class="form-group col-md-6">
             <label class="form-control-label">Twitter Link </label>
             <input type="text" class="form-control" name="link_twitter" 
@@ -156,7 +152,8 @@ figure figcaption {
                     <label class="error" for="link_twitter">{{ $errors->first('link_twitter') }}</label>
                 @endif
         </div>
-
+-->
+<!--
         <div class="form-group col-md-6">
             <label class="form-control-label">Google Plus Link </label>
             <input type="text" class="form-control" name="link_googleplus" 
@@ -165,13 +162,13 @@ figure figcaption {
                     <label class="error" for="link_googleplus">{{ $errors->first('link_googleplus') }}</label>
                 @endif
         </div>
-
+-->
         </div>
 
         <div class="row">
         	
     		<div class="form-group col-md-4">
-	            <label class="form-control-label">Course Image</label>
+	            <label class="form-control-label">Imagem</label>
 	            
 	            <label class="cabinet center-block">
 	                <figure class="course-image-container">
@@ -180,9 +177,9 @@ figure figcaption {
 	                	<input type="file" class="item-img file center-block" name="course_image" id="course_image" />
 	                </figure>
                     <span style="font-size: 10px;">
-                    Supported File Formats: jpg,jpeg,png 
-                    <br>Dimesnion: 258px X 172px
-                    <br> Max File Size: 1MB
+                   Formatos Suportados: jpg,jpeg,png 
+                    <br>Dimensões: 258px X 172px
+                    <br> Tamanho Máximo: 1MB
                 </span>
 	            </label>
 	            <input type="hidden" name="course_image_base64" id="course_image_base64">
@@ -190,7 +187,7 @@ figure figcaption {
 	        </div>
 
 	        <div class="form-group col-md-8">
-	            <label class="form-control-label">Biography <span class="required">*</span></label>
+	            <label class="form-control-label">Sobre <span class="required">*</span></label>
 	            <textarea name="biography">
 	                {{ $instructor->biography }}
 	            </textarea>
@@ -205,8 +202,8 @@ figure figcaption {
       <hr>
       <div class="form-group row">
         <div class="col-md-4">
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <button type="reset" class="btn btn-default btn-outline">Reset</button>
+        @include('admin/components/button', ['type' => 'submit', 'primary' => 'true', 'text' => 'Salvar'])
+            @include('admin/components/button', ['type' => 'reset', 'primary' => '', 'text' => 'Limpar'])
         </div>
       </div>
       
@@ -347,7 +344,7 @@ figure figcaption {
             menubar:false,
             statusbar: false,
             height: 280,
-            content_style: "#tinymce p{color:#76838f;}"
+            content_style: "#tinymce p{color:#414146;}"
         });
 
        

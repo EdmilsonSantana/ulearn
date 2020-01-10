@@ -49,11 +49,11 @@ btn-link:active {
   border-color: rgba(20, 23, 28, 0.05);
 }
 
-
 .register-form {
-    color: #414146;
+  color: #414146;
 }
 
 .register-form input {
-    border-radius: 0;
+  border-radius: 0;
+  color: #414146;
 }

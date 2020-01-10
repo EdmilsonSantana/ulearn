@@ -59,12 +59,7 @@ figure figcaption {
 </style>
 
 <div class="page-header">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('instructor.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('instructor.course.list') }}">Courses</a></li>
-    <li class="breadcrumb-item active">Add</li>
-  </ol>
-  <h1 class="page-title">Add Course</h1>
+  <h1 class="page-title">Adicionar Curso</h1>
 </div>
 
 <div class="page-content">
@@ -76,7 +71,7 @@ figure figcaption {
     @include('instructor/course/tabs')
     
 
-    <form method="POST" action="{{ route('instructor.course.image.save') }}" id="courseForm" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('instructor.course.image.save') }}" class="register-form" id="courseForm" enctype="multipart/form-data">
       {{ csrf_field() }}
       <input type="hidden" name="course_id" value="{{ $course->id }}">
       <input type="hidden" name="old_course_image" value="{{ $course->course_image }}">
@@ -96,9 +91,9 @@ figure figcaption {
 
         <div class="form-group col-md-6 pt-4">
             <span style="font-size: 10px;">
-                Supported File Formats: jpg,jpeg,png 
-                <br>Dimesnion: 825px X 550px
-                <br> Max File Size: 1MB
+                Formatos Suportados: jpg,jpeg,png 
+                <br>Dimensões: 825px X 550px
+                <br> Tamanho Máximo: 1MB
             </span>
             <hr class="my-4">
             <div class="row">
@@ -116,7 +111,8 @@ figure figcaption {
                 </div>
 
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    @include('admin/components/button', ['type' => 'submit', 'primary' => 'true', 'text' => 'Salvar'])
+
                 </div>
             </div>
         </div>
