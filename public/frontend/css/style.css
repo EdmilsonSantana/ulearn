@@ -442,7 +442,7 @@ li > a#loginLink {
 
 .course-rating {
   font-size: 11px;
-  color: #787887;
+  color: #cfcfd3;
 }
 .course-rating .checked {
   color: #00a500;
@@ -873,33 +873,35 @@ a.social-btn {
   margin-bottom: auto;
 }
 
-.cv-category-icon {
+.course-category-icon {
   width: 30px;
   float: left;
 }
-.cv-header {
+.course-banner-header {
   font-size: 0.9rem;
   font-weight: 600;
   margin-top: 0.8rem;
 }
-.cv-header i {
+.course-banner-header i {
   font-size: 34px;
-  color: #14bef0;
+  color: #459edd;
   margin-top: 0.1rem;
 }
-.cv-category-detail {
+.course-category-detail {
   line-height: 1.2;
 }
-.cv-category-detail span {
-  color: #787887;
+.course-category-detail span {
+  font-weight: normal;
+  font-size: 0.8rem;
 }
-.cv-category-detail h4 {
-  color: #f24c0a;
-}
+
 .course-image img {
-  display: block;
   width: 100%;
-  max-width: none;
+  height: auto;
+  border:0;
+  vertical-align: middle;
+  max-width: 100%;
+  margin: 2px;
 }
 .cv-price {
   margin-top: 6px;
@@ -962,9 +964,6 @@ a.social-btn {
 }
 .course-feature header {
   height: 55px;
-  background-color: #14bef0;
-}
-.course-feature header h6 {
   text-align: center;
   padding-top: 16px;
   color: #fff;
@@ -1518,4 +1517,17 @@ a.clear-filters:hover {
 .dropdown>.dropdown-toggle:active {
   /*Without this, clicking will make it sticky*/
     pointer-events: none;
+}
+
+.course-banner {
+  background-color: #2F4550;
+  padding-bottom: 60px;
+  padding-top: 20px;
+  color: white;
+}
+
+.course-title {
+  font-size: 36px;
+  line-height: 41px;
+  font-weight: 600
 }

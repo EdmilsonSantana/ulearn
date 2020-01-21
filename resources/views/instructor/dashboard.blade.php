@@ -9,7 +9,7 @@
           @include('admin/components/card', ['bg_color' => 'red', 
                                              'icon' => 'fa fa-chalkboard',
                                              'metric' => $metrics['courses'],
-                                             'label' => 'courses'])
+                                             'label' => 'curso'])
         </div>
 
         <div class="col-md-4">
@@ -17,7 +17,7 @@
           @include('admin/components/card', ['bg_color' => 'blue', 
                                              'icon' => 'fas fa-bullhorn',
                                              'metric' => $metrics['lectures'],
-                                             'label' => 'lectures'])
+                                             'label' => 'atividade'])
         </div>
 
         <div class="col-md-4">
@@ -25,7 +25,7 @@
           @include('admin/components/card', ['bg_color' => 'green', 
                                              'icon' => 'far fa-play-circle',
                                              'metric' => $metrics['videos'],
-                                             'label' => 'videos'])
+                                             'label' => 'vídeo'])
         </div>
     </div>
 

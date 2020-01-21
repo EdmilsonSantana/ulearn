@@ -17,7 +17,7 @@
         <li class="site-menu-item {{ request()->is('instructor-course-*') ? 'active' : '' }}">
             <a href="{{ route('instructor.course.list') }}">
                 <i class="site-menu-icon fas fa-chalkboard" aria-hidden="true"></i>
-                <span class="site-menu-title">Courses</span>
+                <span class="site-menu-title">Cursos</span>
             </a>
         </li>
         <!--
