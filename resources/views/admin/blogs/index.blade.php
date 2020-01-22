@@ -10,7 +10,7 @@
         <div class="panel-heading">
             <div class="panel-title">
               @include('admin/components/link', 
-                      ['link' => route('admin.blogForm'), 'text' => 'Novo'])
+                      ['link' => route('admin.blogForm'), 'text' => 'Novo', 'icon' => true])
             </div>
           
           <div class="panel-actions">

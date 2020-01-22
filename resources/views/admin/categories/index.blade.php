@@ -10,7 +10,7 @@
         <div class="panel-heading">
             <div class="panel-title">
               @include('admin/components/link', 
-                      ['link' => route('admin.categoryForm'), 'text' => 'Nova'])
+                      ['link' => route('admin.categoryForm'), 'text' => 'Nova', 'icon' => true])
             </div>
           
           <div class="panel-actions">
