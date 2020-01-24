@@ -188,9 +188,14 @@
                 <!-- course sidebar start -->
                 <div class="col-xl-4 col-lg-4 col-md-5 d-none d-md-block">
                     <section class="course-feature">
-
-                        <div class="course-image">
-                            <img src="@if(Storage::exists($course->course_image)){{ Storage::url($course->course_image) }}@else{{ asset('backend/assets/images/course_detail.jpg') }}@endif">
+                        <div class="course-preview">
+                            <div class="bg-gradient"></div>
+                            <a href="#" data-toggle="modal" data-target="#video-modal">
+                                <div class="play-button"></div>
+                            </a>
+                            <div class="course-image">
+                                <img src="@if(Storage::exists($course->course_image)){{ Storage::url($course->course_image) }}@else{{ asset('backend/assets/images/course_detail.jpg') }}@endif">
+                            </div>
                         </div>
                         <div class="course-feature-content">
                             <div class="container">
@@ -210,25 +215,34 @@
                         </div>
                     </section>
 
-                    @if($video)
-                    <h6 class="underline-heading mt-3">COURSE INTRO</h6>
-                    <section class="course_preview_video mt-3">
-                        <div class="aligncenter overlay">
+                    <div class="modal fade" id="video-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
 
-                            @php
-                            $file_name = 'course/'.$video->course_id.'/'.$video->video_title.'.'.$video->video_type;
-                            $file_image_name = 'course/'.$video->course_id.'/'.$video->image_name;
-                            @endphp
 
-                            <a href="#myVideo" class="btn-play far fa-play-circle lightbox"></a>
-                            <video controls id="myVideo" style="display:none;">
-                                <source src="{{ Storage::url($file_name) }}" type="video/mp4">
-                                Your browser doesn't support HTML5 video tag.
-                            </video>
-                            <img src="@if(Storage::exists($file_image_name)){{ Storage::url($file_image_name) }}@else{{ asset('backend/assets/images/course_detail.jpg') }}@endif" alt="image description">
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    @php
+                                        $file_name = 'course/'.$video->course_id.'/'.$video->video_title.'.'.$video->video_type;
+                                        $file_image_name = 'course/'.$video->course_id.'/'.$video->image_name;
+                                    @endphp
+                                    <div>{{$file_name}}</div>
+                                    <video controls id="course-video-preview" class="video-js" data-setup="{}" preload="auto">
+                                        <source src="{{ Storage::url($file_name) }}" type="video/mp4">
+                                        Your browser doesn't support HTML5 video tag.
+                                        <p class="vjs-no-js">
+                                            Para ver este vídeo, ative o JavaScript e considere atualizar para um navegador Web que
+                                            <a href="https://videojs.com/html5-video-support/" target="_blank">suporte vídeo HTML5</a>
+                                        </p>
+                                    </video>
+
+                                </div>
+
+                            </div>
                         </div>
-                    </section>
-                    @endif
+                    </div>
                     <!--
                 @if($course->keywords)
                 <section class="tags-container mt-3">

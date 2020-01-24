@@ -16,7 +16,10 @@
 
         <link rel="stylesheet" href="{{ asset('backend/fonts/web-icons/web-icons.min599c.css?v4.0.2') }}">
         <link rel="stylesheet" href="{{ asset('backend/vendor/toastr/toastr.min599c.css?v4.0.2') }}">
-        
+
+        <!-- Video JS --> 
+        <link href="https://vjs.zencdn.net/7.6.6/video-js.css" rel="stylesheet" />
+
     </head>
     <body>
     <div class="se-pre-con"></div>
@@ -191,6 +194,10 @@
     
     <!-- Toastr -->
     <script src="{{ asset('backend/vendor/toastr/toastr.min599c.js?v4.0.2') }}"></script>
+
+
+    <!-- Video JS --> 
+    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 
     
 
