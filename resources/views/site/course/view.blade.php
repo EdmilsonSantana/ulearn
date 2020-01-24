@@ -225,10 +225,9 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                     @php
-                                        $file_name = 'course/'.$video->course_id.'/'.$video->video_title.'.'.$video->video_type;
+                                        $file_name = '/app/public/course/'.$video->course_id.'/'.$video->video_title.'.'.$video->video_type;
                                         $file_image_name = 'course/'.$video->course_id.'/'.$video->image_name;
                                     @endphp
-                                    <div>{{$file_name}}</div>
                                     <video controls id="course-video-preview" class="video-js" data-setup="{}" preload="auto">
                                         <source src="{{ Storage::url($file_name) }}" type="video/mp4">
                                         Your browser doesn't support HTML5 video tag.
