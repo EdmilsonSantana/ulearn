@@ -190,7 +190,7 @@
                     <section class="course-feature">
                         <div class="course-preview">
                             <div class="bg-gradient"></div>
-                            <a href="#" data-toggle="modal" data-target="#video-modal">
+                            <a href="#course-video-preview" data-lity>
                                 <div class="play-button"></div>
                             </a>
                             <div class="course-image">
@@ -214,35 +214,24 @@
                             </ul>
                         </div>
                     </section>
+                    <div class="lity-hide">
+                        @php
+                        // Alterar ao salvar o vídeo do curso
+                        $file_name = '/app/public/course/'.$video->course_id.'/'.$video->video_title.'.'.$video->video_type;
+                        $file_image_name = 'course/'.$video->course_id.'/'.$video->image_name;
+                        @endphp
 
-                    <div class="modal fade" id="video-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-
-
-                                <div class="modal-body">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    @php
-                                        $file_name = '/app/public/course/'.$video->course_id.'/'.$video->video_title.'.'.$video->video_type;
-                                        $file_image_name = 'course/'.$video->course_id.'/'.$video->image_name;
-                                    @endphp
-                                    <video controls id="course-video-preview" class="video-js" data-setup="{}" preload="auto">
-                                        <source src="{{ Storage::url($file_name) }}" type="video/mp4">
-                                        Your browser doesn't support HTML5 video tag.
-                                        <p class="vjs-no-js">
-                                            Para ver este vídeo, ative o JavaScript e considere atualizar para um navegador Web que
-                                            <a href="https://videojs.com/html5-video-support/" target="_blank">suporte vídeo HTML5</a>
-                                        </p>
-                                    </video>
-
-                                </div>
-
-                            </div>
-                        </div>
+                        <video-js controls id="course-video-preview" class="video-js" data-setup="{}">
+                            <source src="{{ Storage::url($file_name) }}" type="video/mp4">
+                            Your browser doesn't support HTML5 video tag.
+                            <p class="vjs-no-js">
+                                Para ver este vídeo, ative o JavaScript e considere atualizar para um navegador Web que
+                                <a href="https://videojs.com/html5-video-support/" target="_blank">suporte vídeo HTML5</a>
+                            </p>
+                        </video-js>
                     </div>
-                    <!--
+                </div>
+                <!--
                 @if($course->keywords)
                 <section class="tags-container mt-3">
                     <h6 class="underline-heading">TAGS</h6>
@@ -257,37 +246,42 @@
                 </section>
                 @endif
                                 -->
-                </div>
-                <!-- course sidebar end -->
             </div>
+            <!-- course sidebar end -->
         </div>
     </div>
-    <!-- content end -->
-    @endsection
+</div>
+<!-- content end -->
+@endsection
 
-    @section('javascript')
-    <script type="text/javascript">
-        function toggleIcon(e) {
-            $(e.target)
-                .prev('.card-header')
-                .find(".accordian-icon")
-                .toggleClass('fa-plus fa-minus');
-        }
-        $('.accordion').on('hidden.bs.collapse', toggleIcon);
-        $('.accordion').on('shown.bs.collapse', toggleIcon);
+@section('javascript')
+<script type="text/javascript">
+    function toggleIcon(e) {
+        $(e.target)
+            .prev('.card-header')
+            .find(".accordian-icon")
+            .toggleClass('fa-plus fa-minus');
+    }
+    $('.accordion').on('hidden.bs.collapse', toggleIcon);
+    $('.accordion').on('shown.bs.collapse', toggleIcon);
 
-        // lightbox init
-        function initFancybox() {
-            "use strict";
+    // lightbox init
+    function initFancybox() {
+        "use strict";
 
-            $('a.lightbox, [data-fancybox]').fancybox({
-                parentEl: 'body',
-                margin: [50, 0]
-            });
-        }
-
-        $(document).ready(function() {
-            initFancybox();
+        $('a.lightbox, [data-fancybox]').fancybox({
+            parentEl: 'body',
+            margin: [50, 0]
         });
-    </script>
-    @endsection
+    }
+
+    $(document).ready(function() {
+        initFancybox();
+    });
+
+    $(document).on('lity:close', function(event, instance) {
+        var videoPlayer = videojs('course-video-preview');
+        videoPlayer.pause();
+    });
+</script>
+@endsection
