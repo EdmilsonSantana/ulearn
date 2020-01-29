@@ -19,8 +19,8 @@
         "intervention/image": "2.4.2",
         "ignited/laravel-omnipay": "3.0.2",
         "omnipay/paypal": "3.0.2",
-        "mercadopago/dx-php": "dev-master",
-        "chumper/zipper": "1.0.x"
+        "chumper/zipper": "1.0.x",
+        "jenssegers/date": "^3.5.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
