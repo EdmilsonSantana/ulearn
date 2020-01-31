@@ -30,7 +30,6 @@
                     <span>{{ $course->ratings->count('rating') }} </span>
                 </div>
             </div>
-
             <div class="m-1">
                 <span> (199 classificações) </span><span> 199 alunos inscritos </span>
             </div>

@@ -42,15 +42,17 @@
                 }
                 @endphp
                 <div class="row lecture-container">
-                    <div class="col-8 my-auto ml-4">
+                    <div class="{{ $is_learning ? 'col-8' : 'col-7'}} my-auto ml-4">
                         <i class="{{ $icon_class }} mr-2"></i>
                         <span>{{ $curriculum_lecture->l_title }}</span>
                     </div>
+
                     <div class="col-3 my-auto">
                         <article class="preview-time">
-                            <span>
+
+                            <span class="{{ $is_learning ? 'mr-2' : ''}}">
                                 @if($curriculum_lecture->media_type == 2)
-                                {{ $curriculum_lecture->f_duration.' Pages' }}
+                                {{ $curriculum_lecture->f_duration.' Página(s)' }}
                                 @elseif($curriculum_lecture->media_type == 0 || $curriculum_lecture->media_type == 1)
                                 @if($curriculum_lecture->media_type == 0)
                                 {{ $curriculum_lecture->v_duration }}
@@ -59,8 +61,33 @@
                                 @endif
                                 @endif
                             </span>
+
+                            @if($is_learning)
+
+                            @php
+                            $is_completed = SiteHelpers::getCoursecompletedStatus($curriculum_lecture->lecture_quiz_id);
+                            @endphp
+
+                            <a href="{{ url('course-enroll/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($curriculum_lecture->lecture_quiz_id,true)) }}" class="btn btn-ulearn-preview">
+                                @if($is_completed)
+                                REINICIAR
+                                @else
+                                INICIAR
+                                @endif
+                            </a>
+                            @endif
+
                         </article>
                     </div>
+
+                    @if($is_learning)
+                    <div class="col-1 my-auto">
+                        @if($is_completed)
+                        <i class="fas fa-check-circle" style=color:green;></i>
+                        @endif
+                    </div>
+                    @endif
+
                 </div>
                 @endforeach
             </div>

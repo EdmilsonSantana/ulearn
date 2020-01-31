@@ -6,7 +6,7 @@
     </div>
     @endif
 
-    @include('site/course/components/course-curriculum')
+    @include('site/course/components/course-curriculum', ['is_learning' => $is_learning])
 
-    @include('site/course/components/course-rating')
+    @include('site/course/components/course-reviews')
 </div>
