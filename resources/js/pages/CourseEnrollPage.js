@@ -28,6 +28,8 @@ import Master from "../components/Master";
 
 if (document.getElementById("course-enroll-container")) {
   require("bootstrap/dist/css/bootstrap.css");
+  require("react-perfect-scrollbar/dist/css/styles.css");
+  require('pretty-checkbox/dist/pretty-checkbox.min.css')
   require("../site.css");
 
   render(
