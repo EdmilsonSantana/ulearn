@@ -9,7 +9,7 @@ export default class SideBar extends Component {
     sideItem(){
        if(this.props.sections instanceof Array){
          return this.props.sections.map(function(lecture, i){
-            return <SideItem lecture={lecture} key={i} />;
+            return <SideItem lecture={lecture} key={`side_item_${i}`} />;
          })
        }
      }
