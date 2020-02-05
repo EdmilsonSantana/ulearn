@@ -16,7 +16,7 @@ export default class CourseContent extends Component {
             })
             .catch(function (error) {
                 console.log(error);
-                return window.location.href = site_url+'/login';
+               // return window.location.href = site_url+'/login';
             })
         }
         componentWillReceiveProps(nextProps) {
@@ -25,24 +25,7 @@ export default class CourseContent extends Component {
                 this.setState({ is_completed: nextProps.lecture.completion_status });
             }
         }
-        completedStatus(){
-            
-            if(this.state.is_completed == true)
-            {
-                return (
-                        <button is_completed={this.props.lecture.completion_status ? 1 : 0} className="btn btn-primary" onClick={this.handleClick.bind(this)}>
-                            <FontAwesomeIcon icon="check" />
-                            &nbsp;Completed
-                       </button>
-                    );
-            } else if(this.state.is_completed == false) {
-                return (
-                        <button is_completed={this.props.lecture.completion_status ? 1 : 0} className="btn btn-success" onClick={this.handleClick.bind(this)}>
-                            Mark as completed
-                       </button>
-                    );
-            }
-        }
+       
         lectureFile(){
             if(this.props.lecture.media_type == 0)
             {
@@ -132,9 +115,6 @@ export default class CourseContent extends Component {
                               {this.prev()}
                               {this.next()}
                             </ul>
-                        </div>
-                        <div className="col-xl-3 col-md-6 col-sm-6 col-6">
-                           {this.completedStatus()}
                         </div>
                     </div>
                     

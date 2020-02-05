@@ -82820,6 +82820,51 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Checkbox.js":
+/*!*********************************************!*\
+  !*** ./resources/js/components/Checkbox.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (props) {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(props.initialChecked),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      checked = _React$useState2[0],
+      setChecked = _React$useState2[1];
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "pretty p-jelly"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "checkbox",
+    id: "checkbox_".concat(props.id),
+    onChange: function onChange(event) {
+      var checked = event.target.checked;
+      props.onChange(checked).then(function () {
+        return setChecked(checked);
+      });
+    },
+    checked: checked
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "state p-success"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null)));
+});
+
+/***/ }),
+
 /***/ "./resources/js/components/CourseCard.js":
 /*!***********************************************!*\
   !*** ./resources/js/components/CourseCard.js ***!
@@ -82974,8 +83019,7 @@ function (_Component) {
           is_completed: !_this2.state.is_completed
         });
       })["catch"](function (error) {
-        console.log(error);
-        return window.location.href = site_url + '/login';
+        console.log(error); // return window.location.href = site_url+'/login';
       });
     }
   }, {
@@ -82985,25 +83029,6 @@ function (_Component) {
         this.setState({
           is_completed: nextProps.lecture.completion_status
         });
-      }
-    }
-  }, {
-    key: "completedStatus",
-    value: function completedStatus() {
-      if (this.state.is_completed == true) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          is_completed: this.props.lecture.completion_status ? 1 : 0,
-          className: "btn btn-primary",
-          onClick: this.handleClick.bind(this)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], {
-          icon: "check"
-        }), "\xA0Completed");
-      } else if (this.state.is_completed == false) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          is_completed: this.props.lecture.completion_status ? 1 : 0,
-          className: "btn btn-success",
-          onClick: this.handleClick.bind(this)
-        }, "Mark as completed");
       }
     }
   }, {
@@ -83108,9 +83133,7 @@ function (_Component) {
         className: "col-xl-3 col-md-6 col-sm-6 col-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "pagination"
-      }, this.prev(), this.next())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-xl-3 col-md-6 col-sm-6 col-6"
-      }, this.completedStatus())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.prev(), this.next()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row media-container"
       }, this.lectureFile()));
     }
@@ -83369,6 +83392,8 @@ function (_Component) {
 
       if (is_sidebar) {
         axios.get(site_url + "/course-enroll-api/" + course_slug + "/" + l_slug + "/" + is_sidebar).then(function (response) {
+          console.log(response.data.sections);
+
           _this2.setState({
             sections: response.data.sections,
             lecture_detail: response.data.lecture_details
@@ -83376,8 +83401,7 @@ function (_Component) {
 
           console.log(_this2.state);
         })["catch"](function (error) {
-          console.log(error);
-          return window.location.href = site_url + "/login";
+          console.log(error); //return (window.location.href = site_url + "/login");
         });
       } else {
         axios.get(site_url + "/course-enroll-api/" + course_slug + "/" + l_slug + "/" + is_sidebar).then(function (response) {
@@ -83387,8 +83411,7 @@ function (_Component) {
 
           console.log(_this2.state);
         })["catch"](function (error) {
-          console.log(error);
-          return window.location.href = site_url + "/login";
+          console.log(error); //return (window.location.href = site_url + "/login");
         });
       }
     }
@@ -83740,8 +83763,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _Checkbox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Checkbox */ "./resources/js/components/Checkbox.js");
+/* harmony import */ var _services_LectureService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/LectureService */ "./resources/js/services/LectureService.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -83780,6 +83803,7 @@ function (_Component) {
     _this.state = {
       checked: false
     };
+    _this.service = new _services_LectureService__WEBPACK_IMPORTED_MODULE_3__["default"](site_url);
     return _this;
   }
 
@@ -83810,18 +83834,13 @@ function (_Component) {
           className: "pl-2"
         }, "Atividade ", this.props.lecture.number, ":", " ", this.props.lecture.l_title))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "ml-auto"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "pretty p-jelly"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "checkbox",
-          id: "checkbox_".concat(this.props.lecture.number),
-          onChange: function onChange(event) {
-            return _this2.handleChange(event);
-          },
-          checked: this.state.checked
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "state p-success"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null))))));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          id: this.props.lecture.number,
+          initialChecked: this.props.lecture.completion_status,
+          onChange: function onChange(checked) {
+            return _this2.service.updateLectureStatus(_this2.props.lecture, checked);
+          }
+        }))));
       }
     }
   }]);
@@ -84098,6 +84117,51 @@ if (document.getElementById("course-enroll-container")) {
     component: _components_Master__WEBPACK_IMPORTED_MODULE_5__["default"]
   })), document.getElementById("course-enroll-container"));
 }
+
+/***/ }),
+
+/***/ "./resources/js/services/LectureService.js":
+/*!*************************************************!*\
+  !*** ./resources/js/services/LectureService.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LectureService; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var LectureService =
+/*#__PURE__*/
+function () {
+  function LectureService(site_url) {
+    _classCallCheck(this, LectureService);
+
+    this.site_url = site_url;
+  }
+
+  _createClass(LectureService, [{
+    key: "updateLectureStatus",
+    value: function updateLectureStatus(lecture, is_completed) {
+      console.log(lecture);
+      console.log("Atualizando status da Atividade...");
+      var url = "".concat(this.site_url, "/update-lecture-status/").concat(lecture.course_id, "/").concat(lecture.lecture_quiz_id, "/").concat(is_completed);
+      console.log("URL: ", url);
+      return axios.get(url)["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  }]);
+
+  return LectureService;
+}();
+
+
 
 /***/ }),
 

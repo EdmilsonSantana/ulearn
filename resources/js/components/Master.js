@@ -35,6 +35,7 @@ export default class Master extends Component {
             is_sidebar
         )
         .then(response => {
+          console.log(response.data.sections);
           this.setState({
             sections: response.data.sections,
             lecture_detail: response.data.lecture_details
@@ -43,7 +44,7 @@ export default class Master extends Component {
         })
         .catch(function(error) {
           console.log(error);
-          return (window.location.href = site_url + "/login");
+          //return (window.location.href = site_url + "/login");
         });
     } else {
       axios
@@ -62,7 +63,7 @@ export default class Master extends Component {
         })
         .catch(function(error) {
           console.log(error);
-          return (window.location.href = site_url + "/login");
+          //return (window.location.href = site_url + "/login");
         });
     }
   }

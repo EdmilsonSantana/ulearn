@@ -7,11 +7,8 @@ import {
   NavLink,
   Link
 } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-import {
-  faCheck
-} from "@fortawesome/free-solid-svg-icons";
+import Checkbox from './Checkbox';
+import LectureService from "../services/LectureService";
 
 export default class SideItem extends Component {
 
@@ -20,6 +17,7 @@ export default class SideItem extends Component {
     this.state = {
       checked: false
     };
+    this.service = new LectureService(site_url);
   }
 
   handleChange(event) {
@@ -51,17 +49,9 @@ export default class SideItem extends Component {
               </article>
             </NavLink>
             <div className="ml-auto">
-              <div className="pretty p-jelly">
-                <input
-                  type="checkbox"
-                  id={`checkbox_${this.props.lecture.number}`}
-                  onChange={(event) => this.handleChange(event)}
-                  checked={this.state.checked}
-                />
-                <div className="state p-success">
-                  <label></label>
-                </div>
-              </div>
+              <Checkbox id={this.props.lecture.number} 
+                  initialChecked={this.props.lecture.completion_status}
+                  onChange={checked => this.service.updateLectureStatus(this.props.lecture, checked)} />
             </div>
           </li>
 

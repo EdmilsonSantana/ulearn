@@ -46,7 +46,11 @@ class Course extends Model
               ->join('curriculum_lectures_quiz', 'curriculum_lectures_quiz.section_id', '=', 'curriculum_sections.section_id')
               ->leftJoin('course_videos', 'course_videos.id', '=', 'curriculum_lectures_quiz.media')
               ->leftJoin('course_files', 'course_files.id', '=', 'curriculum_lectures_quiz.media')
-              ->select('curriculum_sections.section_id',
+              ->leftJoin('course_progress', 'course_progress.lecture_id', '=', 'curriculum_lectures_quiz.lecture_quiz_id')
+              ->select(
+                'curriculum_sections.section_id',
+                'curriculum_sections.course_id',
+                'course_progress.status as completion_status',
                 'curriculum_lectures_quiz.lecture_quiz_id',
                 'curriculum_sections.title as s_title', 
                 'curriculum_lectures_quiz.title as l_title')
