@@ -1,63 +1,54 @@
-// TableRow.js
-
 import React, { Component } from "react";
 import {
   BrowserRouter as Router,
   Route,
   NavLink,
-  Link
+  Link,
+  useLocation
 } from "react-router-dom";
 import Checkbox from './Checkbox';
 import LectureService from "../services/LectureService";
 
-export default class SideItem extends Component {
+const SideItem = (props) => {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false
-    };
-    this.service = new LectureService(site_url);
-  }
+  const service = new LectureService(site_url);
+  const lecture = props.lecture;
 
-  handleChange(event) {
+  const handleChange = (event) => {
     this.setState({ checked: event.target.checked });
+  };
+
+  const getNavLinkClass = (path) => {
+    return useLocation().pathname === path ? 'active' : '';
   }
-  
-  render() {
-    const is_section = this.props.lecture.is_section;
 
-    if (is_section) {
-      return (
-        <li className="site-menu-category">
-          Seção {this.props.lecture.number} - {this.props.lecture.s_title}
-        </li>
-      );
-    } else {
-      return (
-        <React.Fragment>
-          <li className={`site-menu-item d-flex flex-row align-items-center`}>
+  if (lecture.is_section) {
+    return (
+      <li className="site-menu-category">
+        Seção {lecture.number} - {lecture.s_title}
+      </li>
+    );
+  } else {
+    let linkUrl = `${base_url}/${lecture.url}`;
 
-            <NavLink
-              to={base_url + "/" + this.props.lecture.url}
-            >
-              <article>
-                <div className="pl-2">
-                  Atividade {this.props.lecture.number}:{" "}
-                  {this.props.lecture.l_title}
-                </div>
-              </article>
-            </NavLink>
-            <div className="ml-auto">
-              <Checkbox id={this.props.lecture.number} 
-                  initialChecked={this.props.lecture.completion_status}
-                  onChange={checked => this.service.updateLectureStatus(this.props.lecture, checked)} />
+    return (
+      <li className={`site-menu-item d-flex flex-row align-items-center ${getNavLinkClass(linkUrl)}`}>
+        <NavLink to={linkUrl}>
+          <article>
+            <div className="pl-2">
+              Atividade {lecture.number}:{" "}
+              {lecture.l_title}
             </div>
-          </li>
-
-
-        </React.Fragment>
-      );
-    }
+          </article>
+        </NavLink>
+        <div className="ml-auto">
+          <Checkbox id={lecture.number}
+            initialChecked={lecture.completion_status}
+            onChange={checked => service.updateLectureStatus(lecture, checked)} />
+        </div>
+      </li>
+    );
   }
 }
+
+export default SideItem;

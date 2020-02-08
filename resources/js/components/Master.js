@@ -81,9 +81,6 @@ export default class Master extends Component {
         <div className="page">
           <CourseContent lecture={this.state.lecture_detail} />
         </div>
-        <div className="site-action">
-          <Resource lecture={this.state.lecture_detail} />
-        </div>
       </div>
     );
   }
