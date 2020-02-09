@@ -21,6 +21,7 @@ use App\Models\CourseVideos;
 use App\Models\CourseFiles;
 use Session;
 
+use function PHPSTORM_META\type;
 
 class CourseController extends Controller
 {
@@ -146,13 +147,15 @@ class CourseController extends Controller
         $file_id = SiteHelpers::encrypt_decrypt($file_id, 'd');
         $file_details = $this->model->getFileDetails($file_id);
         if($file_details){
-            $file = Storage::url('course/'.$file_details->course_id.'/'.$file_details->file_name.'.'.$file_details->file_extension);
-
+            $file_path = 'course/'.$file_details->course_id.'/'.$file_details->file_name.'.'.$file_details->file_extension;
             header('Content-type: application/pdf');
             header('Content-Disposition: inline; filename=document.pdf');
             header('Content-Transfer-Encoding: binary');
             header('Accept-Ranges: bytes');
-            @readfile($file);
+            
+            echo Storage::get($file_path);
+        } else {
+            abort(404);
         }
     }
 
