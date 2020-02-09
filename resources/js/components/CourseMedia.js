@@ -17,7 +17,7 @@ const Video = ({ lecture }) => (
 );
 
 const Audio = ({ lecture }) => (
-    <div className="col d-flex align-items-center justify-content-center">
+    <div className="col mt-4 d-flex align-items-center justify-content-center">
         <audio controls>
             <source src={`${storage_url}/${lecture.course_id}/${lecture.file_name}.${lecture.file_extension}`} type="audio/mpeg" />
         </audio>
@@ -25,8 +25,8 @@ const Audio = ({ lecture }) => (
 );
 
 const Document = ({ lecture }) => (
-    <div className="col mt-4">
-        <iframe src={`${site_url}/readPDF/${lecture.media}`} width="100%" height="450px"></iframe>
+    <div className="col mb-5 mt-4">
+        <iframe src={`${site_url}/readPDF/${lecture.media}`} width="100%" height="100%"></iframe>
     </div>
 );
 
