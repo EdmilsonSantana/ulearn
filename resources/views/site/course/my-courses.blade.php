@@ -18,7 +18,7 @@
                 @foreach($courses as $course)
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                     <div class="course-block mx-auto">
-                        <a href="{{ route('course.learn', $course->course_slug) }}" class="c-view">
+                        <a href="{{ route('course.view', $course->course_slug) }}" class="c-view">
                             <main>
                                 <img src="@if(Storage::exists($course->thumb_image)){{ Storage::url($course->thumb_image) }}@else{{ asset('backend/assets/images/course_detail_thumb.jpg') }}@endif">
                                 <div class="col-md-12">
@@ -52,7 +52,7 @@
                     <div class="row">
                         <div class="col-12 not-found-col">
                             <span><b>2<span class="blue">0</span>4</b></span>
-                            <h3>Sorry! No courses added to your account</h3>
+                            <h3>Você não possui cursos ainda. Comece a aprender agora!</h3>
                             <a href="{{ route('course.list') }}" class="btn btn-ulearn-cview mt-3">Explore Courses</a>
                         </div>
                     </div>

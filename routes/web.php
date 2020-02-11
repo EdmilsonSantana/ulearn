@@ -68,7 +68,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('download-resource/{resource_id}/{course_slug}', 'CourseController@getDownloadResource');
 
         Route::get('my-courses', 'CourseController@myCourses')->name('my.courses');
-        Route::get('course-learn/{course_slug}', 'CourseController@courseLearn')->name('course.learn');
 
         Route::post('course-rate', 'CourseController@courseRate')->name('course.rate');
         Route::get('delete-rating/{raing_id}', 'CourseController@deleteRating')->name('delete.rating');

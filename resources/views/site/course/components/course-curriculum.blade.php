@@ -41,53 +41,57 @@
                 $icon_class = 'fas fa-video';
                 }
                 @endphp
-                <div class="row lecture-container">
-                    <div class="{{ $is_learning ? 'col-8' : 'col-7'}} my-auto ml-4">
-                        <i class="{{ $icon_class }} mr-2"></i>
-                        <span>{{ $curriculum_lecture->l_title }}</span>
+
+                @if($is_subscribed)
+                @php
+                $is_completed = SiteHelpers::getCoursecompletedStatus($curriculum_lecture->lecture_quiz_id);
+                @endphp
+                @endif
+                <div class="d-flex justify-content-between align-items-center lecture-container">
+                    <div class="ml-4">
+                        <div class="d-flex">
+                            <div>
+                                <i class="{{ $icon_class }} mr-2"></i>
+                                <span>{{ $curriculum_lecture->l_title }}</span>
+                            </div>
+                            @if($is_subscribed)
+                            <div class="ml-2">
+                                @if($is_completed)
+                                <i class="fas fa-check-circle" style=color:green;></i>
+                                @endif
+                            </div>
+                            @endif
+                        </div>
                     </div>
 
-                    <div class="col-3 my-auto">
+                    <div>
+                        <span>
+                            @if($curriculum_lecture->media_type == 2)
+                            {{ $curriculum_lecture->f_duration.' Página(s)' }}
+                            @elseif($curriculum_lecture->media_type == 0 || $curriculum_lecture->media_type == 1)
+                            @if($curriculum_lecture->media_type == 0)
+                            {{ $curriculum_lecture->v_duration }}
+                            @else
+                            {{ $curriculum_lecture->f_duration }}
+                            @endif
+                            @endif
+                        </span>
+                    </div>
+
+                    <div>
                         <article class="preview-time">
+                            @if($is_subscribed)
 
-                            <span class="{{ $is_learning ? 'mr-2' : ''}}">
-                                @if($curriculum_lecture->media_type == 2)
-                                {{ $curriculum_lecture->f_duration.' Página(s)' }}
-                                @elseif($curriculum_lecture->media_type == 0 || $curriculum_lecture->media_type == 1)
-                                @if($curriculum_lecture->media_type == 0)
-                                {{ $curriculum_lecture->v_duration }}
-                                @else
-                                {{ $curriculum_lecture->f_duration }}
-                                @endif
-                                @endif
-                            </span>
-
-                            @if($is_learning)
-
-                            @php
-                            $is_completed = SiteHelpers::getCoursecompletedStatus($curriculum_lecture->lecture_quiz_id);
-                            @endphp
-
-                            <a href="{{ url('course-enroll/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($curriculum_lecture->lecture_quiz_id,true)) }}" class="btn btn-ulearn-preview">
+                            <a title="{{$is_completed ? 'Reiniciar Atividade' : 'Iniciar Atividade'}}" href="{{ url('course-enroll/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($curriculum_lecture->lecture_quiz_id,true)) }}" class="btn btn-ulearn-preview">
                                 @if($is_completed)
-                                REINICIAR
+                                <i class="fas fa-redo"></i>
                                 @else
-                                INICIAR
+                                <i class="fas fa-play"></i>
                                 @endif
                             </a>
                             @endif
-
                         </article>
                     </div>
-
-                    @if($is_learning)
-                    <div class="col-1 my-auto">
-                        @if($is_completed)
-                        <i class="fas fa-check-circle" style=color:green;></i>
-                        @endif
-                    </div>
-                    @endif
-
                 </div>
                 @endforeach
             </div>

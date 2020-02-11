@@ -176,12 +176,12 @@ if it's not present, don't show loader */
     padding: 0.375rem 0.7rem;
 }
 
-.btn-ulearn-preview, .btn-ulearn-preview:hover {
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    background-color: #14bef0;
-    padding: 0.05rem 0.7rem;
+.btn-ulearn-preview i {
+    color: #459edd;
+}
+
+.btn-ulearn-preview i:hover  {
+    color: #0b4263;
 }
 
 #dropdownMenuButton, #dropdownMenuButtonRight {
