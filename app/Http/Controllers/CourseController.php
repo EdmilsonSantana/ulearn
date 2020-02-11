@@ -81,7 +81,7 @@ class CourseController extends Controller
 
     public function courseView($course_slug = '', Request $request)
     {
-        $is_subscribed = Course::is_subscribed($course_slug, \Auth::user()->id);
+        $is_subscribed = \Auth::user() != null && Course::is_subscribed($course_slug, \Auth::user()->id);
 
         $model_variables = array(
             'course', 'curriculum_sections',
