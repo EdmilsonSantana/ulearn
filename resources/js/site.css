@@ -1190,7 +1190,6 @@ video {
   color: #dc3545;
 }
 
-
 /* Duplicated CSS */
 
 .btn-learna {
@@ -1251,4 +1250,40 @@ btn-link:active {
 .register-form input {
   border-radius: 0;
   color: #414146;
+}
+
+/* Modal */
+
+.bi-header {
+  border-bottom: 0;
+  color: #14bef0;
+}
+
+.bi-header .close {
+  padding: 0rem;
+  margin: 0rem 0rem -1rem -1.1rem;
+}
+
+.modal-header {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: start;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+}
+
+.modal-header .close {
+  padding: 1rem 1rem;
+  margin: -1rem -1rem -1rem auto;
+}
+
+.register-form {
+  border: 1px solid rgba(216, 216, 216, 0.5);
+  border-radius: 4px;
+  margin: 0 50px 50px 50px;
 }
