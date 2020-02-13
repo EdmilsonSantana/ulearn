@@ -295,6 +295,7 @@ code {
 }
 .navbar-toolbar {
   float: left;
+  width: 100%;
 }
 .navbar-toolbar::after {
   display: block;

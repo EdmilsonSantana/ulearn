@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faStar
+} from "@fortawesome/free-solid-svg-icons";
 
 export default class TopBar extends Component {
     render() {
@@ -17,12 +20,17 @@ export default class TopBar extends Component {
                   </div>
                 </div>
 
-                <div className="navbar-container container-fluid pl-0">
+                <div className="navbar-container container-fluid pl-0 pr-0">
                     <div className="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
                         <ul className="nav navbar-toolbar">
                           <li className="nav-item hidden-float" id="toggleMenubar">
                             <a className="nav-link " data-toggle="menubar" href={ site_url+"/course-learn/"+course_slug } role="button">
                                 <FontAwesomeIcon icon="arrow-left" /> &nbsp;Voltar
+                              </a>
+                          </li>
+                          <li className="ml-auto nav-item hidden-float">
+                            <a className="nav-link" role="button">
+                                <FontAwesomeIcon icon={faStar} /> &nbsp;Deixe a sua classificação
                               </a>
                           </li>
                         </ul>
