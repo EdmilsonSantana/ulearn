@@ -8,12 +8,7 @@ $course_id = $course->id;
 <link href="{{ asset('backend/curriculum/css/createcourse/style.css') }}" rel="stylesheet">
 
 <div class="page-header">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('instructor.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('instructor.course.list') }}">Courses</a></li>
-    <li class="breadcrumb-item active">Add</li>
-  </ol>
-  <h1 class="page-title">Add Course</h1>
+  <h1 class="page-title">Adicionar Curso</h1>
 </div>
 
 <div class="page-content">
@@ -36,7 +31,7 @@ $course_id = $course->id;
         <div class="slider_divsblocks">
           
           <div class="form-group">
-            <form method="POST" action="{{ 'course/updatecourse' }}" accept-charset="UTF-8" class="form-horizontal saveLabel" parsley-validate="" novalidate=" " enctype="multipart/form-data">
+            <form method="POST" action="{{ 'course/updatecourse' }}" accept-charset="UTF-8" class="register-formform-horizontal saveLabel" parsley-validate="" novalidate=" " enctype="multipart/form-data">
             
              <input name="course_id" type="hidden" value="{{ $course->id }}">
 
@@ -1217,7 +1212,7 @@ $(document).ready(function(){
     $(this).parent('div').children('.addcontents').hide();
     $(this).parent('div').children('.adddescription').hide();
     $(this).parent('div').children('.closeheader').children('.closecontents').show();
-    $(this).parent('div').children('.closeheader').children('span.closetext').text('Select Content Type');
+    $(this).parent('div').children('.closeheader').children('span.closetext').text('Conteúdo');
     $(this).parent('div').children('.closeheader').show();
     var cid = $(this).data('blockid');
     if ($('#wholeblock-'+cid).is(':visible')) { 
