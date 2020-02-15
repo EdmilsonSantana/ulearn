@@ -5,7 +5,7 @@ import {  } from "@fortawesome/fontawesome-svg-core"
 import Modal from "react-modal";
 import Rating from "react-rating";
 
-Modal.setAppElement("#course-enroll-container");
+//Modal.setAppElement("#course-enroll-container");
 
 const ModalRating = props => {
   const [modalIsOpen, setIsOpen] = React.useState(false);

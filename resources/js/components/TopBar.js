@@ -52,7 +52,7 @@ export default class TopBar extends Component {
                 </a>
               </li>
               <li className="ml-auto nav-item hidden-float">
-                <ModalRating />
+                
               </li>
             </ul>
           </div>

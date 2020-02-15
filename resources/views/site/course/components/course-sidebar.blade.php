@@ -41,6 +41,7 @@
     </section>
 
     <div class="lity-hide">
-        @include('site/course/components/course-video', ['id' => 'course-video-preview'])
+        @include('site/course/components/course-video', ['video' => $video, 
+                'id' => 'course-video-preview', 'is_modal' => true])
     </div>
 </div>

@@ -19,8 +19,7 @@
   <link rel="stylesheet" href="{{ asset('backend/css/bootstrap-extend.min599c.css?v4.0.2') }}">
   <link rel="stylesheet" href="{{ asset('backend/assets/css/site.min599c.css?v4.0.2') }}">
   <link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
-
-  
+  <link href="https://vjs.zencdn.net/7.6.6/video-js.css" rel="stylesheet" />
 
   <!-- Plugins -->
   <link rel="stylesheet" href="{{ asset('backend/vendor/asscrollable/asScrollable.min599c.css?v4.0.2') }}">
@@ -42,7 +41,8 @@
   
   <!-- Scripts -->
   <script src="{{ asset('backend/vendor/breakpoints/breakpoints.min599c.js?v4.0.2') }}"></script>
-  
+  <script src="https://vjs.zencdn.net/7.6.6/video.js"></script>
+
   <script>
     Breakpoints();
   </script>

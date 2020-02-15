@@ -1,12 +1,10 @@
+@if(isset($video))
 <div>
-    @if(isset($video))
     @php
-    // Alterar ao salvar o vídeo do curso
     $file_name = '/app/public/course/'.$video->course_id.'/'.$video->video_title.'.'.$video->video_type;
-    $file_image_name = 'course/'.$video->course_id.'/'.$video->image_name;
     @endphp
 
-    <video-js controls id="{{ $id }}" class="video-js" data-setup="{}">
+    <video-js controls id="{{ $id }}" class="video-js vjs-default-skin vjs-big-play-centered {{!$is_modal ? 'vjs-16-9' : ''}} " data-setup='{}'>
         <source src="{{ Storage::url($file_name) }}" type="video/mp4">
         Your browser doesn't support HTML5 video tag.
         <p class="vjs-no-js">
@@ -16,13 +14,14 @@
     </video-js>
 </div>
 @endif
-</div>
 
-<script type="text/javascript">
-    window.addEventListener('load', function() {
-        $(document).on('lity:close', function(event, instance) {
-            var videoPlayer = videojs("{{ $id }}");
-            videoPlayer.pause();
+@if(isset($is_modal) && $is_modal)
+    <script type="text/javascript">
+        window.addEventListener('load', function() {
+            $(document).on('lity:close', function(event, instance) {
+                var videoPlayer = videojs("{{ $id }}");
+                videoPlayer.pause();
+            });
         });
-    });
-</script>
+    </script>
+@endif

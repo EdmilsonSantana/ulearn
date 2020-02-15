@@ -527,7 +527,7 @@ class CourseController extends Controller
         $path = 'course/' . $course_id;
         $video_name = 'raw_' . $created_at . '_' . $file_name . '.' . $extension;
 
-        $video_path = $path . '/' . $video_name;
+        $video_path = 'app/public/' . $path . '/' . $video_name;
 
         $video_image_name = 'raw_' . $created_at . '_' . $file_name . '.jpg';
         $video_image_path = storage_path('app/public/' . $path . '/' . $video_image_name);
