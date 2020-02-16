@@ -66,14 +66,15 @@ $course_id = $course->id;
                     <div class="row-fluid sorthandle">
                       <div class="col col-lg-12">
                         <div class="su_course_section_label su_gray_curr_block">
-                          <div class="edit_option edit_option_section">{!! Lang::get('curriculum.section')!!} <span class="serialno">{!! $sectioncount !!}</span>: <label class="slqtitle">{!! $section->title !!}</label>
-                            <input type="text" maxlength="80" class="chcountfield su_course_update_section_textbox" @if($section->title == 'Start Here') placeholder="Start Here" value="" @else value="{!! $section->title !!}" @endif>
-                            <span class="ch-count">@if($section->title == 'Start Here') 80 @else{!! 80-strlen($section->title) !!}@endif</span>
+                          <div class="edit_option edit_option_section">{!! Lang::get('curriculum.section')!!} <span class="serialno">{!! $sectioncount !!}</span>:<label class="slqtitle">{!! $section->title !!}</label>
+                            <input type="text" maxlength="80" class="chcountfield su_course_update_section_textbox" @if($section->title == 'Seção '.$sectioncount) placeholder="{!! 'Seção '.$sectioncount !!}" value="" @else value="{!! $section->title !!}" @endif>
+                            <span class="ch-count">@if($section->title == 'Seção '.$sectioncount) 80 @else{!! 80-strlen($section->title) !!}@endif</span>
                           </div>
+                          <i class="fa fa-edit btn-edit-title"></i>
                           <input type="hidden" value="{!! $section->section_id !!}" class="sectionid" name="sectionids[]">
                           <input type="hidden" value="{!! $section->sort_order !!}" class="sectionpos" name="sectionposition[]">
-                          <div class="deletesection" onclick="deletesection({!! $section->section_id !!})"></div>
-                          <div class="updatesection" onclick="updatesection({!! $section->section_id !!})"></div>
+                          <div class="deletesection" onclick="deletesection({!! $section->section_id !!})"><i class="fa fa-trash"></i></div>
+                          <div class="updatesection" onclick="updatesection({!! $section->section_id !!})"><i class="fa fa-check"></i></div>
                         </div>
                       </div>
                     </div>
@@ -90,11 +91,12 @@ $course_id = $course->id;
                             <input type="text" class="su_course_update_lecture_textbox chcountfield" value="{!! $lecturequiz->title !!}" maxlength="80">
                             <span class="ch-count">{!! 80-strlen($lecturequiz->title) !!}</span>
                           </div>
+                          <i class="fa fa-edit btn-edit-title"></i>
                           <input type="hidden" value="{!! $lecturequiz->lecture_quiz_id !!}" class="lectureid" name="lectureids[]">
                           <input type="hidden" value="{!! $lecturequiz->sort_order !!}" class="lecturepos" name="lectureposition[]">
                           <input type="hidden" value="{!! $section->section_id !!}" class="lecturesectionid" name="lecturesectionid">
-                          <div class="deletelecture" onclick="deletelecture({!! $lecturequiz->lecture_quiz_id !!},{!! $section->section_id !!})"></div>
-                          <div class="updatelecture" onclick="updatelecture({!! $lecturequiz->lecture_quiz_id !!},{!! $section->section_id !!})"></div>
+                          <div class="deletelecture" onclick="deletelecture({!! $lecturequiz->lecture_quiz_id !!},{!! $section->section_id !!})"><i class="fa fa-trash"></i></div>
+                          <div class="updatelecture" onclick="updatelecture({!! $lecturequiz->lecture_quiz_id !!},{!! $section->section_id !!})"><i class="fa fa-check"></i></div>
                           <div class="lecture_add_content" id="lecture_add_content{!! $lecturequiz->lecture_quiz_id !!}">
                             @if(empty($lecturequiz->description))
                             <input type="button" name="lecture_add_content" class="adddescription" value="{!! Lang::get('curriculum.Add_Description')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}">
@@ -173,8 +175,8 @@ $course_id = $course->id;
                                     <div class="col col-lg-12">
                                       <div class="width100"  id="textdescfiles-{!! $lecturequiz->lecture_quiz_id !!}" style="display:none;">
                                         <textarea name="textdescription" id="textdesc-{!! $lecturequiz->lecture_quiz_id !!}" class="form-control curricullamEditor"></textarea>
-                                        <input type="button" name="textsave" value="{!! Lang::get('curriculum.sb_save')!!}"  class="btn btn-warning savedesctext" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
-                                        <input type="button" name="canceldesctext" value="{!! Lang::get('curriculum.cancel')!!}"  class="btn btn-warning canceldesctext" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
+                                        <input type="button" name="textsave" value="{!! Lang::get('curriculum.sb_save')!!}"  class="btn btn-primary savedesctext" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
+                                        <input type="button" name="canceldesctext" value="{!! Lang::get('curriculum.cancel')!!}"  class="btn btn-secondary canceldesctext" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
                                       </div>
 
 
@@ -279,7 +281,7 @@ $course_id = $course->id;
                                     </div>
                                     <div class="lecture_buttons">
                                       <div class="lecture_edit_content" id="lecture_edit_content{!! $lecturequiz->lecture_quiz_id !!}">
-                                        <input type="button" name="lecture_edit_content" class="btn btn-default editlectcontent" value="{!! Lang::get('curriculum.Edit_Content')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="video">
+                                        <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get('curriculum.Edit_Content')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="video">
                                         <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get('curriculum.Add_Resource')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="resource">
                                         @if($lecturequiz->publish == 0)
                                         <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get('curriculum.Publish')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}">
@@ -304,7 +306,7 @@ $course_id = $course->id;
                                     </div>
                                     <div class="lecture_buttons">
                                       <div class="lecture_edit_content" id="lecture_edit_content{!! $lecturequiz->lecture_quiz_id !!}">
-                                        <input type="button" name="lecture_edit_content" class="btn btn-default editlectcontent" value="{!! Lang::get('curriculum.Edit_Content')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="audio">
+                                        <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get('curriculum.Edit_Content')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="audio">
                                         <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get('curriculum.Add_Resource')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="resource">
                                         @if($lecturequiz->publish == 0)
                                         <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get('curriculum.Publish')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}">
@@ -328,7 +330,7 @@ $course_id = $course->id;
                                     </div>
                                     <div class="lecture_buttons">
                                       <div class="lecture_edit_content" id="lecture_edit_content{!! $lecturequiz->lecture_quiz_id !!}">
-                                        <input type="button" name="lecture_edit_content" class="btn btn-default editlectcontent" value="{!! Lang::get('curriculum.Edit_Content')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="file">
+                                        <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get('curriculum.Edit_Content')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="file">
                                         <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get('curriculum.Add_Resource')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="resource">
                                         @if($lecturequiz->publish == 0)
                                         <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get('curriculum.Publish')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}">
@@ -343,7 +345,7 @@ $course_id = $course->id;
                                     </div>
                                     <div class="lecture_buttons">
                                       <div class="lecture_edit_content" id="lecture_edit_content{!! $lecturequiz->lecture_quiz_id !!}">
-                                        <input type="button" name="lecture_edit_content" class="btn btn-default editlectcontent" value="{!! Lang::get('curriculum.Edit_Content')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="text">
+                                        <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get('curriculum.Edit_Content')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="text">
                                         <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get('curriculum.Add_Resource')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="resource">
                                         @if($lecturequiz->publish == 0)
                                         <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get('curriculum.Publish')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}">
@@ -367,7 +369,7 @@ $course_id = $course->id;
                                     </div>
                                     <div class="lecture_buttons">
                                       <div class="lecture_edit_content" id="lecture_edit_content{!! $lecturequiz->lecture_quiz_id !!}">
-                                        <input type="button" name="lecture_edit_content" class="btn btn-default editlectcontent" value="{!! Lang::get('curriculum.Edit_Content')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="presentation">
+                                        <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get('curriculum.Edit_Content')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="presentation">
                                         <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get('curriculum.Add_Resource')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}" data-alt="resource">
                                         @if($lecturequiz->publish == 0)
                                         <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get('curriculum.Publish')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}">
@@ -396,7 +398,7 @@ $course_id = $course->id;
                     <!-- add description start -->
 
                     <div class="su_course_add_lecture_desc_content su_course_add_content_desc_form @if(empty($lecturequiz->description)) hideit editing @endif" id="adddescblock-{!! $lecturequiz->lecture_quiz_id !!}">
-                      <div class="divtitlehead"><p><strong>{!! Lang::get('curriculum.Description')!!}</strong></p></div>
+                      <div class="divtitlehead"><p>{!! Lang::get('curriculum.Description')!!}</p></div>
                       <div class="formrow @if(empty($lecturequiz->description)) hideit @endif" id="descblock{!! $lecturequiz->lecture_quiz_id !!}">
                         <div class="row-fluid">
                           <div class="editdescription" id="descriptions{!! $lecturequiz->lecture_quiz_id !!}" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">{!! $lecturequiz->description !!}</div>
@@ -413,8 +415,8 @@ $course_id = $course->id;
                       <div class="formrow @if(!empty($lecturequiz->description)) hideit @endif" id="editblockfooter{!! $lecturequiz->lecture_quiz_id !!}">
                         <div class="row-fluid">
                           <div class="col col-lg-12"> 
-                            <input type="button" name="su_course_add_lecture_desc_submit" value="{!! Lang::get('curriculum.sb_save')!!}" class="btn btn-warning su_course_add_lecture_desc_submit"  data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
-                            <input type="button" id="btn_description" name="su_course_add_lecture_desc_cancel" value="{!! Lang::get('curriculum.cancel')!!}" class="btn btn-warning su_course_add_lecture_desc_cancel" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}"></div>
+                            <input type="button" name="su_course_add_lecture_desc_submit" value="{!! Lang::get('curriculum.sb_save')!!}" class="btn btn-primary su_course_add_lecture_desc_submit"  data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
+                            <input type="button" id="btn_description" name="su_course_add_lecture_desc_cancel" value="{!! Lang::get('curriculum.cancel')!!}" class="btn btn-secondary su_course_add_lecture_desc_cancel" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}"></div>
                         </div>
                       </div>
 
@@ -424,7 +426,7 @@ $course_id = $course->id;
 
                     <!-- list resources start -->
                     <div class="su_course_add_lecture_desc_content @if(!isset($lecturesresources[$section->section_id][$lecturequiz->lecture_quiz_id])) hideit @endif" id="resourceblock{!! $lecturequiz->lecture_quiz_id !!}">
-                      <div class="divtitlehead"><p><strong>{!! Lang::get('curriculum.Resources')!!}</strong></p></div>
+                      <div class="divtitlehead"><p>{!! Lang::get('curriculum.Resources')!!}</p></div>
                       <div class="formrow">
                         <div class="row-fluid resourcefiles">
                           @if(isset($lecturesresources[$section->section_id][$lecturequiz->lecture_quiz_id]))
@@ -1123,17 +1125,19 @@ $(document).ready(function(){
   /*
   * Update course section text
   */
-  $(document).on('click','.edit_option_section',function(){
+  $(document).on('click','.btn-edit-title',function(){
     var id=$(this).next().val();
     $('.section-'+id).addClass('editon');
+    $(this).hide();
   });
 
   /*
   * Update course lecture text
   */
-  $(document).on('click','.edit_option_lecture',function(){
+  $(document).on('click','.btn-edit-title',function(){
     var id=$(this).next().val();
     $('.lecture-'+id).addClass('editon');
+    $(this).hide();
   });
 
   /*
@@ -1397,7 +1401,7 @@ $(document).ready(function(){
     var courselecturepublish =$('[name="courselecturepublish"]').val();
     var _token =$('[name="_token"]').val();
     $(this).attr('name','lecture_unpublish_content');
-    $(this).val('Unpublish');
+    $(this).val('Cancelar Publicação');
     $(this).removeClass('publishcontent');
     $(this).addClass('unpublishcontent');
     $(this).removeClass('btn-warning');
@@ -1419,7 +1423,7 @@ $(document).ready(function(){
     var courselecturepublish =$('[name="courselecturepublish"]').val();
     var _token =$('[name="_token"]').val();
     $(this).attr('name','lecture_publish_content');
-    $(this).val('Publish');
+    $(this).val('Publicar');
     $(this).removeClass('unpublishcontent');
     $(this).addClass('publishcontent');
     $(this).removeClass('btn-danger');
@@ -1703,6 +1707,9 @@ $(document).ready(function(){
 
   $(document).on('click','.editlectcontent',function(){
     var mid = $(this).data('blockid');
+
+    $('.lecture-' + mid + ' .deletelecture').hide();
+    
     var attr = $(this).data('alt');
     $('#cccontainer'+mid).show();
     $('#externalrestab'+mid).removeClass('current');
@@ -1836,7 +1843,7 @@ $(document).ready(function(){
       $("#videoresponse"+mid).hide();
       $("#lecture_add_content"+mid).find('.adddescription').hide();
       $("#lecture_add_content"+mid).find('.closeheader .closecontents').show();
-      $("#lecture_add_content"+mid).find('.closeheader span.closetext').text('Edit Text');
+      $("#lecture_add_content"+mid).find('.closeheader span.closetext').text('Editar Conteúdo');
       $("#lecture_add_content"+mid).find('.closeheader').show();
       
       $('#contentpopshow'+mid).show();
@@ -1894,16 +1901,16 @@ $(document).ready(function(){
             } else {
               var videopart = '<video class="video-js vjs-default-skin" controls preload="auto" data-setup="{}"><source src="'+return_data.file_link+'" type="video/webm" id="videosource"></video>';
             }
-            $("#videoresponse"+lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-'+type+'"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p><p><span class="cclickable vid_preview text-default" data-id="'+lid+'"><i class="fa fa-play"></i> Video Preview</span></p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+lid+'"> <input type="button" name="lecture_edit_content" class="btn btn-default editlectcontent" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+lid+'" data-alt="'+type+'"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+lid+'"></div></div><div class="media_preview" id="video_preview'+lid+'"> '+videopart+' </div></div></div>');
+            $("#videoresponse"+lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-'+type+'"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p><p><span class="cclickable vid_preview text-default" data-id="'+lid+'"><i class="fa fa-play"></i> Video Preview</span></p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+lid+'" data-alt="'+type+'"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+lid+'"></div></div><div class="media_preview" id="video_preview'+lid+'"> '+videopart+' </div></div></div>');
           } else if(type == 'audio') {
             if(return_data.file_type!='mp3'){
               var audiopart = '{!! Lang::get("curriculum.audio_message") !!}';
             } else {
               var audiopart = '<audio controls><source src="'+return_data.file_link+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
             }
-            $("#videoresponse"+lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-'+type+'"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p><p><span class="cclickable aud_preview text-default" data-id="'+lid+'"><i class="fa fa-play"></i> Audio Preview</span></p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+lid+'"> <input type="button" name="lecture_edit_content" class="btn btn-default editlectcontent" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+lid+'" data-alt="'+type+'"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+lid+'"></div></div><div class="media_preview" id="audio_preview'+lid+'">'+audiopart+'</div></div></div>');
+            $("#videoresponse"+lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-'+type+'"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p><p><span class="cclickable aud_preview text-default" data-id="'+lid+'"><i class="fa fa-play"></i> Audio Preview</span></p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+lid+'" data-alt="'+type+'"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+lid+'"></div></div><div class="media_preview" id="audio_preview'+lid+'">'+audiopart+'</div></div></div>');
           } else {
-            $("#videoresponse"+lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-'+type+'"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+lid+'"> <input type="button" name="lecture_edit_content" class="btn btn-default editlectcontent" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+lid+'" data-alt="'+type+'"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+lid+'"></div></div></div></div>');
+            $("#videoresponse"+lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-'+type+'"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+lid+'" data-alt="'+type+'"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+lid+'"></div></div></div></div>');
           }
         }else{
 
@@ -2024,7 +2031,7 @@ $(document).ready(function(){
             $('.lecture-'+lid).find('.su_course_lecture_label').removeClass('su_lgray_curr_block');
             $('.lecture-'+lid).find('.su_course_lecture_label').removeClass('su_green_curr_block');
             $('.lecture-'+lid).find('.su_course_lecture_label').addClass('su_orange_curr_block');
-            $("#videoresponse"+lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-text"><div class="lecture_title"><p>Text</p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+lid+'"> <input type="button" name="lecture_edit_content" class="btn btn-default editlectcontent" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+lid+'" data-alt="text"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+lid+'"></div></div><div class="clearfix"></div><div class="lecture_contenttext" id="lecture_contenttext'+lid+'"><p>'+text+'</p></div></div></div>');
+            $("#videoresponse"+lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-text"><div class="lecture_title"><p>Text</p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+lid+'" data-alt="text"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+lid+'"></div></div><div class="clearfix"></div><div class="lecture_contenttext" id="lecture_contenttext'+lid+'"><p>'+text+'</p></div></div></div>');
           }else{
 
           }
@@ -2079,7 +2086,7 @@ function filesuploadajax(){
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_lgray_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_green_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').addClass('su_orange_curr_block');
-        $("#videoresponse"+data.lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-video"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p><p><span class="cclickable vid_preview text-default" data-id="'+data.lid+'"><i class="fa fa-play"></i> Video Preview</span></p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+data.lid+'"> <input type="button" name="lecture_edit_content" class="btn btn-default editlectcontent" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+data.lid+'" data-alt="video"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+data.lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+data.lid+'"></div></div><div class="media_preview" id="video_preview'+data.lid+'"><video class="video-js vjs-default-skin video_p_'+data.lid+'" controls="" preload="auto" data-setup="{}"></video></div></div></div>');
+        $("#videoresponse"+data.lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-video"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p><p><span class="cclickable vid_preview text-default" data-id="'+data.lid+'"><i class="fa fa-play"></i> Video Preview</span></p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+data.lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+data.lid+'" data-alt="video"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+data.lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+data.lid+'"></div></div><div class="media_preview" id="video_preview'+data.lid+'"><video class="video-js vjs-default-skin video_p_'+data.lid+'" controls="" preload="auto" data-setup="{}"></video></div></div></div>');
         $('#probar_status_'+data.lid).val(0);
         //<video class="video-js vjs-default-skin" controls preload="auto" data-setup="{}"><source src="'+return_data.file_link+'" type="video/webm" id="videosource"></video>
       }else{
@@ -2132,7 +2139,7 @@ function filesuploadajax(){
         } else {
           var audiopart = '<audio controls><source src="'+return_data.file_link+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
         }
-        $("#videoresponse"+data.lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-audio"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p><p><span class="cclickable aud_preview text-default" data-id="'+data.lid+'"><i class="fa fa-play"></i> Audio Preview</span></p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+data.lid+'"> <input type="button" name="lecture_edit_content" class="btn btn-default editlectcontent" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+data.lid+'" data-alt="audio"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+data.lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+data.lid+'"></div></div><div class="media_preview" id="audio_preview'+data.lid+'">'+audiopart+'</div></div></div>');
+        $("#videoresponse"+data.lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-audio"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p><p><span class="cclickable aud_preview text-default" data-id="'+data.lid+'"><i class="fa fa-play"></i> Audio Preview</span></p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+data.lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+data.lid+'" data-alt="audio"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+data.lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+data.lid+'"></div></div><div class="media_preview" id="audio_preview'+data.lid+'">'+audiopart+'</div></div></div>');
         $('#probar_status_'+data.lid).val(0);
       }else{
         
@@ -2179,7 +2186,7 @@ function filesuploadajax(){
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_lgray_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_green_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').addClass('su_orange_curr_block');
-        $("#videoresponse"+data.lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-presentation"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+data.lid+'"> <input type="button" name="lecture_edit_content" class="btn btn-default editlectcontent" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+data.lid+'" data-alt="presentation"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+data.lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+data.lid+'"></div></div></div></div>');
+        $("#videoresponse"+data.lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-presentation"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+data.lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+data.lid+'" data-alt="presentation"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+data.lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+data.lid+'"></div></div></div></div>');
         $('#probar_status_'+data.lid).val(0);
       }else{
 
@@ -2226,7 +2233,7 @@ function filesuploadajax(){
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_lgray_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_green_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').addClass('su_orange_curr_block');
-        $("#videoresponse"+data.lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-file"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+data.lid+'"> <input type="button" name="lecture_edit_content" class="btn btn-default editlectcontent" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+data.lid+'" data-alt="file"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+data.lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+data.lid+'"></div></div></div></div>');
+        $("#videoresponse"+data.lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-file"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+data.lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+data.lid+'" data-alt="file"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+data.lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+data.lid+'"></div></div></div></div>');
         $('#probar_status_'+data.lid).val(0);
       }else{
 
@@ -2327,6 +2334,7 @@ function updatesection(id) {
         $('.section-'+id).css('opacity','1');
         $('.section-'+id+' label.slqtitle').text(section);
         $('.section-'+id).removeClass('editon');
+        $('.section-'+id + ' .btn-edit-title').show();
       }
     });
   } else {
@@ -2416,6 +2424,7 @@ function updatelecture(id,sid) {
         $('.lecture-'+id).css('opacity','1');
         $('.lecture-'+id+' label.slqtitle').text(lecture);
         $('.lecture-'+id).removeClass('editon');
+        $('.lecture-'+id + ' .btn-edit-title').show();
       }
     });
   } else {

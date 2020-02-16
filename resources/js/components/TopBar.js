@@ -45,7 +45,7 @@ export default class TopBar extends Component {
                 <a
                   className="nav-link "
                   data-toggle="menubar"
-                  href={site_url + "/course-learn/" + course_slug}
+                  href={site_url + "/course-view/" + course_slug}
                   role="button"
                 >
                   <FontAwesomeIcon icon="arrow-left" /> &nbsp;Voltar
