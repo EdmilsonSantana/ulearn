@@ -231,6 +231,14 @@ class Course extends Model
 		return $result;
 		
     }
+  
+  public function get_lecture($lecture_id) {
+    return \DB::table('curriculum_lectures_quiz')->where('lecture_quiz_id', '=', $lecture_id)->first();
+  }
+
+  public function get_section($section_id) {
+    return \DB::table('curriculum_sections')->where('section_id', '=', $section_id)->first();
+  }
 	
 	
 	public  function insertSectionRow($data,$id){

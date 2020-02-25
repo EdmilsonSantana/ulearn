@@ -603,6 +603,7 @@ class CourseController extends Controller
 
     public function postLectureSave(Request $request)
     {
+        $course_id = $request->input('courseid');
         $data['section_id'] = $request->input('sectionid');
         $data['title'] = $request->input('lecture');
         $data['sort_order'] = $request->input('position');
@@ -616,7 +617,24 @@ class CourseController extends Controller
         } else {
             $newID = $this->model->insertLectureQuizRow($data, $request->input('lid'));
         }
-        echo $newID;
+
+        $coursecurriculum = $this->model->getcurriculuminfo(Course::find($course_id),
+                        \Auth::user()->instructor->id);
+        
+        $this->data['lecturecount'] = $request->input('position');
+        $this->data['section'] = $this->model->get_section($data['section_id']);
+        $this->data['lecturequiz'] = $this->model->get_lecture($newID);
+        $this->data['lecturesmedia'] = $coursecurriculum['lecturesmedia'];
+        $this->data['lecturesresources'] = $coursecurriculum['lecturesresources'];
+        $this->data['uservideos'] = $coursecurriculum['uservideos'];
+        $this->data['useraudios'] = $coursecurriculum['useraudios'];
+        $this->data['userpresentation'] = $coursecurriculum['userpresentation'];
+        $this->data['userdocuments'] = $coursecurriculum['userdocuments'];
+        $this->data['userresources'] = $coursecurriculum['userresources'];
+
+        $lecture_content = view('instructor.course.components.lecture_content', $this->data)->render();
+
+        echo json_encode(array('id'=> $newID, 'lecture_content'=> $lecture_content));
     }
 
 
