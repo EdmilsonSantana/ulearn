@@ -483,6 +483,11 @@ div.cctabs div.current{
 	display: block;
 }
 
+
+.lecture_add_content ~ div.deletelecture {
+	display: none;
+}
+
 .btn-edit-title {
 	cursor: pointer;
 }
