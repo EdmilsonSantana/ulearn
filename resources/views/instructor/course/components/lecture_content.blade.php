@@ -75,8 +75,20 @@ use App\Library\ulearnHelpers;
                                         </div>
                                     </div>
                                     <div class="col col-lg-4">
+                                    @include('instructor/course/components/upload_input',
+                                    ['container_id' =>  'videosfiles-' . $lecturequiz->lecture_quiz_id,
+                                     'input_id' => 'luploadvideo',
+                                     'class' => 'videofiles',
+                                     'name' => 'lecturevideo',
+                                     'label' => Lang::get('curriculum.use_lecture_video'),
+                                     'lecture_id' => $lecturequiz->lecture_quiz_id,
+                                     'url' =>  url('courses/lecturevideo/save/'.$lecturequiz->lecture_quiz_id)
+                                     ])
 
-                                        <div class="luploadvideo" id="videosfiles-{!! $lecturequiz->lecture_quiz_id !!}" style="display:none;"> <input id="luploadvideo" class="videofiles" type="file" name="lecturevideo" data-url="{!! url('courses/lecturevideo/save/'.$lecturequiz->lecture_quiz_id) !!}" data-lid="{!! $lecturequiz->lecture_quiz_id !!}"><span>{!! Lang::get('curriculum.use_lecture_video')!!}</span></div>
+                                        <div class="luploadvideo" id="videosfiles-{!! $lecturequiz->lecture_quiz_id !!}" style="display:none;"> 
+                                            <input id="luploadvideo" class="videofiles" type="file" name="lecturevideo" data-url="{!! url('courses/lecturevideo/save/'.$lecturequiz->lecture_quiz_id) !!}" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
+                                            <span>{!! Lang::get('curriculum.use_lecture_video')!!}</span>
+                                        </div>
 
                                         <div class="luploadvideo" id="audiofiles-{!! $lecturequiz->lecture_quiz_id !!}" style="display:none;">
                                             <input id="luploadaudio" class="audiofiles luploadbtn" type="file" name="lectureaudio" data-url="{!! url('courses/lectureaudio/save/'.$lecturequiz->lecture_quiz_id) !!}" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
@@ -86,10 +98,16 @@ use App\Library\ulearnHelpers;
                                             <input id="luploadpre" class="prefiles luploadbtn" type="file" name="lecturepre" data-url="{!! url('courses/lecturepre/save/'.$lecturequiz->lecture_quiz_id) !!}" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
                                             <span>{!! Lang::get('curriculum.curriculum_pdf')!!}</span>
                                         </div>
-                                        <div class="luploadvideo" id="docfiles-{!! $lecturequiz->lecture_quiz_id !!}" style="display:none;">
-                                            <input id="luploaddoc" class="docfiles luploadbtn" type="file" name="lecturedoc" data-url="{!! url('courses/lecturedoc/save/'.$lecturequiz->lecture_quiz_id) !!}" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
-                                            <span>{!! Lang::get('curriculum.curriculum_pdfdoc')!!}</span>
-                                        </div>
+                                        @include('instructor/course/components/upload_input',
+                                        ['container_id' =>  'docfiles-' . $lecturequiz->lecture_quiz_id,
+                                        'input_id' => 'luploaddoc',
+                                        'class' => 'docfiles luploadbtn',
+                                        'name' => 'lecturedoc',
+                                        'label' => Lang::get('curriculum.curriculum_pdfdoc'),
+                                        'lecture_id' => $lecturequiz->lecture_quiz_id,
+                                        'url' =>  url('courses/lecturedoc/save/'.$lecturequiz->lecture_quiz_id)
+                                        ])
+
                                         <div class="luploadvideo" id="resfiles-{!! $lecturequiz->lecture_quiz_id !!}" style="display:none;">
                                             <input id="luploadres" class="resfiles luploadbtn" type="file" name="lectureres" data-url="{!! url('courses/lectureres/save/'.$lecturequiz->lecture_quiz_id) !!}" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
                                             <span>{!! Lang::get('curriculum.curriculum_doc')!!}</span>

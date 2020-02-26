@@ -147,6 +147,7 @@ text-transform: capitalize; display:none; color:#222; }
 .preview .buttongreen30, .lecturecontent_text_content .buttongreen30, .add_description  .buttongreen30, .supplementary_material_detail{ padding:15px 0 0; }
 .loader { text-align:center; }
 .loader img { margin:0 auto; }
+.luploadvideo-progressbar {display: none;}
 
 /*
 * Lecture content step3 page
@@ -219,16 +220,34 @@ border-radius:5px;
 	 
 .su_courses_form_course_image_fileupload .bar { padding:0 10px; }	 
 	
-#su_courses_form_course_image_fileupload, #luploadvideo,#luploadaudio,#luploadpre,#luploaddoc,#luploadres {
+#su_courses_form_course_image_fileupload, #luploadvideo,#luploadaudio,#luploadpre,#luploadres {
     cursor: pointer;
     direction: ltr;
     font-size: 200px;
     margin: 0;
-    opacity: 0;
+	opacity: 0;
+	background-color: blue;
     position: absolute;
     right: 0;
     top: 0;
-}	
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
 .meter .bar { padding:0 !important; } 
 
 		.meter { 

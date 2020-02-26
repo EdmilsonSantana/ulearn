@@ -1730,6 +1730,10 @@ $(document).ready(function(){
   });
   
 
+function show_progress_bar() {
+  $('.luploadvideo-progressbar').fadeIn();
+}
+
 filesuploadajax();
 
 function filesuploadajax(){
@@ -1787,6 +1791,7 @@ function filesuploadajax(){
     autoUpload: true,
     acceptFileTypes: /(\.|\/)(mp3|wav)$/i,
     maxFileSize: 1024000000, // 1 GB
+    fileuploadsend: show_progress_bar,
     progress: function (e, data) {
       // console.log(data);
       // alert(data.lid);
@@ -1841,6 +1846,7 @@ function filesuploadajax(){
     autoUpload: true,
     acceptFileTypes: /(\.|\/)(pdf)$/i,
     maxFileSize: 1024000000, // 1 GB
+    fileuploadsend: show_progress_bar,
     progress: function (e, data) {
       // console.log(data);
       // alert(data.lid);
@@ -1888,6 +1894,9 @@ function filesuploadajax(){
     autoUpload: true,
     acceptFileTypes: /(\.|\/)(pdf)$/i,
     maxFileSize: 1024000000, // 1 GB
+    start: function (e, data) {
+      show_progress_bar();
+    },
     progress: function (e, data) {
       // console.log(data);
       // alert(data.lid);
