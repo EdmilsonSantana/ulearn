@@ -207,23 +207,18 @@ use App\Library\ulearnHelpers;
                             @if(isset($lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id]))
 
 
-                            <div class="lecture_main_content_first_block1">
-                                <div class="lc_details @if($lecturequiz->media_type == 0) imagetype-video @elseif($lecturequiz->media_type == 1) imagetype-audio @elseif($lecturequiz->media_type == 2) imagetype-file @elseif($lecturequiz->media_type == 3) imagetype-text @elseif($lecturequiz->media_type == 5) imagetype-presentation @endif">
+                            @if($lecturequiz->media_type == 0)
+                                @include('instructor/course/components/media_video')
+                            @elseif($lecturequiz->media_type == 1)
+                                @include('instructor/course/components/media_audio')
+                            @elseif($lecturequiz->media_type == 2)
+                                @include('instructor/course/components/media_file')
+                            @elseif($lecturequiz->media_type == 3)
+                                @include('instructor/course/components/media_text', ['text' =>  $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id]])
+                            @elseif($lecturequiz->media_type == 5)
+                                @include('instructor/course/components/media_presentation')
+                            @endif
 
-                                    @if($lecturequiz->media_type == 0)
-                                    @include('instructor/course/components/media_video')
-                                    @elseif($lecturequiz->media_type == 1)
-                                    @include('instructor/course/components/media_audio')
-                                    @elseif($lecturequiz->media_type == 2)
-                                    @include('instructor/course/components/media_file')
-                                    @elseif($lecturequiz->media_type == 3)
-                                    @include('instructor/course/components/media_text')
-                                    @elseif($lecturequiz->media_type == 5)
-                                    @include('instructor/course/components/media_presentation')
-                                    @endif
-                                </div>
-
-                            </div>
                             @endif
                             @endif
 

@@ -826,7 +826,7 @@ $(document).ready(function(){
     $('.su_course_add_lecture_textbox').removeClass('error');
   });
 
-  /*
+  //quiz
 
   $('.su_course_add_quiz_label').click(function(){
     $('#quiz_title_counter').text('80');
@@ -842,7 +842,7 @@ $(document).ready(function(){
     $(this).parents('.su_course_add_quiz_content').hide();
     $('.add_quiz_lecture_part').show();
     $('.su_course_add_quiz_textbox').removeClass('error');
-  });  */
+  });  
 
   
   
@@ -913,12 +913,33 @@ $(document).ready(function(){
       $('#videoresponse'+cid).show();
       $('#wholevideos'+cid).hide();
     }
+
     $('#cccontainer'+cid).hide();
+
+    show_delete_button(cid);
   });
+
+  function hide_delete_button(lecture_id) {
+    $(`.lecture-${lecture_id} .deletelecture`).show();
+  }
+
+  function show_delete_button(lecture_id) {
+    if(has_lecture_content(lecture_id)) {
+      $(`.lecture-${lecture_id}`).find('.deletelecture').show();
+    }
+  }
+
+  function has_lecture_content(lecture_id) {
+    let btn_add_content_class = '.addcontents';
+    return $(`#lecture_add_content${lecture_id}`).has(btn_add_content_class).length == 0;
+  }
 
   $(document).on('click','.su_course_add_lecture_desc_cancel',function () { 
     tinyMCE.activeEditor.setContent("");
     var cid = $(this).attr('data-blockid');
+    
+    $('.lecture-'+cid + ' .deletelecture').show();
+
     if($('#contentpopshow'+cid).hasClass('hideit')){
       $('#lecture_add_content'+cid).children('.addcontents').show();
     } 
@@ -967,7 +988,7 @@ $(document).ready(function(){
     $('#lecture_add_content'+cid).children('.closeheader').children('span.closetext').text('');
     $('#lecture_add_content'+cid).children('.closeheader').hide();
     
-    $('.lecture-'+cid + ' .deletelecture').show();
+    show_delete_button(cid);
 
     if($('#adddescblock-'+cid).hasClass("hideit")) {
       $("#adddescblock-"+cid).hide();
@@ -991,12 +1012,17 @@ $(document).ready(function(){
   });
   
   $(document).on('click','.adddescription',function () { 
-    $(this).parent('div').children('.addcontents').hide();
-    $(this).parent('div').children('.adddescription').hide();
-    $(this).parent('div').children('.closeheader').children('.closecontents').show();
-    $(this).parent('div').children('.closeheader').children('span.closetext').text('Descrição');
-    $(this).parent('div').children('.closeheader').show();
+    
     var cid = $(this).data('blockid');
+
+    $(`.lecture-${cid} .deletelecture`).hide();
+
+    let closeHeader = $(`#lecture_add_content${cid}`).children('.closeheader');
+
+    closeHeader.children('.closecontents').show();
+    closeHeader.children('span.closetext').text('Descrição');
+    closeHeader.show();
+
     $('#contentpopshow'+cid).hide();
     if ($('#adddescblock-'+cid).is(':visible')) { 
       $("#adddescblock-"+cid).hide(); 
@@ -1005,7 +1031,6 @@ $(document).ready(function(){
       $("#adddescblock-"+cid).hide();
     } else {
       $("#adddescblock-"+cid).show(); 
-
     } 
   });
 
@@ -1041,12 +1066,19 @@ $(document).ready(function(){
           $('#lecture_add_content'+lid).find('.closeheader .closecontents').hide();
           $('#lecture_add_content'+lid).find('.closeheader span.closetext').text('');
           $('#lecture_add_content'+lid).find('.closeheader').hide();
+          
+          hide_delete_button(lid);
+          hide_description_button(lid);
         }
       });
     } else {
       alert('{!! Lang::get("curriculum.curriculum_description") !!}');
     }
   });
+
+  function hide_description_button(lecture_id) {
+    $(`#lecture_edit_content${lecture_id}`).find('.adddescription').hide();
+  }
 
   $(document).on('click','.publishcontent',function(){
     var lid = $(this).data('blockid');
@@ -1320,7 +1352,7 @@ $(document).ready(function(){
     }
 
   });
- /*
+
   $(document).on('click','.addresource',function(){
     var mid = $(this).data('blockid');
     var attr = $(this).data('alt');
@@ -1355,7 +1387,7 @@ $(document).ready(function(){
     }
 
   });
-  */
+  
 
   $(document).on('click','.editlectcontent',function(){
     var mid = $(this).data('blockid');
@@ -1655,6 +1687,7 @@ $(document).ready(function(){
     $("#audio_preview"+lid).slideToggle();
   });
   
+  // Cadastro de Textos
   $(document).on('click','.savedesctext',function(){
     var lid = $(this).data('lid');
     var text = $.trim(tinyClean(tinyMCE.get('textdesc-'+lid).getContent()));
@@ -1684,7 +1717,7 @@ $(document).ready(function(){
             $('.lecture-'+lid).find('.su_course_lecture_label').removeClass('su_lgray_curr_block');
             $('.lecture-'+lid).find('.su_course_lecture_label').removeClass('su_green_curr_block');
             $('.lecture-'+lid).find('.su_course_lecture_label').addClass('su_orange_curr_block');
-            $("#videoresponse"+lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-text"><div class="lecture_title"><p>Text</p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+lid+'" data-alt="text"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+lid+'"></div></div><div class="clearfix"></div><div class="lecture_contenttext" id="lecture_contenttext'+lid+'"><p>'+text+'</p></div></div></div>');
+            $("#videoresponse"+lid).append(return_data.lecture_content);
           }else{
 
           }
@@ -1749,6 +1782,7 @@ function filesuploadajax(){
     }
   });
 
+  // Cadastro de Áudios
   $('.audiofiles').fileupload({
     autoUpload: true,
     acceptFileTypes: /(\.|\/)(mp3|wav)$/i,
@@ -1792,7 +1826,9 @@ function filesuploadajax(){
         } else {
           var audiopart = '<audio controls><source src="'+return_data.file_link+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
         }
+        // 
         $("#videoresponse"+data.lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-audio"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p><p><span class="cclickable aud_preview text-default" data-id="'+data.lid+'"><i class="fa fa-play"></i> Audio Preview</span></p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+data.lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+data.lid+'" data-alt="audio"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+data.lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+data.lid+'"></div></div><div class="media_preview" id="audio_preview'+data.lid+'">'+audiopart+'</div></div></div>');
+        
         $('#probar_status_'+data.lid).val(0);
       }else{
         

@@ -1019,8 +1019,14 @@ class CourseController extends Controller
         }
         $return_data = array(
             'status' => true,
-            'file_title' => 'Text'
+            'file_title' => 'Text',
         );
+
+        $this->data['lecturequiz'] = $this->model->get_lecture($newID);
+        $this->data['text'] = $data['contenttext'];
+
+        $return_data['lecture_content'] = view('instructor.course.components.media_text',
+                                 $this->data)->render();
 
         echo json_encode($return_data);
         exit;

@@ -11,8 +11,4 @@
         <input type="button" name="lecture_unpublish_content" class="btn btn-danger unpublishcontent" value="{!! Lang::get('curriculum.Unpublish')!!}" data-blockid="{!! $lecturequiz->lecture_quiz_id !!}">
         @endif
     </div>
-
-<!--    <div class="">
-
-    </div> -->
 </div>
