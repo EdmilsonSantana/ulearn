@@ -473,7 +473,7 @@ $course_id = $course->id;
 
   function has_lecture_content(lecture_id) {
     let btn_add_content_class = '.addcontents';
-    return $(`#lecture_add_content${lecture_id}`).has(btn_add_content_class).length == 0;
+    return $(`#lecture_add_content${lecture_id}`).has(btn_add_content_class).is(':visible');
   }
 
 $('.curriculam-block').bind({
