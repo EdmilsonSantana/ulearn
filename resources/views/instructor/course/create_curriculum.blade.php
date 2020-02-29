@@ -476,6 +476,12 @@ $course_id = $course->id;
     return $(`#lecture_add_content${lecture_id}`).has(btn_add_content_class).is(':visible');
   }
 
+  function initialize_video_lecture(lecture_id) {
+    let video_id = $(`#videoresponse${lecture_id}`).find("video").attr('id');
+    let videoPlayer = videojs(video_id);
+    videoPlayer.reset()
+  }
+
 $('.curriculam-block').bind({
     dragenter: function(e) {
         $(this).addClass('highlighted');
@@ -712,8 +718,9 @@ $(document).ready(function(){
 
           $('.su_course_add_lecture_submit').prop("disabled", false);
           
-          $('.su_course_curriculam_sortable ul').append(data.lecture_content);
-          $( ".su_course_curriculam_sortable ul" ).sortable('refresh');
+          let lecture_list = $( ".su_course_curriculam_sortable ul.clearfix.ui-sortable");
+          lecture_list.append(data.lecture_content);
+          lecture_list.sortable('refresh');
           //$('.su_course_add_lecture_content .col.col-lg-3 span').text(cno);
           $('.su_course_add_lecture_textbox').val('');
           $('.add_quiz_lecture_part').show();
@@ -1777,7 +1784,10 @@ function filesuploadajax(){
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_lgray_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_green_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').addClass('su_orange_curr_block');
-        $("#videoresponse"+data.lid).append(return_data.view);
+        $("#videoresponse"+data.lid).html(return_data.view);
+        
+        initialize_video_lecture(data.lid);
+        
         $('#probar_status_'+data.lid).val(0);
         show_delete_button(data.lid);
         //<video class="video-js vjs-default-skin" controls preload="auto" data-setup="{}"><source src="'+return_data.file_link+'" type="video/webm" id="videosource"></video>

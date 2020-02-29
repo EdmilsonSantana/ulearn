@@ -12,6 +12,7 @@
             @include('instructor/course/components/lecture_buttons', ['media_type' => 'video'])
         </div>
         <div class="media_preview " id="video_preview{!! $lecturequiz->lecture_quiz_id !!}" data-lec-id="{!! $lecturequiz->lecture_quiz_id !!}">
+           
             @if($video->processed == 0)
             {!! Lang::get('curriculum.lecture_process') !!}
             @else
