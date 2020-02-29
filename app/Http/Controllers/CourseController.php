@@ -750,11 +750,16 @@ class CourseController extends Controller
                 $data['publish'] = '0';
                 $newID = $this->model->insertLectureQuizRow($data, $lid);
             }
+
+            $route = 'instructor.course.components.media_video';
+
             $return_data = array(
                 'status'    => true,
-                'duration'  => $duration,
-                'file_title' => $file_title,
                 'file_link' => Storage::url($video_path),
+                'view' => $this->render_view($route, array(
+                    'video' => $courseVideos,
+                    'lecturequiz' => $this->model->get_lecture($lid)
+                ))
             );
         } else {
             $return_data = array(
@@ -800,6 +805,7 @@ class CourseController extends Controller
         $courseFiles->file_extension = $file_type;
         $courseFiles->file_size = $file_size;
         $courseFiles->duration = $duration;
+        $courseFiles->processed = 1;
         if ($file_type != 'mp3') {
             $courseFiles->processed = 0;
         }
@@ -814,12 +820,19 @@ class CourseController extends Controller
                 $data['publish'] = '0';
                 $newID = $this->model->insertLectureQuizRow($data, $lid);
             }
+
+            $route = 'instructor.course.components.media_audio';
+
             $return_data = array(
                 'status' => true,
-                'duration'  => $duration,
-                'file_title' => $file_title,
-                'file_type' => $file_type,
-                'file_link' => Storage::url('course/' . $course_id . '/' . $file_name . '.' . $file_type),
+                'view' => $this->render_view($route, array(
+                    'duration' => $duration,
+                    'file_title' => $file_title,
+                    'processed' => $courseFiles->processed,
+                    'file_name' => $file_name,
+                    'lecturequiz' => $this->model->get_lecture($lid),
+                    'course_id' => $course_id
+                ))
             );
         } else {
             $return_data = array(
@@ -939,10 +952,20 @@ class CourseController extends Controller
                 } else {
                     $pdfPage = $pdfPages . ' Pages';
                 }
+                
+                $route = 'instructor.course.components.media_file';
+
+                $view = $this->render_view($route, array(
+                    'lecturequiz' => $this->model->get_lecture($lid),
+                    'pdfpages' => $courseFiles->duration,
+                    'file_title' => $courseFiles->file_title
+                ));
+
                 $return_data = array(
                     'status' => true,
                     'file_title' => $file_title,
-                    'duration' => $pdfPage
+                    'duration' => $pdfPage,
+                    'view' => $view
                 );
             } else {
                 $return_data = array(
@@ -950,6 +973,7 @@ class CourseController extends Controller
                 );
             }
         }
+
         echo json_encode($return_data);
         exit;
     }
@@ -1152,5 +1176,11 @@ class CourseController extends Controller
         echo $vidoes->video_title;
         exit();
     }
+
+
+    private function render_view($route, $data) {
+        return view($route, $data)->render();
+    }
+
     /* Curriculum end */
 }

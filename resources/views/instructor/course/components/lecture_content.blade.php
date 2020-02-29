@@ -75,43 +75,52 @@ use App\Library\ulearnHelpers;
                                         </div>
                                     </div>
                                     <div class="col col-lg-4">
-                                    @include('instructor/course/components/upload_input',
-                                    ['container_id' =>  'videosfiles-' . $lecturequiz->lecture_quiz_id,
-                                     'input_id' => 'luploadvideo',
-                                     'class' => 'videofiles',
-                                     'name' => 'lecturevideo',
-                                     'label' => Lang::get('curriculum.use_lecture_video'),
-                                     'lecture_id' => $lecturequiz->lecture_quiz_id,
-                                     'url' =>  url('courses/lecturevideo/save/'.$lecturequiz->lecture_quiz_id)
-                                     ])
-
-                                        <div class="luploadvideo" id="videosfiles-{!! $lecturequiz->lecture_quiz_id !!}" style="display:none;"> 
-                                            <input id="luploadvideo" class="videofiles" type="file" name="lecturevideo" data-url="{!! url('courses/lecturevideo/save/'.$lecturequiz->lecture_quiz_id) !!}" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
-                                            <span>{!! Lang::get('curriculum.use_lecture_video')!!}</span>
-                                        </div>
-
-                                        <div class="luploadvideo" id="audiofiles-{!! $lecturequiz->lecture_quiz_id !!}" style="display:none;">
-                                            <input id="luploadaudio" class="audiofiles luploadbtn" type="file" name="lectureaudio" data-url="{!! url('courses/lectureaudio/save/'.$lecturequiz->lecture_quiz_id) !!}" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
-                                            <span>{!! Lang::get('curriculum.curriculum_upload')!!}</span>
-                                        </div>
-                                        <div class="luploadvideo" id="prefiles-{!! $lecturequiz->lecture_quiz_id !!}" style="display:none;">
+                                        <!-- Upload Vídeo Start -->
+                                        @include('instructor/course/components/upload_input',
+                                        ['container_id' =>  'videosfiles-' . $lecturequiz->lecture_quiz_id,
+                                        'input_id' => 'luploadvideo',
+                                        'class' => 'videofiles',
+                                        'name' => 'lecturevideo',
+                                        'label' => Lang::get('curriculum.use_lecture_video'),
+                                        'lecture_id' => $lecturequiz->lecture_quiz_id,
+                                        'url' =>  url('courses/lecturevideo/save/'.$lecturequiz->lecture_quiz_id)
+                                        ])
+                                        <!-- Upload Vídeo End -->
+                                        
+                                        <!--<div class="luploadvideo" id="prefiles-{!! $lecturequiz->lecture_quiz_id !!}" style="display:none;">
                                             <input id="luploadpre" class="prefiles luploadbtn" type="file" name="lecturepre" data-url="{!! url('courses/lecturepre/save/'.$lecturequiz->lecture_quiz_id) !!}" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
                                             <span>{!! Lang::get('curriculum.curriculum_pdf')!!}</span>
-                                        </div>
+                                        </div> -->
+
+                                        <!-- Upload Audio Start -->
+                                        @include('instructor/course/components/upload_input',
+                                        ['container_id' =>  'audiofiles-' . $lecturequiz->lecture_quiz_id,
+                                        'input_id' => 'luploadaudio',
+                                        'class' => 'audiofiles luploadbtn',
+                                        'name' => 'lectureaudio',
+                                        'label' => Lang::get('curriculum.curriculum_upload'),
+                                        'lecture_id' => $lecturequiz->lecture_quiz_id,
+                                        'url' =>  url('courses/lectureaudio/save/'.$lecturequiz->lecture_quiz_id)
+                                        ])
+                                        <!-- Upload Audio End -->
+
+                                        <!-- Upload Documents Start -->
                                         @include('instructor/course/components/upload_input',
                                         ['container_id' =>  'docfiles-' . $lecturequiz->lecture_quiz_id,
                                         'input_id' => 'luploaddoc',
                                         'class' => 'docfiles luploadbtn',
                                         'name' => 'lecturedoc',
-                                        'label' => Lang::get('curriculum.curriculum_pdfdoc'),
+                                        'label' => Lang::get('curriculum.curriculum_pdf'),
                                         'lecture_id' => $lecturequiz->lecture_quiz_id,
                                         'url' =>  url('courses/lecturedoc/save/'.$lecturequiz->lecture_quiz_id)
                                         ])
+                                        <!-- Upload Documents End -->
 
+                                        <!--
                                         <div class="luploadvideo" id="resfiles-{!! $lecturequiz->lecture_quiz_id !!}" style="display:none;">
                                             <input id="luploadres" class="resfiles luploadbtn" type="file" name="lectureres" data-url="{!! url('courses/lectureres/save/'.$lecturequiz->lecture_quiz_id) !!}" data-lid="{!! $lecturequiz->lecture_quiz_id !!}">
                                             <span>{!! Lang::get('curriculum.curriculum_doc')!!}</span>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="col col-lg-12">
                                         <div class="width100" id="textdescfiles-{!! $lecturequiz->lecture_quiz_id !!}" style="display:none;">
@@ -226,13 +235,19 @@ use App\Library\ulearnHelpers;
 
 
                             @if($lecturequiz->media_type == 0)
-                                @include('instructor/course/components/media_video')
+                                @include('instructor/course/components/media_video', ['video' => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]])
+                            
                             @elseif($lecturequiz->media_type == 1)
-                                @include('instructor/course/components/media_audio')
+                                @include('instructor/course/components/media_audio', ['file_title' => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]->file_title,
+                                                                                      'duration'   => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]->duration,
+                                                                                      'processed'  => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]->processed,
+                                                                                      'file_name'  => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]->file_name])
                             @elseif($lecturequiz->media_type == 2)
-                                @include('instructor/course/components/media_file')
+                                @include('instructor/course/components/media_file', ['pdfpages' => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]->duration,
+                                                                                     'file_title' => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]->file_title])
                             @elseif($lecturequiz->media_type == 3)
                                 @include('instructor/course/components/media_text', ['text' =>  $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id]])
+                            
                             @elseif($lecturequiz->media_type == 5)
                                 @include('instructor/course/components/media_presentation')
                             @endif

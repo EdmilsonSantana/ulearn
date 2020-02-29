@@ -16,12 +16,12 @@
 @endif
 
 @if(isset($is_modal) && $is_modal)
-    <script type="text/javascript">
-        window.addEventListener('load', function() {
-            $(document).on('lity:close', function(event, instance) {
-                var videoPlayer = videojs("{{ $id }}");
-                videoPlayer.pause();
-            });
+<script type="text/javascript">
+    window.addEventListener('load', function() {
+        $(document).on('lity:close', function(event, instance) {
+            var videoPlayer = videojs("{{ $id }}");
+            videoPlayer.pause();
         });
-    </script>
+    });
+</script>
 @endif

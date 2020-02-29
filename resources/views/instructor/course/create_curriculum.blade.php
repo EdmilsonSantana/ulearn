@@ -460,6 +460,22 @@ $course_id = $course->id;
 <script type="text/javascript" src="{{ asset('backend/curriculum/js/plugins/fileupload/jquery.fileupload-validate.js') }}"></script>
 
 <script type="text/javascript">
+
+  function hide_delete_button(lecture_id) {
+    $(`.lecture-${lecture_id} .deletelecture`).show();
+  }
+
+  function show_delete_button(lecture_id) {
+    if(has_lecture_content(lecture_id)) {
+      $(`.lecture-${lecture_id}`).find('.deletelecture').show();
+    }
+  }
+
+  function has_lecture_content(lecture_id) {
+    let btn_add_content_class = '.addcontents';
+    return $(`#lecture_add_content${lecture_id}`).has(btn_add_content_class).length == 0;
+  }
+
 $('.curriculam-block').bind({
     dragenter: function(e) {
         $(this).addClass('highlighted');
@@ -918,21 +934,6 @@ $(document).ready(function(){
 
     show_delete_button(cid);
   });
-
-  function hide_delete_button(lecture_id) {
-    $(`.lecture-${lecture_id} .deletelecture`).show();
-  }
-
-  function show_delete_button(lecture_id) {
-    if(has_lecture_content(lecture_id)) {
-      $(`.lecture-${lecture_id}`).find('.deletelecture').show();
-    }
-  }
-
-  function has_lecture_content(lecture_id) {
-    let btn_add_content_class = '.addcontents';
-    return $(`#lecture_add_content${lecture_id}`).has(btn_add_content_class).length == 0;
-  }
 
   $(document).on('click','.su_course_add_lecture_desc_cancel',function () { 
     tinyMCE.activeEditor.setContent("");
@@ -1707,9 +1708,6 @@ $(document).ready(function(){
             $("#videoresponse"+lid).text("");
             $("#wholevideos"+lid).hide();
             $('#videoresponse'+lid).show();
-           
-
-            $('.lecture-'+lid + ' .deletelecture').show();
 
             $('#lecture_add_content'+lid).find('.closeheader .closecontents').hide();
             $('#lecture_add_content'+lid).find('.closeheader span.closetext').text('');
@@ -1718,6 +1716,8 @@ $(document).ready(function(){
             $('.lecture-'+lid).find('.su_course_lecture_label').removeClass('su_green_curr_block');
             $('.lecture-'+lid).find('.su_course_lecture_label').addClass('su_orange_curr_block');
             $("#videoresponse"+lid).append(return_data.lecture_content);
+
+            show_delete_button(lid);
           }else{
 
           }
@@ -1742,9 +1742,10 @@ function filesuploadajax(){
     autoUpload: true,
     acceptFileTypes: /(\.|\/)(mp4|avi|mov|flv)$/i,
     maxFileSize: 4096000000, // 4 GB
+    start: function (e, data) {
+      show_progress_bar();
+    },
     progress: function (e, data) {
-      // console.log(data);
-      
       $("#videoresponse"+data.lid).text("");
       $('#probar_status_'+data.lid).val(1);
       var percentage = parseInt(data.loaded / data.total * 100);
@@ -1776,13 +1777,13 @@ function filesuploadajax(){
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_lgray_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_green_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').addClass('su_orange_curr_block');
-        $("#videoresponse"+data.lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-video"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p><p><span class="cclickable vid_preview text-default" data-id="'+data.lid+'"><i class="fa fa-play"></i> Video Preview</span></p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+data.lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+data.lid+'" data-alt="video"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+data.lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+data.lid+'"></div></div><div class="media_preview" id="video_preview'+data.lid+'"><video class="video-js vjs-default-skin video_p_'+data.lid+'" controls="" preload="auto" data-setup="{}"></video></div></div></div>');
+        $("#videoresponse"+data.lid).append(return_data.view);
         $('#probar_status_'+data.lid).val(0);
+        show_delete_button(data.lid);
         //<video class="video-js vjs-default-skin" controls preload="auto" data-setup="{}"><source src="'+return_data.file_link+'" type="video/webm" id="videosource"></video>
-      }else{
-        
       }
 
+      
     }
   });
 
@@ -1791,10 +1792,10 @@ function filesuploadajax(){
     autoUpload: true,
     acceptFileTypes: /(\.|\/)(mp3|wav)$/i,
     maxFileSize: 1024000000, // 1 GB
-    fileuploadsend: show_progress_bar,
+    start: function (e, data) {
+      show_progress_bar();
+    },
     progress: function (e, data) {
-      // console.log(data);
-      // alert(data.lid);
       $("#videoresponse"+data.lid).text("");
       $('#probar_status_'+data.lid).val(1);
       var percentage = parseInt(data.loaded / data.total * 100);
@@ -1826,19 +1827,13 @@ function filesuploadajax(){
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_lgray_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_green_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').addClass('su_orange_curr_block');
-        if(return_data.file_type!='mp3'){
-          var audiopart = '{!! Lang::get("curriculum.audio_message")!!}';
-        } else {
-          var audiopart = '<audio controls><source src="'+return_data.file_link+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
-        }
-        // 
-        $("#videoresponse"+data.lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-audio"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p><p><span class="cclickable aud_preview text-default" data-id="'+data.lid+'"><i class="fa fa-play"></i> Audio Preview</span></p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+data.lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+data.lid+'" data-alt="audio"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+data.lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+data.lid+'"></div></div><div class="media_preview" id="audio_preview'+data.lid+'">'+audiopart+'</div></div></div>');
+        
+        $("#videoresponse"+data.lid).append(return_data.view);
         
         $('#probar_status_'+data.lid).val(0);
-      }else{
-        
+        show_delete_button(data.lid);
       }
-
+      
     }
   });
 
@@ -1890,6 +1885,7 @@ function filesuploadajax(){
     }
   });
 
+  // Cadastro de Documentos
   $('.docfiles').fileupload({
     autoUpload: true,
     acceptFileTypes: /(\.|\/)(pdf)$/i,
@@ -1931,12 +1927,10 @@ function filesuploadajax(){
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_lgray_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').removeClass('su_green_curr_block');
         $('.lecture-'+data.lid).find('.su_course_lecture_label').addClass('su_orange_curr_block');
-        $("#videoresponse"+data.lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-file"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+data.lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+data.lid+'" data-alt="file"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+data.lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+data.lid+'"></div></div></div></div>');
+        $("#videoresponse"+data.lid).append(return_data.view);
         $('#probar_status_'+data.lid).val(0);
-      }else{
-
+        show_delete_button(data.lid);
       }
-
     }
   }); 
 
@@ -2229,7 +2223,7 @@ function checkURL(link){
   var regexp = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
     return regexp.test(link); 
 }
-
+/*
 $('body').on('click','.cclickable',function(){
 
   if(!$(this).hasClass('updaterescontent')) 
@@ -2240,18 +2234,20 @@ $('body').on('click','.cclickable',function(){
       id = $(this).attr('data-id');
     }
 
+    
      $.ajax({
         url: '{!! \URL::to("courses/video") !!}',
         data:{vid:id},
         method:'POST',
         success: function(result)
         {
-              var storage_path = "{{ Storage::url('/course/'.$course_id.'/') }}";
-              var vi = '<source src="'+storage_path+result+'.mp4" type="video/mp4" id="videosource">';
+            console.log("Vídeo - ", result);
+            var storage_path = "{{ Storage::url('app/public/course/'.$course_id.'/') }}";
+            var vi = '<source src="'+storage_path+result+'.mp4" type="video/mp4" id="videosource">';
             $('.video_p_'+id).html(vi);
           }
       });
   }
-});
+}); */
 </script>
 @endsection

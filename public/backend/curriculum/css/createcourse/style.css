@@ -166,11 +166,13 @@ text-transform: capitalize; display:none; color:#222; }
 .lc_details p {  font-size:14px; text-transform:capitalize; }
 .lc_details p a { font-size:12px; text-decoration:underline; }
 .imagetype-text { background:url(../images/course/text1.png) no-repeat scroll left 5px; padding-left:50px;  }
-.imagetype-audio { background:url(../images/course/audio1.png) no-repeat scroll left 5px; padding-left:50px; }
+.imagetype-audio { background:url(../images/course/audio1.png) no-repeat scroll left 5px; padding-left:50px;}
+.imagetype-audio .lecture_buttons {width:100%;}
 .imagetype-presentation { background:url(../images/course/presentation1.png) no-repeat scroll left 5px; padding-left:50px; }
 .imagetype-file { background:url(../images/course/file1.png) no-repeat scroll left 5px; padding-left:50px; }
 .imagetype-video { background:url(../images/course/video1.png) no-repeat scroll left 5px; padding-left:50px; }
-
+.imagetype-video .lecture_buttons {width:100%;}
+.lecture_title p { word-break: break-word; }
 
 /*
 * Course image page
@@ -246,6 +248,14 @@ border-radius:5px;
     background: white;
     cursor: inherit;
     display: block;
+}
+
+.btn-file {
+	background-color: #4985b8;
+}
+
+.btn-file:hover {
+	background-color: #3a6b94;
 }
 
 .meter .bar { padding:0 !important; } 
@@ -364,6 +374,7 @@ input[type="text"].form-element{width:100%;}
 .lecture_title{ display:inline-block; }
 .lecturecontent_tab_content .lecture_title p {font-weight: 600; font-size: 1rem}
 .lecture_buttons{ display:inline-block;float:right; }
+
 .lecture_contenttext{ width:100%;    margin: 10px 0px; }
 .lecture_edit_content{ text-align:right; }
 .divtitlehead{margin: 0px 0px 10px 0px;}
@@ -419,7 +430,7 @@ div.cctabs div{
 	font: bold 12px;
 }
 div.cctabs div.current{
-	background: #f0ad4e;
+	background: #76838f;
 	color: #FFF;
 }
 .cctab-content{
