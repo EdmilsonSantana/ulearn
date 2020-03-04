@@ -462,22 +462,24 @@ $course_id = $course->id;
 <script type="text/javascript">
 
   function hide_delete_button(lecture_id) {
-    $(`.lecture-${lecture_id} .deletelecture`).show();
+    $(`.lecture-${lecture_id} .deletelecture`).hide();
   }
 
   function show_delete_button(lecture_id) {
-    if(has_lecture_content(lecture_id)) {
+    if(!has_lecture_content(lecture_id)) {
       $(`.lecture-${lecture_id}`).find('.deletelecture').show();
     }
   }
 
   function has_lecture_content(lecture_id) {
     let btn_add_content_class = '.addcontents';
+    console.log($(`#lecture_add_content${lecture_id}`).has(btn_add_content_class).is(':visible'));
     return $(`#lecture_add_content${lecture_id}`).has(btn_add_content_class).is(':visible');
   }
 
   function initialize_video_lecture(lecture_id) {
     let video_id = $(`#videoresponse${lecture_id}`).find("video").attr('id');
+    console.log(video_id);
     let videoPlayer = videojs(video_id);
     videoPlayer.reset()
   }
@@ -1400,8 +1402,8 @@ $(document).ready(function(){
   $(document).on('click','.editlectcontent',function(){
     var mid = $(this).data('blockid');
 
-    $('.lecture-' + mid + ' .deletelecture').hide();
-    
+    hide_delete_button(mid);
+
     var attr = $(this).data('alt');
     $('#cccontainer'+mid).show();
     $('#externalrestab'+mid).removeClass('current');
@@ -1420,7 +1422,7 @@ $(document).ready(function(){
       $("#lecture_add_content"+mid).find('.adddescription').hide();
       $("#lecture_add_content"+mid).find('.closecontents').show();
       $("#lecture_add_content"+mid).find('.closeheader .closecontents').show();
-      $("#lecture_add_content"+mid).find('.closeheader span.closetext').text('Edit Video');
+      $("#lecture_add_content"+mid).find('.closeheader span.closetext').text('Editar Vídeo');
       $("#lecture_add_content"+mid).find('.closeheader').show();
       
       $('#contentpopshow'+mid).show();
@@ -1448,7 +1450,7 @@ $(document).ready(function(){
       $("#videoresponse"+mid).hide();
       $("#lecture_add_content"+mid).find('.adddescription').hide();
       $("#lecture_add_content"+mid).find('.closeheader .closecontents').show();
-      $("#lecture_add_content"+mid).find('.closeheader span.closetext').text('Edit Audio');
+      $("#lecture_add_content"+mid).find('.closeheader span.closetext').text('Editar Áudio');
       $("#lecture_add_content"+mid).find('.closeheader').show();
       
       $('#contentpopshow'+mid).show();
@@ -1504,7 +1506,7 @@ $(document).ready(function(){
       $("#videoresponse"+mid).hide();
       $("#lecture_add_content"+mid).find('.adddescription').hide();
       $("#lecture_add_content"+mid).find('.closeheader .closecontents').show();
-      $("#lecture_add_content"+mid).find('.closeheader span.closetext').text('Edit Document');
+      $("#lecture_add_content"+mid).find('.closeheader span.closetext').text('Editar Documento');
       $("#lecture_add_content"+mid).find('.closeheader').show();
       
       $('#contentpopshow'+mid).show();
@@ -1535,7 +1537,7 @@ $(document).ready(function(){
       $("#videoresponse"+mid).hide();
       $("#lecture_add_content"+mid).find('.adddescription').hide();
       $("#lecture_add_content"+mid).find('.closeheader .closecontents').show();
-      $("#lecture_add_content"+mid).find('.closeheader span.closetext').text('Editar Conteúdo');
+      $("#lecture_add_content"+mid).find('.closeheader span.closetext').text('Editar Texto');
       $("#lecture_add_content"+mid).find('.closeheader').show();
       
       $('#contentpopshow'+mid).show();
@@ -1556,7 +1558,6 @@ $(document).ready(function(){
       $('#cdocfiles'+mid).hide();
       $('#cresfiles'+mid).hide();
     }
-
   });
   
   $(document).on('click','.updatelibcontent',function(){
@@ -1737,8 +1738,12 @@ $(document).ready(function(){
   });
   
 
-function show_progress_bar() {
-  $('.luploadvideo-progressbar').fadeIn();
+function show_progress_bar(lecture_id) {
+  $(`.lecture-${lecture_id} .luploadvideo-progressbar`).fadeIn();
+}
+
+function hide_progress_bar(lecture_id) {
+  $(`.lecture-${lecture_id} .luploadvideo-progressbar`).hide();
 }
 
 filesuploadajax();
@@ -1750,7 +1755,7 @@ function filesuploadajax(){
     acceptFileTypes: /(\.|\/)(mp4|avi|mov|flv)$/i,
     maxFileSize: 4096000000, // 4 GB
     start: function (e, data) {
-      show_progress_bar();
+      show_progress_bar($(e.target).attr('data-lid'));
     },
     progress: function (e, data) {
       $("#videoresponse"+data.lid).text("");
@@ -1786,10 +1791,12 @@ function filesuploadajax(){
         $('.lecture-'+data.lid).find('.su_course_lecture_label').addClass('su_orange_curr_block');
         $("#videoresponse"+data.lid).html(return_data.view);
         
+        console.log("Inicializando");
         initialize_video_lecture(data.lid);
         
         $('#probar_status_'+data.lid).val(0);
         show_delete_button(data.lid);
+        hide_progress_bar(data.lid);
         //<video class="video-js vjs-default-skin" controls preload="auto" data-setup="{}"><source src="'+return_data.file_link+'" type="video/webm" id="videosource"></video>
       }
 
@@ -1803,7 +1810,7 @@ function filesuploadajax(){
     acceptFileTypes: /(\.|\/)(mp3|wav)$/i,
     maxFileSize: 1024000000, // 1 GB
     start: function (e, data) {
-      show_progress_bar();
+      show_progress_bar($(e.target).attr('data-lid'));
     },
     progress: function (e, data) {
       $("#videoresponse"+data.lid).text("");
@@ -1842,6 +1849,7 @@ function filesuploadajax(){
         
         $('#probar_status_'+data.lid).val(0);
         show_delete_button(data.lid);
+        hide_progress_bar(data.lid);
       }
       
     }
@@ -1851,7 +1859,6 @@ function filesuploadajax(){
     autoUpload: true,
     acceptFileTypes: /(\.|\/)(pdf)$/i,
     maxFileSize: 1024000000, // 1 GB
-    fileuploadsend: show_progress_bar,
     progress: function (e, data) {
       // console.log(data);
       // alert(data.lid);
@@ -1901,7 +1908,7 @@ function filesuploadajax(){
     acceptFileTypes: /(\.|\/)(pdf)$/i,
     maxFileSize: 1024000000, // 1 GB
     start: function (e, data) {
-      show_progress_bar();
+      show_progress_bar($(e.target).attr('data-lid'));
     },
     progress: function (e, data) {
       // console.log(data);
@@ -1940,6 +1947,7 @@ function filesuploadajax(){
         $("#videoresponse"+data.lid).append(return_data.view);
         $('#probar_status_'+data.lid).val(0);
         show_delete_button(data.lid);
+        hide_progress_bar(data.lid);
       }
     }
   }); 
