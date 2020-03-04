@@ -5,7 +5,7 @@
     $file_name = '/app/public/course/'.$video->course_id.'/'.$video->video_title.'.'.$video->video_type;
     @endphp
     <div>{!! $file_name !!}</div>
-    <video controls id="{{$id}}" class="video-js vjs-default-skin vjs-big-play-centered {{!$is_modal ? 'vjs-16-9' : ''}} " data-setup='{}'>
+    <video controls id="{{$id}}" preload="auto" class="video-js vjs-default-skin vjs-big-play-centered {{!$is_modal ? 'vjs-16-9' : ''}} " data-setup='{}'>
         <source src="{{ Storage::url($file_name) }}" type="video/mp4">
         Your browser doesn't support HTML5 video tag.
         <p class="vjs-no-js">

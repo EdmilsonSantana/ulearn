@@ -477,11 +477,20 @@ $course_id = $course->id;
     return $(`#lecture_add_content${lecture_id}`).has(btn_add_content_class).is(':visible');
   }
 
+  function dispose_video_lecture(lecture_id) {
+    let video_id = $(`#videoresponse${lecture_id}`).find("video").attr('id');
+    if(video_id) {
+      console.log("Removendo vídeo: ", video_id);
+      videojs(video_id).dispose();
+    }
+  }
+
   function initialize_video_lecture(lecture_id) {
     let video_id = $(`#videoresponse${lecture_id}`).find("video").attr('id');
-    console.log(video_id);
-    let videoPlayer = videojs(video_id);
-    videoPlayer.reset()
+    if(video_id) {
+      console.log("Inicializando vídeo: ", video_id);
+      videojs(video_id).reset();
+    }
   }
 
 $('.curriculam-block').bind({
@@ -1755,6 +1764,7 @@ function filesuploadajax(){
     acceptFileTypes: /(\.|\/)(mp4|avi|mov|flv)$/i,
     maxFileSize: 4096000000, // 4 GB
     start: function (e, data) {
+      dispose_video_lecture($(e.target).attr('data-lid'));
       show_progress_bar($(e.target).attr('data-lid'));
     },
     progress: function (e, data) {
@@ -1791,7 +1801,6 @@ function filesuploadajax(){
         $('.lecture-'+data.lid).find('.su_course_lecture_label').addClass('su_orange_curr_block');
         $("#videoresponse"+data.lid).html(return_data.view);
         
-        console.log("Inicializando");
         initialize_video_lecture(data.lid);
         
         $('#probar_status_'+data.lid).val(0);
