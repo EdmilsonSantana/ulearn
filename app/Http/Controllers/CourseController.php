@@ -618,9 +618,11 @@ class CourseController extends Controller
             $newID = $this->model->insertLectureQuizRow($data, $request->input('lid'));
         }
 
-        $coursecurriculum = $this->model->getcurriculuminfo(Course::find($course_id),
-                        \Auth::user()->instructor->id);
-        
+        $coursecurriculum = $this->model->getcurriculuminfo(
+            Course::find($course_id),
+            \Auth::user()->instructor->id
+        );
+
         $this->data['lecturecount'] = $request->input('position');
         $this->data['section'] = $this->model->get_section($data['section_id']);
         $this->data['lecturequiz'] = $this->model->get_lecture($newID);
@@ -634,7 +636,7 @@ class CourseController extends Controller
 
         $lecture_content = view('instructor.course.components.lecture_content', $this->data)->render();
 
-        echo json_encode(array('id'=> $newID, 'lecture_content'=> $lecture_content));
+        echo json_encode(array('id' => $newID, 'lecture_content' => $lecture_content));
     }
 
 
@@ -952,7 +954,7 @@ class CourseController extends Controller
                 } else {
                     $pdfPage = $pdfPages . ' Pages';
                 }
-                
+
                 $route = 'instructor.course.components.media_file';
 
                 $view = $this->render_view($route, array(
@@ -1049,8 +1051,10 @@ class CourseController extends Controller
         $this->data['lecturequiz'] = $this->model->get_lecture($newID);
         $this->data['text'] = $data['contenttext'];
 
-        $return_data['lecture_content'] = view('instructor.course.components.media_text',
-                                 $this->data)->render();
+        $return_data['lecture_content'] = view(
+            'instructor.course.components.media_text',
+            $this->data
+        )->render();
 
         echo json_encode($return_data);
         exit;
@@ -1058,45 +1062,56 @@ class CourseController extends Controller
 
     public function postLectureLibrarySave(Request $request)
     {
-        $course_id = $request->input('course_id');
+        $course_id = $request->input('courseid');
+        $lid = $request->input('lid');
+
         $data['media'] = $request->input('lib');
         $data['media_type'] = $request->input('type');
-        $newID = $this->model->insertLectureQuizRow($data, $request->input('lid'));
+        $this->model->insertLectureQuizRow($data, $request->input('lid'));
+
+        $route = null;
+        $view_data = null;
+        $file_link = null;
 
         if ($request->input('type') == 0) {
 
             $libraryDetails = $this->model->getvideoinfo($request->input('lib'));
-            $file_title = $libraryDetails['0']->video_name;
-            $duration = $libraryDetails['0']->duration;
-            $processed = $libraryDetails['0']->processed;
-            if ($processed == 1)
-                $file_link = Storage::url('course/' . $course_id . '/' . $libraryDetails['0']->video_title . '.webm');
-            else
-                $file_link = '';
+                        
+            $route = 'instructor.course.components.media_video';
+            $view_data = array(
+                'video' => $libraryDetails['0'],
+                'course_id' => $course_id,
+                'lecturequiz' => $this->model->get_lecture($lid)
+            );
         } else if ($request->input('type') == 1) {
 
             $libraryDetails = $this->model->getfileinfo($request->input('lib'));
-            $file_title = $libraryDetails['0']->file_title;
-            $duration = $libraryDetails['0']->duration;
-            $file_link = Storage::url('course/' . $course_id . '/' . $libraryDetails['0']->file_name . '.' . $libraryDetails['0']->file_extension);
+                   
+            $route = 'instructor.course.components.media_audio';
+            $view_data =  array(
+                'duration' => $libraryDetails['0']->duration,
+                'file_title' => $libraryDetails['0']->file_title,
+                'processed' => $libraryDetails['0']->processed,
+                'file_name' => $libraryDetails['0']->file_name,
+                'lecturequiz' => $this->model->get_lecture($lid),
+                'course_id' => $course_id
+            );
         } else if ($request->input('type') == 2 || $request->input('type') == 5) {
 
-            $libraryDetails = $this->model->getfileinfo($request->input('lib'));
-            $file_title = $libraryDetails['0']->file_title;
-            if ($libraryDetails['0']->duration <= 1) {
-                $pdfPage = $libraryDetails['0']->duration . ' Page';
-            } else {
-                $pdfPage = $libraryDetails['0']->duration . ' Pages';
-            }
-            $duration = $pdfPage;
-            $file_link = '';
+            $libraryDetails = $this->model->getfileinfo($request->input('lib'));            
+            $route = 'instructor.course.components.media_file';
+            $view_data =  array(
+                'lecturequiz' => $this->model->get_lecture($lid),
+                'pdfpages' => $libraryDetails['0']->duration,
+                'file_title' => $libraryDetails['0']->file_title
+            );
         }
 
         $return_data = array(
             'status' => true,
-            'duration'  => $duration,
-            'file_title' => $file_title,
-            'file_link' => $file_link
+            'file_link' => $file_link,
+            'course_id' => $course_id,
+            'view' => $this->render_view($route, $view_data),
         );
 
         echo json_encode($return_data);
@@ -1178,7 +1193,8 @@ class CourseController extends Controller
     }
 
 
-    private function render_view($route, $data) {
+    private function render_view($route, $data)
+    {
         return view($route, $data)->render();
     }
 

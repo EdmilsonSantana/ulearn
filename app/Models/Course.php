@@ -492,10 +492,14 @@ class Course extends Model
                 ->where('curriculum_lectures_quiz.lecture_quiz_id',$file_id)->first();
   }
 
-    public function getvideoinfo($id='')
+  public function getvideoinfo($id='')
 	{
 	   return \DB::table('course_videos')->where('id', '=', $id)->get(); 
-	}
+  }
+  
+  public function getfileinfo($id='') {
+    return \DB::table('course_files')->where('id', '=', $id)->get(); 
+  }
 
 	public function getvideoinfoFirst($id='')
 	{

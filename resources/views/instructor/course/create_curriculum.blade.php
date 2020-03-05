@@ -467,14 +467,15 @@ $course_id = $course->id;
 
   function show_delete_button(lecture_id) {
     if(!has_lecture_content(lecture_id)) {
+      console.log("Exibindo botão de remoção de atividade...");
       $(`.lecture-${lecture_id}`).find('.deletelecture').show();
     }
   }
 
   function has_lecture_content(lecture_id) {
     let btn_add_content_class = '.addcontents';
-    console.log($(`#lecture_add_content${lecture_id}`).has(btn_add_content_class).is(':visible'));
-    return $(`#lecture_add_content${lecture_id}`).has(btn_add_content_class).is(':visible');
+    console.log($(`#lecture_add_content${lecture_id}`).find(btn_add_content_class).is(':visible'));
+    return $(`#lecture_add_content${lecture_id}`).find(btn_add_content_class).is(':visible');
   }
 
   function dispose_video_lecture(lecture_id) {
@@ -1570,12 +1571,16 @@ $(document).ready(function(){
   });
   
   $(document).on('click','.updatelibcontent',function(){
+    
     var lid = $(this).attr('data-lid');
     var lib = $(this).attr('data-lib');
     var alt = $(this).attr('data-alt');
     var type = $(this).attr('data-type');
     var courseselectlibrary =$('[name="courseselectlibrary"]').val();
     var _token =$('[name="_token"]').val();
+
+    dispose_video_lecture(lid);
+
     $.ajax ({
       type: "POST",
       url: courseselectlibrary,
@@ -1597,23 +1602,9 @@ $(document).ready(function(){
           $('.lecture-'+lid).find('.su_course_lecture_label').removeClass('su_lgray_curr_block');
           $('.lecture-'+lid).find('.su_course_lecture_label').removeClass('su_green_curr_block');
           $('.lecture-'+lid).find('.su_course_lecture_label').addClass('su_orange_curr_block');
-          if(type == 'video') {
-            if(return_data.file_link == ''){
-              var videopart = '{!! Lang::get("curriculum.video_message")!!}';
-            } else {
-              var videopart = '<video class="video-js vjs-default-skin" controls preload="auto" data-setup="{}"><source src="'+return_data.file_link+'" type="video/webm" id="videosource"></video>';
-            }
-            $("#videoresponse"+lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-'+type+'"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p><p><span class="cclickable vid_preview text-default" data-id="'+lid+'"><i class="fa fa-play"></i> Video Preview</span></p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+lid+'" data-alt="'+type+'"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+lid+'"></div></div><div class="media_preview" id="video_preview'+lid+'"> '+videopart+' </div></div></div>');
-          } else if(type == 'audio') {
-            if(return_data.file_type!='mp3'){
-              var audiopart = '{!! Lang::get("curriculum.audio_message") !!}';
-            } else {
-              var audiopart = '<audio controls><source src="'+return_data.file_link+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
-            }
-            $("#videoresponse"+lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-'+type+'"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p><p><span class="cclickable aud_preview text-default" data-id="'+lid+'"><i class="fa fa-play"></i> Audio Preview</span></p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+lid+'" data-alt="'+type+'"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+lid+'"></div></div><div class="media_preview" id="audio_preview'+lid+'">'+audiopart+'</div></div></div>');
-          } else {
-            $("#videoresponse"+lid).append('<div class="lecture_main_content_first_block1"><div class="lc_details imagetype-'+type+'"><div class="lecture_title"><p>'+return_data.file_title+'</p><p>'+return_data.duration+'</p></div><div class="lecture_buttons"><div class="lecture_edit_content" id="lecture_edit_content'+lid+'"> <input type="button" name="lecture_edit_content" class="btn editlectcontent btn-secondary" value="{!! Lang::get("curriculum.Edit_Content") !!}" data-blockid="'+lid+'" data-alt="'+type+'"> <input type="button" name="lecture_resource_content" class="btn btn-info addresource" value="{!! Lang::get("curriculum.Add_Resource") !!}" data-blockid="'+lid+'" data-alt="resource"> <input type="button" name="lecture_publish_content" class="btn btn-warning publishcontent" value="{!! Lang::get("curriculum.Publish")!!}" data-blockid="'+lid+'"></div></div></div></div>');
-          }
+          $("#videoresponse"+lid).append(return_data.view);
+          show_delete_button(lid);
+          initialize_video_lecture(lid);
         }else{
 
         }
