@@ -851,7 +851,7 @@ $(document).ready(function(){
       $('.add_quiz_lecture_part').hide();
       $('.su_course_add_lecture_content').show();
     } else {
-      alert('{!! Lang::get("curriculum.section_message")!!}');
+      toastr.error('{!! Lang::get("curriculum.section_message")!!}');
     }
   });
 
@@ -869,7 +869,7 @@ $(document).ready(function(){
       $('.add_quiz_lecture_part').hide();
       $('.su_course_add_quiz_content').show();
     } else {
-      alert('{!! Lang::get("curriculum.quiz_message")!!}');
+      toastr.error('{!! Lang::get("curriculum.quiz_message")!!}');
     }
   });
   
@@ -919,7 +919,7 @@ $(document).ready(function(){
     var cid = $(this).data('blockid');
     check_process = $('#probar_status_'+cid).val(); 
     if(check_process==1){
-      alert("Please wait untill the process complete.");
+      toastr.error('{!! Lang::get("curriculum.process_in_progress")!!}');
       return false;
     }
     if($('#contentpopshow'+cid).hasClass('hideit')){
@@ -1035,7 +1035,7 @@ $(document).ready(function(){
     
     var cid = $(this).data('blockid');
 
-    $(`.lecture-${cid} .deletelecture`).hide();
+    hide_delete_button(cid);
 
     let closeHeader = $(`#lecture_add_content${cid}`).children('.closeheader');
 
@@ -1087,12 +1087,12 @@ $(document).ready(function(){
           $('#lecture_add_content'+lid).find('.closeheader span.closetext').text('');
           $('#lecture_add_content'+lid).find('.closeheader').hide();
           
-          hide_delete_button(lid);
+          show_delete_button(lid);
           hide_description_button(lid);
         }
       });
     } else {
-      alert('{!! Lang::get("curriculum.curriculum_description") !!}');
+      toastr.error('{!! Lang::get("curriculum.curriculum_description") !!}');
     }
   });
 
@@ -1202,8 +1202,7 @@ $(document).ready(function(){
   $(document).on('click','.lmedia-video',function(){
     var mid = $(this).data('lid');
     var attr = $(this).attr('alt');
-    // alert(attr);
-    // alert(mid);
+   
     if(attr=='video'){
       $('#externalrestab'+mid).removeClass('current');
       $('#externalres'+mid).removeClass('current');
@@ -1238,8 +1237,7 @@ $(document).ready(function(){
   $(document).on('click','.lmedia-audio',function(){
     var mid = $(this).data('lid');
     var attr = $(this).attr('alt');
-    // alert(attr);
-    // alert(mid);
+
     if(attr=='audio'){
       $('#externalrestab'+mid).removeClass('current');
       $('#externalres'+mid).removeClass('current');
@@ -1274,8 +1272,7 @@ $(document).ready(function(){
   $(document).on('click','.lmedia-presentation',function(){
     var mid = $(this).data('lid');
     var attr = $(this).attr('alt');
-    // alert(attr);
-    // alert(mid);
+   
     if(attr=='presentation'){
       $('#externalrestab'+mid).removeClass('current');
       $('#externalres'+mid).removeClass('current');
@@ -1308,8 +1305,7 @@ $(document).ready(function(){
   $(document).on('click','.lmedia-file',function(){
     var mid = $(this).data('lid');
     var attr = $(this).attr('alt');
-    // alert(attr);
-    // alert(mid);
+    
     if(attr=='file'){
       $('#externalrestab'+mid).removeClass('current');
       $('#externalres'+mid).removeClass('current');
@@ -1342,8 +1338,7 @@ $(document).ready(function(){
   $(document).on('click','.lmedia-text',function(){
     var mid = $(this).data('lid');
     var attr = $(this).attr('alt');
-    // alert(attr);
-    // alert(mid);
+    
     if(attr=='text'){
       $('#externalrestab'+mid).removeClass('current');
       $('#externalres'+mid).removeClass('current');
@@ -1376,8 +1371,7 @@ $(document).ready(function(){
   $(document).on('click','.addresource',function(){
     var mid = $(this).data('blockid');
     var attr = $(this).data('alt');
-    // alert(attr);
-    // alert(mid);
+    
     if(attr=='resource'){
       $('#externalrestab'+mid).show();
       $('#contentpopshow'+mid).show();
@@ -1422,8 +1416,7 @@ $(document).ready(function(){
     $('#fromlibrarytab'+mid).removeClass('current');
     $('#upfiletab'+mid).addClass('current');
     $('#upfile'+mid).addClass('current');
-    // alert(attr);
-    // alert(mid);
+    
     if(attr=='video'){
       
       $('#externalrestab'+mid).hide();
@@ -1649,7 +1642,7 @@ $(document).ready(function(){
 
     //check link url validation
     if(!checkURL(link)){
-      alert('invalid url format.');
+      toastr.error('{!! Lang::get("curriculum.res_invalid_url") !!}');
       $('#exres_link'+lid).focus();
       return false;
     }
@@ -1682,7 +1675,7 @@ $(document).ready(function(){
         }
       });
     } else {
-      alert('{!! Lang::get("curriculum.curriculum_empty")!!}');
+      toastr.error('{!! Lang::get("curriculum.curriculum_empty")!!}');
     }
   });
   
@@ -1732,7 +1725,7 @@ $(document).ready(function(){
         }
       });
     } else {
-      alert('{!! Lang::get("curriculum.curriculum_text_empty") !!}');
+      toastr.error('{!! Lang::get("curriculum.curriculum_text_empty") !!}');
     }
   });
   });
@@ -1770,7 +1763,7 @@ function filesuploadajax(){
     processfail: function (e, data) {
       file_name = data.files[data.index].name;
       $('#probar_status_'+data.lid).val(0);
-      alert("{!! Lang::get('curriculum.lecture_video_file')!!}"); 
+      toastr.error("{!! Lang::get('curriculum.lecture_video_file')!!}"); 
     },
     done: function(e, data){
       var return_data = $.parseJSON( data.result );
@@ -1824,7 +1817,7 @@ function filesuploadajax(){
     processfail: function (e, data) {
       file_name = data.files[data.index].name;
       $('#probar_status_'+data.lid).val(0);
-      alert("{!! Lang::get('curriculum.lecture_audio_file')!!}");     
+      toastr.error("{!! Lang::get('curriculum.lecture_audio_file')!!}");     
     },
     done: function(e, data){
       var return_data = $.parseJSON( data.result );
@@ -1860,8 +1853,7 @@ function filesuploadajax(){
     acceptFileTypes: /(\.|\/)(pdf)$/i,
     maxFileSize: 1024000000, // 1 GB
     progress: function (e, data) {
-      // console.log(data);
-      // alert(data.lid);
+     
       $("#videoresponse"+data.lid).text("");
       $('#probar_status_'+data.lid).val(1);
       var percentage = parseInt(data.loaded / data.total * 100);
@@ -1873,7 +1865,7 @@ function filesuploadajax(){
     processfail: function (e, data) {
       file_name = data.files[data.index].name;
       $('#probar_status_'+data.lid).val(0);
-      alert("{!! Lang::get('curriculum.lecture_pdf_file')!!}");   
+      toastr.error("{!! Lang::get('curriculum.lecture_pdf_file')!!}");   
     },
     done: function(e, data){
       var return_data = $.parseJSON( data.result );
@@ -1911,8 +1903,7 @@ function filesuploadajax(){
       show_progress_bar($(e.target).attr('data-lid'));
     },
     progress: function (e, data) {
-      // console.log(data);
-      // alert(data.lid);
+     
       $('#probar_status_'+data.lid).val(1);
       $("#videoresponse"+data.lid).text("");
       var percentage = parseInt(data.loaded / data.total * 100);
@@ -1924,7 +1915,7 @@ function filesuploadajax(){
     processfail: function (e, data) {
       $('#probar_status_'+data.lid).val(0);
       file_name = data.files[data.index].name;
-      alert("{!! Lang::get('curriculum.lecture_pdf_file')!!}");     
+      toastr.error("{!! Lang::get('curriculum.lecture_pdf_file')!!}");     
     },
     done: function(e, data){
       var return_data = $.parseJSON( data.result );
@@ -1957,8 +1948,7 @@ function filesuploadajax(){
     acceptFileTypes: /(\.|\/)(pdf|doc|docx)$/i,
     maxFileSize: 1024000000, // 1 GB
     progress: function (e, data) {
-      // console.log(data);
-      // alert(data.lid);
+      
       $('#probar_status_'+data.lid).val(1);
       $("#resresponse"+data.lid).text("");
       var percentage = parseInt(data.loaded / data.total * 100);
@@ -1970,7 +1960,7 @@ function filesuploadajax(){
     processfail: function (e, data) {
       $('#probar_status_'+data.lid).val(0);
       file_name = data.files[data.index].name;
-      alert("{!! Lang::get('curriculum.lecture_file_not_allowed')!!}");   
+      toastr.error("{!! Lang::get('curriculum.lecture_file_not_allowed')!!}");   
   },
     done: function(e, data){
       var return_data = $.parseJSON( data.result );
@@ -2031,7 +2021,7 @@ function updatesection(id) {
   if(section != ''){
     if(section.length < 2)
     {
-      alert('Please provide atleast 2 characters');
+      toastr.error('{!! Lang::get("curriculum.curriculum_section_ch_length") !!}');
       return false;
     }
     var position=$('.section-'+id+' .sectionpos').val();
@@ -2051,7 +2041,7 @@ function updatesection(id) {
       }
     });
   } else {
-    alert('{!! Lang::get("curriculum.curriculum_section_name") !!}');
+    toastr.error('{!! Lang::get("curriculum.curriculum_section_name") !!}');
   }
 }
 
@@ -2121,7 +2111,7 @@ function updatelecture(id,sid) {
   if(lecture != ''){
     if(lecture.length<=1)
     {
-      alert('{!! Lang::get("curriculum.curriculum_lecture_ch_length")!!}');
+      toastr.error('{!! Lang::get("curriculum.curriculum_lecture_ch_length")!!}');
       return false;
     }
 
@@ -2141,7 +2131,7 @@ function updatelecture(id,sid) {
       }
     });
   } else {
-    alert('{!! Lang::get("curriculum.curriculum_lecture_name")!!}');
+    toastr.error('{!! Lang::get("curriculum.curriculum_lecture_name")!!}');
   }
 }
 
