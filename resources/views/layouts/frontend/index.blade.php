@@ -55,7 +55,7 @@
                 @guest
                 <div class="d-flex justify-content-end align-items-center">
                     <a class="btn btn-learna" href="{{ route('login') }}">Fazer Login</a>
-                    <a class="btn btn-learna btn-learna-primary" href="{{ route('register') }}">Cadastre-se</a>
+                    <!--<a class="btn btn-learna btn-learna-primary" href="{{ route('register') }}">Cadastre-se</a> -->
                 </div>
                 @else
                 <div class="d-flex justify-content-end align-items-center">

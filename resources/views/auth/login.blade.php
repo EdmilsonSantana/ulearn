@@ -14,15 +14,16 @@
             <h1 class="title">Já é nosso Aluno ?</h1>
             <p class="subtitle">Faça seu login e boa aula!</p>
 
-            <div class="p-2">
+            <div class="p-4">
+
                 <div class="form-group">
                     <label>Email</label>
                     <input name="email" type="text" class="form-control form-control-sm" value="{{ old('email') }}">
                     @if ($errors->has('email'))
                     <label class="error" for="email">{{ $errors->first('email') }}</label>
                     @endif
-
                 </div>
+
                 <div class="form-group">
                     <label>Senha</label>
                     <input name="password" type="password" class="form-control form-control-sm" value="{{ old('password') }}">
@@ -31,7 +32,7 @@
                     @endif
                 </div>
 
-                <div class="form-group">
+                <div class="form-group pt-4">
                     <button type="submit" class="btn btn-lg btn-block btn-learna btn-learna-primary">ENTRAR</button>
                 </div>
 
@@ -63,11 +64,11 @@
             },
             messages: {
                 email: {
-                    required: 'The email field is required.',
-                    email: 'The email must be a valid email address.'
+                    required: 'O campo de email é obrigatório.',
+                    email: 'O email deve ser um endereço de email válido.'
                 },
                 password: {
-                    required: 'The password field is required.'
+                    required: 'O campo de senha é obrigatório.'
                 }
             }
         });
