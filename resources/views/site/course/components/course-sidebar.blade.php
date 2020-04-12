@@ -14,18 +14,23 @@
         <div class="course-feature-content">
             <div class="container">
                 <div class="d-flex flex-column">
+                    
+                    @if(!$is_subscribed)
                     <div class="course-pricing">
                         {{ $course->price ? 'R$'.$course->price : 'Gratuito' }}
                     </div>
+                    @endif
 
                     @php
 
-                    $first_lecture = array_values($curriculum_sections)[0][0];
-                    $route_course_content = url('course-enroll/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($first_lecture->lecture_quiz_id,true));
+                    $lecture_url = count($curriculum_sections) > 0 ? '/'.SiteHelpers::encrypt_decrypt(array_values($curriculum_sections)[0][0]->lecture_quiz_id,true) : '';
+
+                    $route_course_content = url('course-enroll/'.$course->course_slug.$lecture_url);
                     $route_course_checkout = route('course.checkout', $course->course_slug);
 
                     $btn_route = $is_subscribed ? $route_course_content : $route_course_checkout;
                     $btn_label = $is_subscribed ? 'Ir para o curso' : 'Inscreva-se agora';
+
                     @endphp
 
                     @include('admin/components/link',
@@ -41,7 +46,7 @@
     </section>
 
     <div class="lity-hide">
-        @include('site/course/components/course-video', ['video' => $video, 
-                'id' => 'course-video-preview', 'is_modal' => true])
+        @include('site/course/components/course-video', ['video' => $video,
+        'id' => 'course-video-preview', 'is_modal' => true])
     </div>
 </div>
