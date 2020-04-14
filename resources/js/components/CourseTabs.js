@@ -26,6 +26,7 @@ export default class CoursesTab extends Component {
     axios
       .get(`${this.props.site_url}/api/category/${categoryId}/courses`)
       .then(response => {
+        console.log(response.data);
         this.setState({ courses: response.data });
       })
       .catch(function(error) {

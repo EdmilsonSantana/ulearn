@@ -1529,7 +1529,7 @@ a.clear-filters, a.clear-filters:hover {
 
 .bi-header {
     border-bottom: 0;
-    color: #14bef0;
+    color: #686f7a;
 }
 
 .bi-header .close {
@@ -1550,7 +1550,7 @@ a.clear-filters, a.clear-filters:hover {
     bottom: -4px;
     left: 50%;
     right: auto;
-    background-color: #14bef0;
+    background-color: #505763;
 }
 
 .bi-header-seperator-head:after {
@@ -1767,4 +1767,8 @@ div.page-main-content {
     font-weight: normal;
     color: #fff;
     opacity: 1;
+}
+
+.br-theme-fontawesome-stars #barrating + .br-widget a {
+    font-size: 50px;
 }

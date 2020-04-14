@@ -14,7 +14,7 @@
         <div class="course-feature-content">
             <div class="container">
                 <div class="d-flex flex-column">
-                    
+
                     @if(!$is_subscribed)
                     <div class="course-pricing">
                         {{ $course->price ? 'R$'.$course->price : 'Gratuito' }}
@@ -34,7 +34,12 @@
                     @endphp
 
                     @include('admin/components/link',
-                    ['link' => $btn_route, 'text' => $btn_label, 'icon' => false, 'large' => true])
+                    ['link' => $btn_route, 'text' => $btn_label, 'large' => true])
+                    <div class="mt-1"></div>
+                    @include('admin/components/link',
+                    ['secondary' => true, 'text' => 'Deixe uma classificação', 'icon' => 'fa fa-star', 'large' => false, 'modal' => '#rateModal'])
+
+                    @include('site/course/components/course-rating')
                 </div>
             </div>
             <ul class="list-unstyled cf-pricing-li">

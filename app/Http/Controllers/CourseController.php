@@ -38,11 +38,10 @@ class CourseController extends Controller
     public function myCourses(Request $request)
     {
         $user_id = \Auth::user()->id;
-        $courses = DB::table('courses')
-            ->select('courses.*', 'instructors.first_name', 'instructors.last_name')
-            ->join('instructors', 'instructors.id', '=', 'courses.instructor_id')
-            ->join('course_taken', 'course_taken.course_id', '=', 'courses.id')
-            ->where('course_taken.user_id', $user_id)->get();
+
+        $courses =  Course::join('instructors', 'instructors.id', '=', 'courses.instructor_id')
+                            ->join('course_taken', 'course_taken.course_id', '=', 'courses.id')
+                            ->where('course_taken.user_id', $user_id)->get();
 
         return view('site.course.my-courses', compact('courses'));
     }
@@ -99,10 +98,12 @@ class CourseController extends Controller
         $is_curriculum = $curriculum['is_curriculum'];
 
         if ($is_subscribed) {
-            $students_count = $this->model->students_count($course->id);
             $course_rating = $this->get_course_rating($course);
-            array_push($model_variables, 'students_count', 'course_rating');
+            array_push($model_variables, 'course_rating');
         }
+
+        $students_count = $this->model->students_count($course->id);
+        array_push($model_variables, 'students_count');
 
         $video = null;
         if ($course->course_video) {

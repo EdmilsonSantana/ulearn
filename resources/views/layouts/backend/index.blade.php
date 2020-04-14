@@ -38,7 +38,10 @@
   <link rel="stylesheet" href="{{ asset('backend/vendor/datatables.net-bs4/dataTables.bootstrap4.min599c.css?v4.0.2') }}">
 
   <link rel="stylesheet" href="{{ asset('backend/vendor/croppie/croppie.css?v4.0.2') }}">
-  
+
+  <!-- Rating -->
+  <link rel="stylesheet" href="{{ asset('frontend/vendor/rating/fontawesome-stars.css') }}">
+
   <!-- Scripts -->
   <script src="{{ asset('backend/vendor/breakpoints/breakpoints.min599c.js?v4.0.2') }}"></script>
   <script src="https://vjs.zencdn.net/7.6.6/video.js"></script>
@@ -130,6 +133,8 @@
   </div>
   <!-- End Page -->
 
+  <!-- Rating -->
+  <script src="{{ asset('frontend/vendor/rating/jquery.barrating.min.js') }}"></script>
 
   <!-- Footer -->
   <footer class="site-footer">

@@ -10,11 +10,13 @@ import {
   faCheck,
   faArrowLeft,
   faDownload,
+  faStar,
   faPaperclip,
   faExternalLinkAlt
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
+  faStar,
   faAngleDoubleRight,
   faCheck,
   faArrowLeft,

@@ -40,7 +40,7 @@ export default class CourseCard extends React.Component {
                   {ratings.map((rating, index) => (
                     <span key={index}
                       className={`fa fa-star ${
-                        rating <= this.props.averageRating ? "checked" : ""
+                        rating <= Number(this.props.average_rating) ? "checked" : ""
                       } `}
                     ></span>
                   ))}

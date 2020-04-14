@@ -8,7 +8,7 @@ import Rating from "react-rating";
 //Modal.setAppElement("#course-enroll-container");
 
 const ModalRating = props => {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = React.useState(props.open);
 
   const openModal = () => setIsOpen(true);
 
@@ -28,7 +28,7 @@ const ModalRating = props => {
   return (
     <div>
       <a className="nav-link" role="button" onClick={openModal}>
-        <FontAwesomeIcon icon={faStar} /> &nbsp;Deixe a sua classificação
+        <FontAwesomeIcon icon={faStar} /> &nbsp;Deixe uma classificação
       </a>
       <Modal
         isOpen={modalIsOpen}

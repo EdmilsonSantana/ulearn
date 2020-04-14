@@ -22,16 +22,22 @@
         <div class="d-flex">
 
             <div class="m-1">
+                @php
+                $ratings_count = $course->ratings->count('rating');
+                $average_rating = $course->ratings->avg('rating');
+
+                $rating = $ratings_count > 1 ? $ratings_count . ' classificações' : $ratings_count. ' classificação';
+                $count =  $students_count > 1 ? $students_count .' alunos inscritos' : $students_count . ' aluno inscrito';
+                @endphp
+
                 <div class="cv-category-detail cv-rating float-lg-left float-md-right float-sm-right">
                     <star class="course-rating">
-                        @for($r=1;$r<=5;$r++) <span class="fa fa-star {{ $r <= $course->ratings->avg('rating') ? 'checked-vpage' : ''}}"></span>
+                        @for($r=1;$r<=5;$r++) <span class="fa fa-star {{ $r <= $average_rating ? 'checked-vpage' : ''}}"></span>
                             @endfor
                     </star>
-                    <span>{{ $course->ratings->count('rating') }} </span>
+                    
+                    <span>{{ number_format($average_rating, 1) }} ({{ $rating }}) {{ $count }} </span>
                 </div>
-            </div>
-            <div class="m-1">
-                <span> (199 classificações) </span><span> 199 alunos inscritos </span>
             </div>
         </div>
     </div>

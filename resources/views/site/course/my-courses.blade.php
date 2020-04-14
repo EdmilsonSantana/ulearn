@@ -37,7 +37,7 @@
                                     <div class="p-2 pr-4">
                                         <star class="course-rating">
                                             <?php for ($r = 1; $r <= 5; $r++) { ?>
-                                                <span class="fa fa-star <?php echo $r <= 4 ? 'checked' : ''; ?>"></span>
+                                                <span class="fa fa-star <?php echo $r <= $course->ratings->avg('rating') ? 'checked' : ''; ?>"></span>
                                             <?php } ?>
                                         </star>
                                     </div>

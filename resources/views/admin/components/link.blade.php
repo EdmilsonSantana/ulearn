@@ -1,1 +1,1 @@
-<a href="{{ $link }}" class="btn btn-learna btn-learna-primary {{ isset($large) && $large ? 'btn-learna-lg' : 'btn-sm'}}"><i class=" {{ $icon ? 'icon wb-plus' : ''}}" aria-hidden="true"></i>{{ $text }}</a>
+<a data-toggle="{{isset($modal) ? 'modal' : ''}}" data-target="{{isset($modal) ? $modal : ''}}"href="{{ isset($link) ? $link : '#' }}" class="btn btn-learna {{ !isset($secondary) ? 'btn-learna-primary' : '' }}  {{ isset($large) && $large ? 'btn-learna-lg' : 'btn-sm'}}"><i class=" {{ isset($icon) ? 'icon '.$icon : ''}}" aria-hidden="true"></i> {{ $text }}</a>

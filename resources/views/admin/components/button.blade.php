@@ -1,1 +1,1 @@
-<button type="{{ $type }}" id="{{ isset($id) ? $id : '' }}" class="btn btn-learna {{ $primary ? 'btn-learna-primary' : ''}}">{{ $text }}</button>
+<button type="{{ $type }}" id="{{ isset($id) ? $id : '' }}" class="btn {{isset($large) && $large ? 'btn-lg btn-block' : ''}} btn-learna {{ $primary ? 'btn-learna-primary' : ''}}">{{ $text }}</button>

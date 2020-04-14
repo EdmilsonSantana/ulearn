@@ -18,6 +18,8 @@
 
         <link rel="stylesheet" href="{{ asset('backend/fonts/web-icons/web-icons.min599c.css?v4.0.2') }}">
         <link rel="stylesheet" href="{{ asset('backend/vendor/toastr/toastr.min599c.css?v4.0.2') }}">
+        <!-- Rating -->
+        <link rel="stylesheet" href="{{ asset('frontend/vendor/rating/fontawesome-stars.css') }}">
 
         <!-- Video JS --> 
         <link href="https://vjs.zencdn.net/7.6.6/video-js.css" rel="stylesheet" />
@@ -194,6 +196,9 @@
     <script src="{{ asset('frontend/js/modernizr.js') }}"></script>
     <script src="{{ asset('frontend/js/jquery.validate.js') }}"></script>
     <script src="{{ asset('frontend/js/lity.min.js') }}"></script>
+
+    <!-- Rating -->
+    <script src="{{ asset('frontend/vendor/rating/jquery.barrating.min.js') }}"></script>
 
     <!-- Toastr -->
     <script src="{{ asset('backend/vendor/toastr/toastr.min599c.js?v4.0.2') }}"></script>
