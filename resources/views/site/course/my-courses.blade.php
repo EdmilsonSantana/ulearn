@@ -11,7 +11,7 @@
     <!-- banner end -->
 
     <!-- course list start -->
-    <div class="courses-panel">
+    <div class="content-panel">
         <div class="container" id="my-courses">
             <div class="row">
                 @if(count($courses)> 0 )

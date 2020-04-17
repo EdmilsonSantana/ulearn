@@ -1,27 +1,23 @@
 @extends('layouts.backend.index')
 @section('content')
 <div class="page-header">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Settings</li>
-  </ol>
-  <h1 class="page-title">General</h1>
+
+  <h1 class="page-title">Geral</h1>
 </div>
 
 <div class="page-content">
 
-<div class="panel">
-  <div class="panel-body">
-    <form method="POST" action="{{ route('admin.saveConfig') }}" enctype="multipart/form-data">
-      {{ csrf_field() }}
-      <input type="hidden" name="code" value="settingGeneral">
+  <div class="panel">
+    <div class="panel-body">
+      <form method="POST" id="register-form" action="{{ route('admin.saveConfig') }}" enctype="multipart/form-data">
+        {{ csrf_field() }}
+        <input type="hidden" name="code" value="settingGeneral">
         <div class="row">
-            <div class="form-group col-md-6">
-              <label class="form-control-label">Application Name</label>
-              <input type="text" class="form-control" name="application_name" 
-                placeholder="Application Name" value="{{ isset($config['application_name']) ? $config['application_name'] : '' }}" />
-            </div>
-        
+          <div class="form-group col-md-6">
+            <label class="form-control-label">Nome da Aplicação</label>
+            <input type="text" class="form-control" name="application_name" value="{{ isset($config['application_name']) ? $config['application_name'] : '' }}" />
+          </div>
+          <!--
             <div class="form-group col-md-6">
               <label class="form-control-label">Meta Key</label>
               <input type="text" class="form-control" name="meta_key" 
@@ -118,13 +114,12 @@
                   @endif
               </div>
             </div>
-
-            <div class="form-group col-md-4">
-              <label class="form-control-label">Admin Email</label>
-              <input type="text" class="form-control" name="admin_email" 
-                placeholder="Admin Email" value="{{ isset($config['admin_email']) ? $config['admin_email'] : '' }}" />
-            </div>
-
+-->
+          <div class="form-group col-md-4">
+            <label class="form-control-label">E-mail Administrativo</label>
+            <input type="text" class="form-control" name="admin_email" value="{{ isset($config['admin_email']) ? $config['admin_email'] : '' }}" />
+          </div>
+          <!--
             <div class="form-group col-md-4">
               <label class="form-control-label">Admin Commision</label>
               <input type="text" class="form-control" name="admin_commission" 
@@ -136,76 +131,72 @@
               <input type="text" class="form-control" name="minimum_withdraw" 
                 placeholder="Minimum Withdraw" value="{{ isset($config['minimum_withdraw']) ? $config['minimum_withdraw'] : '' }}" />
             </div>
-
+-->
         </div>
 
-      <hr>
-      <div class="form-group row">
-        <div class="col-md-4">
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <button type="reset" class="btn btn-default btn-outline">Reset</button>
+        <hr>
+        <div class="form-group row">
+          <div class="col-md-4">
+            @include('admin/components/button', ['type' => 'submit', 'primary' => 'true', 'text' => 'Salvar'])
+            @include('admin/components/button', ['type' => 'reset', 'primary' => '', 'text' => 'Limpar'])
+          </div>
         </div>
-      </div>
-      
-    </form>
+
+      </form>
+    </div>
   </div>
-</div>
 
-       
-      <!-- End Panel Basic -->
+
+  <!-- End Panel Basic -->
 </div>
 
 @endsection
 
 @section('javascript')
 <script type="text/javascript">
-    $(document).ready(function()
-    { 
-        tinymce.init({ 
-          selector: "textarea",  // change this value according to your HTML
-          plugins: "code",
-          toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | code",
-          menubar: false,
-          height: 500,
-          content_style: "#tinymce {color:#76838f;}"
-        });
-
-        
-        $('.item-img').on('change', function () {
-            readFile(this, $(this).attr('id')); 
-        });
-
-        function readFile(input, id) {    
-            
-            var file_name = input.files[0].name;
-            var extension = (input.files[0].name).split('.').pop();
-            if(id = 'fav_icon')
-            {
-                var allowed_extensions = ["ico"];
-            }
-            else
-            {
-                var allowed_extensions = ["jpg", "jpeg", "png"];
-            }
-             var allowed_extensions = ["jpg", "jpeg", "png"];
-            var fsize = input.files[0].size;
-            toastr.options.closeButton = true;
-            toastr.options.timeOut = 5000;
-
-            if (input.files && input.files[0]) {
-
-                if ($.inArray(extension, allowed_extensions) == -1) {
-                    toastr.error("Image format mismatch");
-                    return false;
-                } else if(fsize > 1048576) {
-                    toastr.error("Image size exceeds");
-                    return false;
-                } 
-
-                $('#'+id+'_read').attr('value', file_name);
-            }
-        }
+  $(document).ready(function() {
+    tinymce.init({
+      selector: "textarea", // change this value according to your HTML
+      plugins: "code",
+      toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | code",
+      menubar: false,
+      height: 500,
+      content_style: "#tinymce {color:#76838f;}"
     });
+
+
+    $('.item-img').on('change', function() {
+      readFile(this, $(this).attr('id'));
+    });
+
+    function readFile(input, id) {
+
+      var file_name = input.files[0].name;
+      var extension = (input.files[0].name).split('.').pop();
+      if (id = 'fav_icon') {
+        var allowed_extensions = ["ico"];
+      } else {
+        var allowed_extensions = ["jpg", "jpeg", "png"];
+      }
+      var allowed_extensions = ["jpg", "jpeg", "png"];
+      var fsize = input.files[0].size;
+      toastr.options.closeButton = true;
+      toastr.options.timeOut = 5000;
+
+      if (input.files && input.files[0]) {
+
+        if ($.inArray(extension, allowed_extensions) == -1) {
+          toastr.error("Image format mismatch");
+          return false;
+        } else if (fsize > 1048576) {
+          toastr.error("Image size exceeds");
+          return false;
+        }
+
+        $('#' + id + '_read').attr('value', file_name);
+      }
+    }
+  });
 </script>
 
 @endsection

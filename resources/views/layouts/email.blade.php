@@ -39,12 +39,12 @@
         @yield('content')
 
         <p>
-          Warm regards,<br>
+          Atenciosamente,<br>
           {{ env('APP_NAME') }}<br>
           <a href="{{ url('') }}">{{ url('') }}</a><br>
-          <img src="http://www.ulearnpro.com/img/logo.png" width="160px" style="margin-top: 5px;">
+          <img src="{{ url('') }}/frontend/img/logo.png" width="160px" style="margin-top: 5px;">
         </p>
-        <p>Note: This is an auto generated email. If you are not the intended recipient please delete this email.</p>
+        <p>Nota: Este é um email gerado automaticamente. Se você não for o destinatário pretendido, exclua este e-mail.</p>
           
     </div></td></tr><tr><td style="word-break:break-word;font-size:1px;padding:10px 25px;text-align:left;"><div style="cursor:auto;color:#000000;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;">&nbsp;</div></td></tr></tbody></table>
     </div></td></tr></tbody></table></div><div style="margin:0 auto;max-width:600px;"><table cellpadding="0" cellspacing="0" style="font-size:1px;width:100%;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;font-size:1px;padding:20px 0px;"></td></tr></tbody></table></div></div>

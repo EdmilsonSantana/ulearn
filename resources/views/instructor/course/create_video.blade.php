@@ -118,6 +118,22 @@
     upload_video();
   });
 
+  function reset_video() {
+    let video_id = $('.video-preview').find("video").attr('id');
+          
+    if(video_id) {
+      videojs(video_id).dispose();
+    }
+  }
+
+  function initialize_video() {
+    let video_id = $('.video-preview').find("video").attr('id');
+          
+    if(video_id) {
+      videojs(video_id).reset();
+    }
+  }
+
   function upload_video() {
     var bar = $('#bar');
     var percent = $('#percent');
@@ -146,9 +162,14 @@
       complete: function(xhr) {
         if (xhr.responseText) {
           $('#progress_div').hide();
+
           var data = JSON.parse(xhr.responseText);
-          var videoPlayer = videojs("promo-video");
-          videoPlayer.src({type: 'video/mp4', src: data.file_link});
+          
+          reset_video();
+          
+          $('.video-preview').html(data.view);
+
+          initialize_video();
         }
       }
     });

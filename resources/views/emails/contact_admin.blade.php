@@ -1,15 +1,15 @@
 @extends('layouts.email')
 @section('subject')
-{{ env('APP_NAME') }} - Enquiry for Admin
+{{ env('APP_NAME') }}
 @endsection
 
 @section('content')
-        Dear Instructor,<br/>
-        <p>We would like to inform you that a user has requested a enquiry.  The enquiry details are:</p>
+        Administrador,<br/>
+        <p>Gostaríamos de informar que um usuário entrou em contato. Segue:</p>
         <p>
-        First Name: {{ $enquiry->first_name }}<br/>
-        Last Name : {{ $enquiry->last_name }}<br/>
-        Email ID : {{ $enquiry->email_id }}<br/>
-        Message :{{ $enquiry->message }}<br/>
+        Nome: {{ $enquiry->first_name }}<br/>
+        Sobrenome: {{ $enquiry->last_name }}<br/>
+        E-mail: {{ $enquiry->email_id }}<br/>
+        Mensagem :{{ $enquiry->message }}<br/>
         </p>
 @endsection

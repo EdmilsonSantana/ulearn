@@ -111,7 +111,6 @@
                         <ul>
                             <li><a href="{{ route('page.about') }}">Quem Somos</a></li>
                             <li><a href="{{ route('page.contact') }}">Contato</a></li>
-                            <li><a href="{{ route('blogs') }}">Blog</a></li>
                         </ul>
                 </div>
             </div>
@@ -123,7 +122,7 @@
                     </div>
                     <div>
                         <span id="c-copyright">
-                            Copyright © 2019 Universidade do Automóvel.
+                            Copyright © {{ date("Y") }} Universidade do Automóvel.
                         </span>
                     </div>
                 </div>

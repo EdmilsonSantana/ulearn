@@ -104,7 +104,7 @@ class HomeController extends Controller
     {
         $admin_email = Config::get_option('settingGeneral', 'admin_email');
         Mail::to($admin_email)->send(new ContactAdmin($request));
-        return $this->return_output('flash', 'success', 'Thanks for your message, will contact you shortly', 'back', '200');
+        return $this->return_output('flash', 'success', 'Obrigado por entrar em contato, responderemos em breve!', 'back', '200');
     }
 
     public function getCheckTime()

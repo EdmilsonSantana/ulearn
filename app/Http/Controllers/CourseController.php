@@ -575,6 +575,18 @@ class CourseController extends Controller
                 'file_title' => $file_title,
                 'file_link' => Storage::url($video_path),
             );
+
+            $route = 'site.course.components.course-video';
+
+            $return_data = array(
+                'status'    => true,
+                'file_link' => Storage::url($video_path),
+                'view' => $this->render_view($route, array(
+                    'video' => $courseVideos,
+                    'is_modal' => false,
+                    'id' => 'promo-video'
+                ))
+            );
         } else {
             $return_data = array(
                 'status' => false,

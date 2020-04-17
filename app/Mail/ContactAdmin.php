@@ -29,8 +29,9 @@ class ContactAdmin extends Mailable
      * @return $this
      */
     public function build()
-    {   
-        return $this->subject('Enquiry for Admin')
-               ->view('emails.contact_admin');
+    {
+        return $this->subject('Contato')
+            ->from('contato@universidadedoautomovel.com.br', 'Universidade do Automóvel')
+            ->view('emails.contact_admin');
     }
 }

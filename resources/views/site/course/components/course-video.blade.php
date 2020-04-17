@@ -4,7 +4,7 @@
     @php
     $file_name = '/app/public/course/'.$video->course_id.'/'.$video->video_title.'.'.$video->video_type;
     @endphp
-    <video controls id="{{$id}}" preload="auto" class="video-js vjs-default-skin vjs-big-play-centered {{!$is_modal ? 'vjs-16-9' : ''}} " data-setup='{}'>
+    <video controls id="{{isset($id) ? $id : ''}}" preload="auto" class="video-js vjs-default-skin vjs-big-play-centered {{!$is_modal ? 'vjs-16-9' : ''}} " data-setup='{}'>
         <source src="{{ Storage::url($file_name) }}" type="video/mp4">
         <p class="vjs-no-js">
             Para ver este vídeo, ative o JavaScript e considere atualizar para um navegador Web que
@@ -19,7 +19,7 @@
 <script type="text/javascript">
     window.addEventListener('load', function() {
         $(document).on('lity:close', function(event, instance) {
-            var videoPlayer = videojs("{{ $id }}");
+            var videoPlayer = videojs("{{ isset($id) ? $id : '' }}");
             videoPlayer.pause();
         });
     });
