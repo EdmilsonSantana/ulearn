@@ -79,10 +79,10 @@ class CategoryController extends Controller
 
         if ($category_id) {
             $category = Category::find($category_id);
-            $success_message = 'Category updated successfully';
+            $success_message = 'Categoria atualizada com sucesso';
         } else {
             $category = new Category();
-            $success_message = 'Category added successfully';
+            $success_message = 'Categoria adicionada com sucesso';
 
             //create slug only while add
             $slug = $request->input('name');
@@ -106,6 +106,6 @@ class CategoryController extends Controller
     public function deleteCategory($category_id)
     {
         Category::destroy($category_id);
-        return $this->return_output('flash', 'success', 'Category deleted successfully', 'admin/categories', '200');
+        return $this->return_output('flash', 'success', 'Categoria removida com sucesso', 'admin/categories', '200');
     }
 }

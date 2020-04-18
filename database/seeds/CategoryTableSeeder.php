@@ -16,72 +16,30 @@ class CategoryTableSeeder extends Seeder
 
         if (!$is_exist->count()) {
             $category = new Category();
-            $category->name = 'Development';
-            $category->slug = 'development';
-            $category->icon_class = 'fa-chart-line';
+            $category->name = 'Veículos Diesel';
+            $category->slug = 'veiculo-diesel';
+            $category->icon_class = 'fa-oil-can';
             $category->is_active = 1;
             $category->save();
 
             $category = new Category();
-            $category->name = 'Business';
-            $category->slug = 'business';
-            $category->icon_class = 'fa-business-time';
+            $category->name = 'Veículos Ciclo Otto';
+            $category->slug = 'veiculo-ciclo-otto';
+            $category->icon_class = 'fa-gas-pump';
             $category->is_active = 1;
             $category->save();
 
             $category = new Category();
-            $category->name = 'IT & Software';
-            $category->slug = 'IT-software';
-            $category->icon_class = 'fa-laptop';
+            $category->name = 'Gestão e Administrativos';
+            $category->slug = 'gestao-administrativos';
+            $category->icon_class = 'fa-tasks';
             $category->is_active = 1;
             $category->save();
 
             $category = new Category();
-            $category->name = 'Marketing';
-            $category->slug = 'marketing';
-            $category->icon_class = 'fa-funnel-dollar';
-            $category->is_active = 1;
-            $category->save();
-
-            $category = new Category();
-            $category->name = 'Lifestyle';
-            $category->slug = 'lifestyle';
-            $category->icon_class = 'fa-heartbeat';
-            $category->is_active = 1;
-            $category->save();
-
-            $category = new Category();
-            $category->name = 'Photography';
-            $category->slug = 'photography';
-            $category->icon_class = 'fa-camera-retro';
-            $category->is_active = 1;
-            $category->save();
-
-            $category = new Category();
-            $category->name = 'Health & Fitness';
-            $category->slug = 'health-fitness';
-            $category->icon_class = 'fa-medkit';
-            $category->is_active = 1;
-            $category->save();
-
-            $category = new Category();
-            $category->name = 'Teacher Training';
-            $category->slug = 'teacher-training';
-            $category->icon_class = 'fa-chalkboard-teacher';
-            $category->is_active = 1;
-            $category->save();
-
-            $category = new Category();
-            $category->name = 'Music';
-            $category->slug = 'music';
-            $category->icon_class = 'fa-music';
-            $category->is_active = 1;
-            $category->save();
-
-            $category = new Category();
-            $category->name = 'Academics';
-            $category->slug = 'academics';
-            $category->icon_class = 'fa-user-graduate';
+            $category->name = 'Eletroeletrônica';
+            $category->slug = 'eletroeletronica';
+            $category->icon_class = 'fa-microchip';
             $category->is_active = 1;
             $category->save();
         }

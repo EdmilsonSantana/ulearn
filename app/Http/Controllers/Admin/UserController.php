@@ -108,10 +108,10 @@ class UserController extends Controller
             $user = User::find($user_id);
             // Detach all roles for the existing user to update new roles...
             $user->roles()->detach();
-            $success_message = 'User updated successfully';
+            $success_message = 'Usuário atualizado com sucesso';
         } else {
             $user = new User();
-            $success_message = 'User added successfully';
+            $success_message = 'Usuário adicionado com sucesso';
         }
 
         $user->first_name = $request->input('first_name');

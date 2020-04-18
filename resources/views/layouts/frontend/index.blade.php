@@ -42,7 +42,8 @@
                     ?>
                  <div class="dropdown-menu" aria-labelledby="dropdownMenu">
                     @foreach ($categories as $category)
-                        <a class="dropdown-item" href="{{ route('course.list','category_id[]='.$category->id) }}">
+                    <!-- {{ route('course.list','category_id[]='.$category->id) }} -->
+                        <a class="dropdown-item" href="#">
                             <i class="fa {{ $category->icon_class }} category-menu-icon"></i>
                             {{ $category->name}}
                         </a>

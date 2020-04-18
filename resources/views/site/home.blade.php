@@ -12,7 +12,8 @@
 
         <span class="title-sub-header">Estude a qualquer hora. Há milhares de cursos ministrados por especialistas.</span>
         <div class="">
-            <form method="GET" action="{{ route('course.list') }}">
+            <!-- {{ route('course.list') }} -->
+            <form method="GET" action="">
                 <div class="searchbox-contrainer col-md-5">
                     <div class="input-group">
                         <input name="keyword" type="search" class="searchbox d-none d-sm-inline-block form-control border-right-0 border" placeholder="O que você quer aprender ?">

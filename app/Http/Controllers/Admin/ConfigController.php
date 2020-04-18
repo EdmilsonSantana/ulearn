@@ -68,7 +68,7 @@ class ConfigController extends Controller
 
         //save the 
         Config::save_options($code, $input);
-        return $this->return_output('flash', 'success', 'saved', 'back', '200');
+        return $this->return_output('flash', 'success', 'Configuração atualizada com sucesso', 'back', '200');
     }
 
     public function pageHome(Request $request)

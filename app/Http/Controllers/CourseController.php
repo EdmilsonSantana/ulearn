@@ -75,7 +75,7 @@ class CourseController extends Controller
     public function deleteRating($rating_id, Request $request)
     {
         CourseRating::where('id', $rating_id)->delete();
-        return $this->return_output('flash', 'success', 'Your rating have been deleted successfully', 'back', '200');
+        return $this->return_output('flash', 'success', 'A classificação foi removida com sucesso', 'back', '200');
     }
 
     public function courseView($course_slug = '', Request $request)

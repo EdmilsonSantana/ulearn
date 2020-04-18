@@ -14,7 +14,7 @@
       <div class="row">
       
         <div class="form-group col-md-4">
-          <label class="form-control-label">Nome</label>
+          <label class="form-control-label">Nome <span class="required">*</span></label>
           <input type="text" class="form-control" name="first_name" 
             placeholder="Nome" value="{{ $user->first_name }}" />
             @if ($errors->has('first_name'))
@@ -23,7 +23,7 @@
         </div>
       
         <div class="form-group col-md-4">
-          <label class="form-control-label">Sobrenome</label>
+          <label class="form-control-label">Sobrenome <span class="required">*</span></label>
           <input type="text" class="form-control" name="last_name"
             placeholder="Sobrenome" value="{{ $user->last_name }}" />
             @if ($errors->has('last_name'))
@@ -32,7 +32,7 @@
         </div>
       
       <div class="form-group col-md-4">
-        <label class="form-control-label">E-mail</label>
+        <label class="form-control-label">E-mail @if(!$user->id) <span class="required">*</span> @endif</label>
         <input type="text" class="form-control" name="email"
           placeholder="E-mail" value="{{ $user->email }}" @if($user->email) readonly @endif/>
         @if ($errors->has('email'))
@@ -54,7 +54,7 @@
       </div>
 
       <div class="form-group col-md-4">
-          <label class="form-control-label">Papél</label>
+          <label class="form-control-label">Papél <span class="required">*</span></label>
           <div>
               <div class="checkbox-custom checkbox-default checkbox-inline">
                 <input type="checkbox" id="inputCheckboxStudent" name="roles[]" value="student" @if($user->id && $user->hasRole('student')) checked @endif>
@@ -73,7 +73,7 @@
       </div>
       
       <div class="form-group col-md-4">
-        <label class="form-control-label" >Senha</label>
+        <label class="form-control-label" >Senha @if(!$user->id) <span class="required">*</span> @endif</label>
         <input type="password" class="form-control"  name="password"
           placeholder="Senha"/>
         @if ($errors->has('password'))
@@ -128,22 +128,22 @@
             },
             messages: {
                 first_name: {
-                    required: 'The first name field is required.'
+                    required: 'Este campo é obrigatório.'
                 },
                 last_name: {
-                    required: 'The last name field is required.'
+                    required: 'Este campo é obrigatório.'
                 },
                 email: {
-                    required: 'The email field is required.',
-                    email: 'The email must be a valid email address.',
-                    remote: 'The email has already been taken.'
+                    required: 'Este campo é obrigatório.',
+                    email: 'Informe um endereço de e-mail válido.',
+                    remote: 'Este e-mail já está em uso.'
                 },
                 password: {
-                    required: 'The password field is required.',
-                    minlength: 'The password must be at least 6 characters.'
+                    required: 'Este campo é obrigatório.',
+                    minlength: 'A senha deve ter no mínimo 6 caracteres.'
                 },
                 "roles[]": {
-                    required: 'The role field is required.'
+                    required: 'Este campo é obrigatório.'
                 }
             },
             errorPlacement: function(error, element) {

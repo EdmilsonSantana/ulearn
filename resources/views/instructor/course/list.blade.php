@@ -53,9 +53,9 @@
                     <i class="icon wb-pencil" aria-hidden="true"></i>
                   </a>
 
-                  <a href="{{ url('instructor-course-delete/'.$course->id) }}" class="delete-record btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Remover" >
+                  <!--<a href="{{ url('instructor-course-delete/'.$course->id) }}" class="delete-record btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Remover" >
                     <i class="icon wb-trash" aria-hidden="true"></i>
-                  </a>
+                  </a> -->
                 </td>
               </tr>
               @endforeach

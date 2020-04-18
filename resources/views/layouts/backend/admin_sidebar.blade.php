@@ -21,6 +21,7 @@
             <span class="site-menu-title">Categorias</span>
           </a>
         </li>
+        <!-- 
         <li class="site-menu-item {{ request()->is('admin/withdraw-requests') ? 'active' : '' }}">
           <a href="{{ route('admin.withdraw.requests') }}">
             <i class="site-menu-icon fas fa-hand-holding-usd" aria-hidden="true"></i>
@@ -32,13 +33,7 @@
             <i class="site-menu-icon fas fa-blog" aria-hidden="true"></i>
             <span class="site-menu-title">Blog</span>
           </a>
-        </li>
-        <li class="site-menu-item {{ request()->is('admin/config/page-contact') ? 'active' : '' }}">
-          <a href="{{ route('admin.pageContact') }}">
-            <i class="site-menu-icon fas fa-envelope" aria-hidden="true"></i>
-            <span class="site-menu-title">Contato</span>
-          </a>
-        </li>
+        </li> -->
 
         <li class="site-menu-item has-sub {{ request()->is('admin/config/page-*') ? 'active open' : '' }}">
           <a href="javascript:void(0)">
@@ -70,10 +65,17 @@
                 <span class="site-menu-title">Geral</span>
               </a>
             </li>
-
+            <!--
             <li class="site-menu-item {{ request()->is('admin/config/setting-payment') ? 'active' : '' }}">
               <a href="{{ route('admin.settingPayment') }}">
                 <span class="site-menu-title">Pagamento</span>
+              </a>
+            </li>
+-->
+            <li class="site-menu-item {{ request()->is('admin/config/page-contact') ? 'active' : '' }}">
+              <a href="{{ route('admin.pageContact') }}">
+              <!--  <i class="site-menu-icon fas fa-envelope" aria-hidden="true"></i> -->
+                <span class="site-menu-title">Contato</span>
               </a>
             </li>
             <!--
