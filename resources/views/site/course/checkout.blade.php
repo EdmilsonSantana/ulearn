@@ -46,10 +46,10 @@
                             <div class="instructor-clist mb-0 mt-1">
                                 <div>
                                     <i class="fa fa-chalkboard-teacher"></i>&nbsp;
-                                    <span>Created by <b>{{ $course->instructor->first_name.' '.$course->instructor->last_name }}</b></span>
+                                    <span>Criado Por <b>{{ $course->instructor->first_name.' '.$course->instructor->last_name }}</b></span>
                                 </div>
                             </div>
-                            @php $course_price = $course->price == 0.00 ? 'Free' : config('config.default_currency').$course->price; @endphp
+                            @php $course_price = $course->price == 0.00 ? 'Gratuito' : config('config.default_currency').$course->price; @endphp
                             <h6 class="c-price-checkout">{{  $course_price }}&nbsp;<s>{{ $course->strike_out_price ? $course->strike_out_price : '' }}</s></h6>
                         </div>
 

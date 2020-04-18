@@ -135,14 +135,14 @@
                                     <div class="instructor-clist">
                                         <div class="col-md-12">
                                             <i class="fa fa-chalkboard-teacher"></i>&nbsp;
-                                            <span>Created by <b>{{ $course->first_name.' '.$course->last_name }}</b></span>
+                                            <span>Criado Por <b>{{ $course->first_name.' '.$course->last_name }}</b></span>
                                         </div>
                                     </div>
                                 </main>
                                 <footer>
                                     <div class="c-row">
                                         <div class="col-md-6 col-sm-6 col-6">
-                                            @php $course_price = $course->price ? config('config.default_currency').$course->price : 'Free'; @endphp
+                                            @php $course_price = $course->price ? config('config.default_currency').$course->price : 'Gratuito'; @endphp
                                             <h5 class="course-price">{{  $course_price }}&nbsp;<s>{{ $course->strike_out_price ? $course->strike_out_price : '' }}</s></h5>
                                         </div>
                                         <div class="col-md-5 offset-md-1 col-sm-5 offset-sm-1 col-5 offset-1">

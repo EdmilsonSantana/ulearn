@@ -74,7 +74,7 @@ figure figcaption {
       
         <div class="form-group col-md-4">
             <label class="form-control-label">Nome <span class="required">*</span></label>
-            <input type="text" class="form-control" name="first_name" 
+            <input type="text" placeholder="Nome" class="form-control" name="first_name" 
                 value="{{ $instructor->first_name }}" />
                 @if ($errors->has('first_name'))
                     <label class="error" for="first_name">{{ $errors->first('first_name') }}</label>
@@ -83,7 +83,7 @@ figure figcaption {
 
         <div class="form-group col-md-4">
             <label class="form-control-label">Sobrenome <span class="required">*</span></label>
-            <input type="text" class="form-control" name="last_name" 
+            <input placeholder="Sobrenome" type="text" class="form-control" name="last_name" 
                 value="{{ $instructor->last_name }}" />
                 @if ($errors->has('last_name'))
                     <label class="error" for="last_name">{{ $errors->first('last_name') }}</label>
@@ -92,7 +92,7 @@ figure figcaption {
 
         <div class="form-group col-md-4">
             <label class="form-control-label">E-mail <span class="required">*</span></label>
-            <input type="text" class="form-control" name="contact_email" 
+            <input placeholder="E-mail" type="text" class="form-control" name="contact_email" 
                 value="{{ $instructor->contact_email }}" />
                 @if ($errors->has('contact_email'))
                     <label class="error" for="contact_email">{{ $errors->first('contact_email') }}</label>
@@ -101,7 +101,7 @@ figure figcaption {
 
         <div class="form-group col-md-4">
             <label class="form-control-label">Telefone <span class="required">*</span></label>
-            <input type="text" class="form-control" name="telephone" 
+            <input placeholder="Telefone" type="text" class="form-control" name="telephone" 
                 value="{{ $instructor->telephone }}" />
                 @if ($errors->has('telephone'))
                     <label class="error" for="telephone">{{ $errors->first('telephone') }}</label>
@@ -110,7 +110,7 @@ figure figcaption {
 
         <div class="form-group col-md-4">
             <label class="form-control-label">Celular </label>
-            <input type="text" class="form-control" name="mobile" 
+            <input placeholder="Celular" type="text" class="form-control" name="mobile" 
                 value="{{ $instructor->mobile }}" />
                 @if ($errors->has('mobile'))
                     <label class="error" for="mobile">{{ $errors->first('mobile') }}</label>
@@ -126,15 +126,16 @@ figure figcaption {
                 @endif
         </div>
 -->
+    <!--
         <div class="form-group col-md-6">
             <label class="form-control-label">Facebook </label>
-            <input type="text" class="form-control" name="link_facebook" 
+            <input placehotype="text" class="form-control" name="link_facebook" 
                value="{{ $instructor->link_facebook }}" />
                 @if ($errors->has('link_facebook'))
                     <label class="error" for="link_facebook">{{ $errors->first('link_facebook') }}</label>
                 @endif
-        </div>
-
+        </div> -->
+<!--
         <div class="form-group col-md-6">
             <label class="form-control-label">Linkedin </label>
             <input type="text" class="form-control" name="link_linkedin" 
@@ -143,7 +144,7 @@ figure figcaption {
                     <label class="error" for="link_linkedin">{{ $errors->first('link_linkedin') }}</label>
                 @endif
         </div>
-<!--
+
         <div class="form-group col-md-6">
             <label class="form-control-label">Twitter Link </label>
             <input type="text" class="form-control" name="link_twitter" 
@@ -151,8 +152,8 @@ figure figcaption {
                 @if ($errors->has('link_twitter'))
                     <label class="error" for="link_twitter">{{ $errors->first('link_twitter') }}</label>
                 @endif
-        </div>
--->
+        </div> -->
+
 <!--
         <div class="form-group col-md-6">
             <label class="form-control-label">Google Plus Link </label>

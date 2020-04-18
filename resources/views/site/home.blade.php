@@ -37,11 +37,11 @@
             <h3 class="dblock-heading">Uma seleção de cursos especializados</h3>
             <p class="dblock-text">Aprenda com profissionais capacitados e especializados no assunto</p>
         </div>
-        <div class="">
-            <!-- Courses by Category Start -->
-            <div id="course_tabs" data-site-url='{{ url("/") }}'></div>
-            <!-- Courses by Category Ends -->
-        </div>
+
+        <!-- Courses by Category Start -->
+        <div style="width: 100%;" id="course_tabs" data-site-url='{{ url("/") }}'></div>
+        <!-- Courses by Category Ends -->
+
     </div>
     <hr class="hr-secondary" />
     <!-- testimonials block start -->

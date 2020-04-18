@@ -42,7 +42,7 @@ export default class CoursesTab extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="d-flex justify-content-start flex-row flex-wrap course-tab-list">
+        <div className="d-flex justify-content-around align-items-center flex-row flex-wrap course-tab-list ">
           {this.state.categories.map((category, index) => (
             <button
               key={index}
@@ -53,7 +53,7 @@ export default class CoursesTab extends Component {
               }}
               className={`btn btn-link course-tab-item ${index == this.state.activeIndex ? "active" : ""}`}
             >
-              {category.name}
+              <strong>{category.name}</strong>
             </button>
           ))}
         </div>
@@ -89,9 +89,9 @@ export default class CoursesTab extends Component {
                 </div>
               ))
             ) : (
-              <div className="empty-courses-message">
+              <p className="dblock-text empty-courses-message">
                 Aguardem novos cursos em breve!
-              </div>
+              </p>
             )}
           </div>
         </div>

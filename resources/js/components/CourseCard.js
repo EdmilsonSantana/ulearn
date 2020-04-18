@@ -17,7 +17,7 @@ export default class CourseCard extends React.Component {
               <div className="col-md-12">
                 <i className="fa fa-chalkboard-teacher"></i>&nbsp;
                 <span>
-                  Created by <b>{this.props.instructor}</b>
+                  Criado Por <b>{this.props.instructor}</b>
                 </span>
               </div>
             </div>
