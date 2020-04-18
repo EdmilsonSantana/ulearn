@@ -215,7 +215,7 @@
         {
             var url = $(this).attr('href');
             event.preventDefault();
-            alertify.confirm('Are you sure want to delete this record?', function () {
+            alertify.confirm('Tem certeza que deseja remover este registro ?', function () {
                 window.location.href = url;
             }, function () {    
                 return false;

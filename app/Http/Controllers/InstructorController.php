@@ -122,7 +122,6 @@ class InstructorController extends Controller
             'last_name' => 'required|string|max:255',
             'contact_email' => 'required|string|email|max:255',
             'telephone' => 'required|string|max:255',
-            'paypal_id' => 'required|string|email|max:255',
             'biography' => 'required',            
         ];
 
@@ -143,10 +142,10 @@ class InstructorController extends Controller
 
         $instructor->link_facebook = $request->input('link_facebook');
         $instructor->link_linkedin = $request->input('link_linkedin');
-        $instructor->link_twitter  = $request->input('link_twitter');
-        $instructor->link_googleplus = $request->input('link_googleplus');
+        //$instructor->link_twitter  = $request->input('link_twitter');
+        //$instructor->link_googleplus = $request->input('link_googleplus');
 
-        $instructor->paypal_id = $request->input('paypal_id');
+        //$instructor->paypal_id = $request->input('paypal_id');
         $instructor->biography = $request->input('biography');
 
 
@@ -178,7 +177,7 @@ class InstructorController extends Controller
 
         $instructor->save();
 
-        return $this->return_output('flash', 'success', 'Profile updated successfully', 'instructor-profile', '200');
+        return $this->return_output('flash', 'success', 'Perfil atualizado com sucesso', 'instructor-profile', '200');
 
     }
 

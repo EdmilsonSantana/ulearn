@@ -52,10 +52,10 @@ class CourseController extends Controller
 
         if ($rating_id) {
             $rating = CourseRating::find($rating_id);
-            $success_message = 'Your review have been updated successfully';
+            $success_message = 'Sua classificação foi atualizado com sucesso';
         } else {
             $rating = new CourseRating();
-            $success_message = 'Your review have been added successfully';
+            $success_message = 'Sua classificação foi adicionada com sucesso';
         }
 
         $rating->user_id = \Auth::user()->id;
@@ -441,7 +441,7 @@ class CourseController extends Controller
             $course->save();
         }
 
-        return $this->return_output('flash', 'success', 'Course image updated successfully', 'instructor-course-image/' . $course_id, '200');
+        return $this->return_output('flash', 'success', 'Imagem do curso atualizada com sucesso', 'instructor-course-image/' . $course_id, '200');
     }
 
     public function instructorCourseInfoSave(Request $request)
@@ -463,10 +463,10 @@ class CourseController extends Controller
 
         if ($course_id) {
             $course = Course::find($course_id);
-            $success_message = 'Course updated successfully';
+            $success_message = 'Curso atualizado com sucesso';
         } else {
             $course = new Course();
-            $success_message = 'Course added successfully';
+            $success_message = 'Curso adicionado com sucesso';
 
             //create slug only while add
             $slug = $request->input('course_title');

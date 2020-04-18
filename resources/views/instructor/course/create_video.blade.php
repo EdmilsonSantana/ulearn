@@ -48,7 +48,7 @@
                   $file_name = 'course/'.$video->course_id.'/'.$video->video_title.'.'.$video->video_type;
                   @endphp
                   @if(Storage::exists($file_name))
-                      @include('site/course/components/course-video', ['video' => $video, 'id' => 'promo-video', 'is_modal' => false])
+                  @include('site/course/components/course-video', ['video' => $video, 'id' => 'promo-video', 'is_modal' => false])
                   @else
                   <blockquote class="blockquote custom-blockquote blockquote-success mt-4">
                     <p class="mb-0">Vídeo Promocional não enviado.</p>
@@ -94,7 +94,7 @@
 
               <div class="col-md-6">
                 @include('admin/components/button', ['type' => 'submit',
-                            'primary' => 'true', 'text' => 'Upload', 'id' => 'btn-upload'])
+                'primary' => 'true', 'text' => 'Upload', 'id' => 'btn-upload'])
 
               </div>
             </div>
@@ -120,16 +120,16 @@
 
   function reset_video() {
     let video_id = $('.video-preview').find("video").attr('id');
-          
-    if(video_id) {
+
+    if (video_id) {
       videojs(video_id).dispose();
     }
   }
 
   function initialize_video() {
     let video_id = $('.video-preview').find("video").attr('id');
-          
-    if(video_id) {
+
+    if (video_id) {
       videojs(video_id).reset();
     }
   }
@@ -164,12 +164,14 @@
           $('#progress_div').hide();
 
           var data = JSON.parse(xhr.responseText);
-          
+
           reset_video();
-          
+
           $('.video-preview').html(data.view);
 
           initialize_video();
+
+          toastr.success("Vídeo promocional atualizado com sucesso");
         }
       }
     });
@@ -186,17 +188,20 @@
     if (input.files && input.files[0]) {
 
       if ($.inArray(extension, allowed_extensions) == -1) {
-        toastr.error("Video format mismatch");
+        toastr.error("Formato de vídeo inválido");
         return false;
       } else if (fsize > 1048576 * 300) {
-        toastr.error("Video size exceeds");
+        toastr.error("Vídeo com tamanho maior que o permitido");
         return false;
       }
       $('.input-group-file input').attr('value', file_name);
-
+      $('#btn-upload').prop('disabled', false);
     }
   }
   $(document).ready(function() {
+    
+    $('#btn-upload').prop('disabled', true);
+
     $('#course_video').on('change', function() {
       imageId = $(this).data('id');
       tempFilename = $(this).val();

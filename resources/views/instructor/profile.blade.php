@@ -75,7 +75,7 @@ figure figcaption {
         <div class="form-group col-md-4">
             <label class="form-control-label">Nome <span class="required">*</span></label>
             <input type="text" class="form-control" name="first_name" 
-                placeholder="Nome" value="{{ $instructor->first_name }}" />
+                value="{{ $instructor->first_name }}" />
                 @if ($errors->has('first_name'))
                     <label class="error" for="first_name">{{ $errors->first('first_name') }}</label>
                 @endif
@@ -84,7 +84,7 @@ figure figcaption {
         <div class="form-group col-md-4">
             <label class="form-control-label">Sobrenome <span class="required">*</span></label>
             <input type="text" class="form-control" name="last_name" 
-                placeholder="Sobrenome" value="{{ $instructor->last_name }}" />
+                value="{{ $instructor->last_name }}" />
                 @if ($errors->has('last_name'))
                     <label class="error" for="last_name">{{ $errors->first('last_name') }}</label>
                 @endif
@@ -93,7 +93,7 @@ figure figcaption {
         <div class="form-group col-md-4">
             <label class="form-control-label">E-mail <span class="required">*</span></label>
             <input type="text" class="form-control" name="contact_email" 
-                placeholder="E-mail" value="{{ $instructor->contact_email }}" />
+                value="{{ $instructor->contact_email }}" />
                 @if ($errors->has('contact_email'))
                     <label class="error" for="contact_email">{{ $errors->first('contact_email') }}</label>
                 @endif
@@ -102,7 +102,7 @@ figure figcaption {
         <div class="form-group col-md-4">
             <label class="form-control-label">Telefone <span class="required">*</span></label>
             <input type="text" class="form-control" name="telephone" 
-                placeholder="Telefone" value="{{ $instructor->telephone }}" />
+                value="{{ $instructor->telephone }}" />
                 @if ($errors->has('telephone'))
                     <label class="error" for="telephone">{{ $errors->first('telephone') }}</label>
                 @endif
@@ -111,7 +111,7 @@ figure figcaption {
         <div class="form-group col-md-4">
             <label class="form-control-label">Celular </label>
             <input type="text" class="form-control" name="mobile" 
-                placeholder="Celular" value="{{ $instructor->mobile }}" />
+                value="{{ $instructor->mobile }}" />
                 @if ($errors->has('mobile'))
                     <label class="error" for="mobile">{{ $errors->first('mobile') }}</label>
                 @endif
@@ -129,7 +129,7 @@ figure figcaption {
         <div class="form-group col-md-6">
             <label class="form-control-label">Facebook </label>
             <input type="text" class="form-control" name="link_facebook" 
-                placeholder="Facebook" value="{{ $instructor->link_facebook }}" />
+               value="{{ $instructor->link_facebook }}" />
                 @if ($errors->has('link_facebook'))
                     <label class="error" for="link_facebook">{{ $errors->first('link_facebook') }}</label>
                 @endif
@@ -138,7 +138,7 @@ figure figcaption {
         <div class="form-group col-md-6">
             <label class="form-control-label">Linkedin </label>
             <input type="text" class="form-control" name="link_linkedin" 
-                placeholder="Linkedin" value="{{ $instructor->link_linkedin }}" />
+               value="{{ $instructor->link_linkedin }}" />
                 @if ($errors->has('link_linkedin'))
                     <label class="error" for="link_linkedin">{{ $errors->first('link_linkedin') }}</label>
                 @endif
@@ -188,7 +188,7 @@ figure figcaption {
 
 	        <div class="form-group col-md-8">
 	            <label class="form-control-label">Sobre <span class="required">*</span></label>
-	            <textarea name="biography">
+	            <textarea id="biography" name="biography">
 	                {{ $instructor->biography }}
 	            </textarea>
                 @if ($errors->has('biography'))
@@ -220,14 +220,14 @@ figure figcaption {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit Photo</h4>
+                <h4 class="modal-title" id="myModalLabel">Editar foto</h4>
             </div>
             <div class="modal-body">
                 <div id="upload-demo" class="center-block"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="cropImageBtn" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" id="cropImageBtn" class="btn btn-primary">Cortar</button>
             </div>
         </div>
     </div>
@@ -260,10 +260,10 @@ figure figcaption {
             if (input.files && input.files[0]) {
 
                 if ($.inArray(extension, allowed_extensions) == -1) {
-                    toastr.error("Image format mismatch");
+                    toastr.error("Formato de imagem inválido");
                     return false;
                 } else if(fsize > 1048576) {
-                    toastr.error("Image size exceeds");
+                    toastr.error("Imagem com tamanho maior que o permitido");
                     return false;
                 } 
                 $('.input-group-file input').attr('value', file_name);
@@ -320,7 +320,7 @@ figure figcaption {
             var this_id = $(this);
             var current_id = $(this).attr('data-id');
 
-            alertify.confirm('Are you sure want to delete this image?', function () {
+            alertify.confirm('Tem certeza de que deseja excluir esta imagem?', function () {
                 var url = "{{ url('delete-photo') }}";
                 var data_content = this_id.attr('data-content');
                  $.ajax({
@@ -373,24 +373,20 @@ figure figcaption {
                 },
                 messages: {
                     first_name: {
-                        required: 'The first name field is required.'
+                        required: 'Este campo é obrigatório.'
                     },
                     last_name: {
-                        required: 'The last name field is required.'
+                        required: 'Este campo é obrigatório.'
                     },
                     contact_email: {
-                        required: 'The contact email field is required.',
-                        email: 'The contact email must be a valid email address.'
+                        required: 'Este campo é obrigatório.',
+                        email: 'Informe um endereço de e-mail válido.'
                     },
                     telephone: {
-                        required: 'The telephone field is required.'
-                    },
-                    paypal_id: {
-                        required: 'The paypal id field is required.',
-                        email: 'The paypal id must be a valid email address.'
+                        required: 'Este campo é obrigatório.'
                     },
                     biography: {
-                        required: 'The biography field is required.'
+                        required: 'Este campo é obrigatório.'
                     },
                 }
             });

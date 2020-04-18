@@ -165,10 +165,10 @@
             if (input.files && input.files[0]) {
 
                 if ($.inArray(extension, allowed_extensions) == -1) {
-                    toastr.error("Image format mismatch");
+                    toastr.error("Formato de imagem inválido");
                     return false;
                 } else if (fsize > 1048576 * 10) {
-                    toastr.error("Image size exceeds");
+                    toastr.error("Imagem com tamanho maior que o permitido");
                     return false;
                 }
                 $('.input-group-file input').attr('value', file_name);
@@ -233,7 +233,7 @@
             var this_id = $(this);
             var current_id = $(this).attr('data-id');
 
-            alertify.confirm('Are you sure want to delete this image?', function() {
+            alertify.confirm('Tem certeza de que deseja excluir esta imagem ?', function() {
                 var url = "{{ url('delete-photo') }}";
                 var data_content = this_id.attr('data-content');
                 $.ajax({
@@ -250,7 +250,7 @@
                 });
             }, function() {
                 return false;
-            });
+            })
 
 
         });

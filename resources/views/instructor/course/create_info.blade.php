@@ -157,20 +157,23 @@
             },
             messages: {
                 course_title: {
-                    required: 'The course title field is required.'
+                    required: 'Este campo é obrigatório.'
                 },
                 category_id: {
-                    required: 'The category field is required.'
+                    required: 'Este campo é obrigatório.'
                 },
                 instruction_level_id: {
-                    required: 'The instruction level field is required.'
+                    required: 'Este campo é obrigatório.'
                 }
             }
         });
 
         $('.course-id-empty').click(function()
         {
-            toastr.error("Fill course info to proceed");
+            toastr.options = {
+                "positionClass": "toast-top-full-width",
+            };
+            toastr.error("Preencha as informações gerais do curso para prosseguir");
         });
     });
 </script>

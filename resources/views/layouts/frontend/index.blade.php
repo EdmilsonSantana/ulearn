@@ -223,7 +223,7 @@
                 var url = $(this).attr('href');
                 event.preventDefault();
                 
-                if(confirm('Are you sure want to delete this record?'))
+                if(confirm('Tem certeza que deseja remover este registro ?'))
                 {
                     window.location.href = url;
                 } else {
