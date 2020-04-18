@@ -153,13 +153,13 @@ class Course extends Model
 		
 		if($sections->isEmpty()){	// IF EMPTY, CREATE DEFAULT SECTION AND LECTURE
 			$data['course_id'] = $id;
-			$data['title'] = 'Start Here';
+			$data['title'] = 'Inicie aqui';
 			$data['sort_order'] = '1';
 			
 			$sectionId = $this->insertSectionRow($data , '');
 			
 			$ldata['section_id'] = $sectionId;
-			$ldata['title'] = 'Introduction';
+			$ldata['title'] = 'Introdução';
 			$ldata['sort_order'] = '1';
 			$ldata['type'] = '0';
 			
@@ -176,7 +176,7 @@ class Course extends Model
 			
 			if($lecturesquiz[$sectionid]->isEmpty()){
 				$ldata['section_id'] = $sectionid;
-				$ldata['title'] = 'Introduction';
+				$ldata['title'] = 'Introdução';
 				$ldata['sort_order'] = '1';
 				$ldata['type'] = '0';
 				

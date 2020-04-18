@@ -156,6 +156,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     tinymce.init({
+      entity_encoding: "raw",
       selector: "textarea", // change this value according to your HTML
       plugins: "code",
       toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | code",

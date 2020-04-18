@@ -19,7 +19,7 @@
             {!! Lang::get('curriculum.lecture_process') !!}
             @else
             <audio controls>
-                <source src="{{ Storage::url('app/public/course/'.$course_id.'/'.$file_name.'.mp3') }}" type="audio/mpeg">{!! Lang::get('curriculum.browser_support')!!}</audio>
+                <source src="{{ Storage::url('app/public/course/'.$course_id.'/'.$file_name . '.' . $file_type) }}" type="audio/mpeg">{!! Lang::get('curriculum.browser_support')!!}</audio>
             @endif
         </div>
     </div>

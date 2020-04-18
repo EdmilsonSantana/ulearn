@@ -70,7 +70,8 @@
 <script type="text/javascript">
     $(document).ready(function()
     { 
-        tinymce.init({ 
+        tinymce.init({
+            entity_encoding: "raw",
             selector:'textarea',
             menubar:false,
             statusbar: false,

@@ -61,7 +61,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc4545', end
 .su_course_curriculam li .edit_option {display:inline-block;font-size: 15px;font-weight: normal; }
 .su_course_curriculam li .edit_option label{font-weight: 700; float: right;font-weight: 700; max-width: 200px; overflow: hidden;text-overflow: ellipsis; white-space: nowrap;}
 .su_lgray_curr_block { position:relative; }
-.lecture_add_content {   line-height: normal; position: absolute; right: 24px; top: 8px; }
+.lecture_add_content {   line-height: normal; float: right; margin-right: 60px}
 .lecture_add_content input[type="button"], .lecture_edit_content input[type="button"] { border: 0 none; color: #FFFFFF; font: 12px; height: 30px; margin: 0; padding: 0 10px;  border-radius:5px; }
 .su_course_add_content_form {
 background: #ffffff; /* Old browsers */

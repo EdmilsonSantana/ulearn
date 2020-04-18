@@ -592,6 +592,7 @@ $(document).ready(function(){
     mode : "specific_textareas",
     editor_selector : "curricullamEditor",
     theme : "advanced",
+    entity_encoding: "raw",
     theme_advanced_buttons1 : "bold,italic,underline",
     theme_advanced_toolbar_location : "top",
     theme_advanced_toolbar_align : "left",
@@ -1057,6 +1058,7 @@ $(document).ready(function(){
   $(document).on('click','.su_course_add_lecture_desc_submit',function(){
     var lid = $(this).data('lid');
     var text = $.trim(tinyClean(tinyMCE.get('lecturedesc-'+lid).getContent()));
+    console.log(text);
     if(text != '') {
       var courselecturedesc =$('[name="courselecturedesc"]').val();
       var _token =$('[name="_token"]').val();

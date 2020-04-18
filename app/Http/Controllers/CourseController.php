@@ -821,9 +821,6 @@ class CourseController extends Controller
         $courseFiles->file_size = $file_size;
         $courseFiles->duration = $duration;
         $courseFiles->processed = 1;
-        if ($file_type != 'mp3') {
-            $courseFiles->processed = 0;
-        }
         $courseFiles->file_tag = 'curriculum';
         $courseFiles->uploader_id = \Auth::user()->instructor->id;
         $courseFiles->created_at = time();
@@ -845,6 +842,7 @@ class CourseController extends Controller
                     'file_title' => $file_title,
                     'processed' => $courseFiles->processed,
                     'file_name' => $file_name,
+                    'file_type' => $file_type,
                     'lecturequiz' => $this->model->get_lecture($lid),
                     'course_id' => $course_id
                 ))
@@ -1106,6 +1104,7 @@ class CourseController extends Controller
                 'file_title' => $libraryDetails['0']->file_title,
                 'processed' => $libraryDetails['0']->processed,
                 'file_name' => $libraryDetails['0']->file_name,
+                'file_type' => $libraryDetails['0']->file_type,
                 'lecturequiz' => $this->model->get_lecture($lid),
                 'course_id' => $course_id
             );
