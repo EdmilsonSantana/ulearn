@@ -81,7 +81,7 @@ export default class CoursesTab extends Component {
                         course.price
                           ? `${this.state.courses.preferences.defaultCurrency ||
                               ""}${course.price}`
-                          : "Free"
+                          : "Gratuito"
                       }
                       strikeOutPrice={course.strike_out_price}
                     />

@@ -16,19 +16,15 @@ class InstructionLevelTableSeeder extends Seeder
 
         if (!$is_exist->count()) {
             $instruction_levels = new InstructionLevel();
-            $instruction_levels->level = 'Introductory';
+            $instruction_levels->level = 'Introdutório';
             $instruction_levels->save();
 
             $instruction_levels = new InstructionLevel();
-            $instruction_levels->level = 'Intermediate';
+            $instruction_levels->level = 'Intermediário';
             $instruction_levels->save();
 
             $instruction_levels = new InstructionLevel();
-            $instruction_levels->level = 'Advanced';
-            $instruction_levels->save();
-
-            $instruction_levels = new InstructionLevel();
-            $instruction_levels->level = 'Comprehensive';
+            $instruction_levels->level = 'Avançado';
             $instruction_levels->save();
         }
     }
