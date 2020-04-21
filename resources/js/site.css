@@ -1169,6 +1169,10 @@ video {
 }
 
 .media-container {
+  height: 100%;
+}
+
+.media-video, .media-audio, .media-text {
   height: 70vh;
 }
 

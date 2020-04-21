@@ -22,6 +22,10 @@
             var videoPlayer = videojs("{{ isset($id) ? $id : '' }}");
             videoPlayer.pause();
         });
+
+        $('video').on('contextmenu', function(e) {
+            e.preventDefault();
+        });
     });
 </script>
 @endif
