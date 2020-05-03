@@ -17,7 +17,16 @@ class Course extends Model
         return \DB::table('course_taken')
           ->where('course_taken.course_id',$course->id)
           ->where('course_taken.user_id',$user_id)
-          ->first();
+          ->exists();
+    }
+
+    public static function is_instructor($course_slug, $user_id)
+    {
+        $instructor = \DB::table('instructors')->where('user_id' , $user_id)->first();
+        
+        return \DB::table('courses')
+          ->where('course_slug', $course_slug)
+          ->where('instructor_id', $instructor->id)->exists();
     }
 
     public function students_count($course_id)

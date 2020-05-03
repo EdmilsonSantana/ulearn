@@ -174,7 +174,7 @@ figure figcaption {
 	            <label class="cabinet center-block">
 	                <figure class="course-image-container">
 	                    <i data-toggle="tooltip" data-original-title="Delete" data-id="course_image" class="fa fa-trash remove-lp" data-content="{{  Crypt::encryptString(json_encode(array('model'=>'courses', 'field'=>'course_image', 'pid' => 'id', 'id' => $instructor->id, 'photo'=>$instructor->instructor_image))) }}" style="display: @if(Storage::exists($instructor->instructor_image)){{ 'block' }} @else {{ 'none' }} @endif"></i>
-	                    <img src="@if(Storage::exists($instructor->instructor_image)){{ Storage::url($instructor->instructor_image) }}@else{{ asset('backend/assets/images/course_detail.jpg') }}@endif" class="gambar img-responsive" id="course_image-output" name="course_image-output" />
+	                    <img src="@if(Storage::disk('public')->exists($instructor->instructor_image)){{ Storage::disk('public')->url($instructor->instructor_image) }}@else{{ asset('backend/assets/images/course_detail.jpg') }}@endif" class="gambar img-responsive" id="course_image-output" name="course_image-output" />
 	                	<input type="file" class="item-img file center-block" name="course_image" id="course_image" />
 	                </figure>
                     <span style="font-size: 10px;">
@@ -242,7 +242,7 @@ figure figcaption {
     $(document).ready(function()
     { 
         //image crop start
-        $(".gambar").attr("src", @if(Storage::exists($instructor->instructor_image))"{{ Storage::url($instructor->instructor_image) }}" @else "{{ asset('backend/assets/images/course_detail.jpg') }}" @endif);
+        $(".gambar").attr("src", @if(Storage::disk('public')->exists($instructor->instructor_image))"{{ Storage::disk('public')->url($instructor->instructor_image) }}" @else "{{ asset('backend/assets/images/course_detail.jpg') }}" @endif);
 
         var $uploadCrop,
         tempFilename,

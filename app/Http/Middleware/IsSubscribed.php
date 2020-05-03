@@ -21,18 +21,16 @@ class IsSubscribed
     {
         $user = Auth::user();
         $course_slug = $request->segment(2);
+
+        $is_subscribed = Course::is_subscribed($course_slug, $user->id) || Course::is_instructor($course_slug, $user->id);
         
-        $is_subscribed = Course::is_subscribed($course_slug, $user->id);
-        
-        if($is_subscribed)
-                return $next($request);
+        if ($is_subscribed)
+            return $next($request);
 
         if (Request::isMethod('get')) {
             abort(401);
-        } else if(Request::isMethod('post')) {
+        } else if (Request::isMethod('post')) {
             return redirect('/');
         }
-
-        
     }
 }

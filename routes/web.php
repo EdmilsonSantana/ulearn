@@ -65,8 +65,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('readPDF/{file_id}', 'CourseController@readPDF');
         Route::get('update-lecture-status/{course_id}/{lecture_id}/{status}', 'CourseController@updateLectureStatus');
 
-        Route::get('download-resource/{resource_id}/{course_slug}', 'CourseController@getDownloadResource');
-
         Route::get('my-courses', 'CourseController@myCourses')->name('my.courses');
 
         Route::post('course-rate', 'CourseController@courseRate')->name('course.rate');
@@ -173,7 +171,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('course-enroll/{course_slug}/{lecture_slug}', function () {
             return view('site/course/course_enroll');
         });
-        Route::get('course-learn/{course_slug}', 'CourseController@courseLearn')->name('course.learn');
+
+        Route::get("/course/{course_slug}/file/{file_name}", "CourseFileController@courseFileServe")->name("storage.course.file");
     });
     
 });

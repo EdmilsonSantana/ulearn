@@ -131,19 +131,6 @@ class CourseController extends Controller
         }
     }
 
-    public function getDownloadResource($resource_id, $slug)
-    {
-        $file_details = \DB::table('course_files')->where('id', $resource_id)->first();
-        $course = \DB::table('courses')->where('course_slug', $slug)->first();
-
-        $file = public_path('storage/course/' . $course->id . '/' . $file_details->file_name . '.' . $file_details->file_extension);
-        $headers = array(
-            'Content-Type: application/pdf',
-        );
-
-        return \Response::download($file, $file_details->file_title, $headers);
-    }
-
     public function readPDF($file_id)
     {
         $file_id = SiteHelpers::encrypt_decrypt($file_id, 'd');
@@ -427,12 +414,12 @@ class CourseController extends Controller
             $new_file_name = SiteHelpers::checkFileName($path, $file_name);
 
             //save the image using storage
-            Storage::put($path . "/" . $new_file_name, $image_make->__toString(), 'public');
+            Storage::disk('public')->put($path . "/" . $new_file_name, $image_make->__toString(), 'public');
 
             //resize image for thumbnail
             $thumb_image = "thumb_" . $new_file_name;
             $resize = Image::make($request->input('course_image_base64'))->resize(258, 172)->encode('jpg');
-            Storage::put($path . "/" . $thumb_image, $resize->__toString(), 'public');
+            Storage::disk('public')->put($path . "/" . $thumb_image, $resize->__toString());
 
             $course = Course::find($course_id);
             $course->course_image = $path . "/" . $new_file_name;
@@ -528,13 +515,15 @@ class CourseController extends Controller
         $path = 'course/' . $course_id;
         $video_name = 'raw_' . $created_at . '_' . $file_name . '.' . $extension;
 
-        $video_path = 'app/public/' . $path . '/' . $video_name;
+        $video_path = $path . '/' . $video_name;
 
         $video_image_name = 'raw_' . $created_at . '_' . $file_name . '.jpg';
         $video_image_path = storage_path('app/public/' . $path . '/' . $video_image_name);
         $ffmpeg->convertImages($video_image_path);
 
-        $request->file('course_video')->storeAs($path, $video_name);
+        Storage::disk('public')->putFileAs(
+            $path, $request->file('course_video'), $video_name
+        );
 
         $courseVideos = new CourseVideos;
         $courseVideos->video_title = 'raw_' . $created_at . '_' . $file_name;
@@ -557,32 +546,26 @@ class CourseController extends Controller
             if ($old_video) {
                 $old_file_name = 'course/' . $old_video->course_id . '/' . $old_video->video_title . '.' . $old_video->video_type;
                 $old_file_image_name = 'course/' . $old_video->course_id . '/' . $old_video->video_title . '.jpg';
-                if (Storage::exists($old_file_name)) {
-                    Storage::delete($old_file_name);
+                if (Storage::disk('public')->exists($old_file_name)) {
+                    Storage::disk('public')->delete($old_file_name);
                 }
 
-                if (Storage::exists($old_file_image_name)) {
-                    Storage::delete($old_file_image_name);
+                if (Storage::disk('public')->exists($old_file_image_name)) {
+                    Storage::disk('public')->delete($old_file_image_name);
                 }
             }
-
+            
             $course->course_video = $courseVideos->id;
             $course->save();
 
-            $return_data = array(
-                'status'    => true,
-                'duration'  => $duration,
-                'file_title' => $file_title,
-                'file_link' => Storage::url($video_path),
-            );
-
             $route = 'site.course.components.course-video';
+            
+            $video_url = Storage::disk('public')->url($video_path);
 
             $return_data = array(
                 'status'    => true,
-                'file_link' => Storage::url($video_path),
                 'view' => $this->render_view($route, array(
-                    'video' => $courseVideos,
+                    'video_url' => $video_url,
                     'is_modal' => false,
                     'id' => 'promo-video'
                 ))
@@ -770,7 +753,6 @@ class CourseController extends Controller
 
             $return_data = array(
                 'status'    => true,
-                'file_link' => Storage::url($video_path),
                 'view' => $this->render_view($route, array(
                     'video' => $courseVideos,
                     'lecturequiz' => $this->model->get_lecture($lid)

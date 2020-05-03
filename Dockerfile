@@ -4,11 +4,13 @@ WORKDIR /ulearn
 
 COPY composer.json /ulearn/
 
-RUN composer update --prefer-dist --no-scripts --no-dev --no-autoloader
+RUN composer global require hirak/prestissimo --no-plugins --no-scripts && \ 
+    composer install --prefer-dist --no-scripts --no-autoloader && \
+    rm -rf /root/.composer
 
 COPY . /ulearn
 
-RUN composer dump-autoload --no-scripts --no-dev --optimize
+RUN composer dump-autoload --optimize
 
 FROM php:apache-stretch
 
@@ -25,9 +27,11 @@ RUN apt-get update && apt-get install -y \
 
 RUN a2enmod rewrite
 
+RUN chown -R www-data:www-data /var/www/html/
+
 VOLUME /var/www/html
 
-CMD php artisan migrate && php artisan db:seed && php artisan storage:link && apache2-foreground
+CMD php artisan migrate:refresh --seed && apache2-foreground
 
 
 

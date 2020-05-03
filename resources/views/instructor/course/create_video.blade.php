@@ -47,8 +47,8 @@
                   @php
                   $file_name = 'course/'.$video->course_id.'/'.$video->video_title.'.'.$video->video_type;
                   @endphp
-                  @if(Storage::exists($file_name))
-                  @include('site/course/components/course-video', ['video' => $video, 'id' => 'promo-video', 'is_modal' => false])
+                  @if(Storage::disk('public')->exists($file_name))
+                  @include('site/course/components/course-video', ['video_url' => Storage::disk('public')->url($file_name), 'id' => 'promo-video', 'is_modal' => false])
                   @else
                   <blockquote class="blockquote custom-blockquote blockquote-success mt-4">
                     <p class="mb-0">Vídeo Promocional não enviado.</p>
