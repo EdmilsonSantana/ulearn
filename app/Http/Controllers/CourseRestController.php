@@ -54,8 +54,8 @@ class CourseRestController extends Controller
             ->get();
 
         $courses = $courses->map(function ($course) {
-            if (Storage::exists($course->thumb_image)) {
-                $course->thumb_image = Storage::url($course->thumb_image);
+            if (Storage::disk('public')->exists($course->thumb_image)) {
+                $course->thumb_image = Storage::disk('public')->url($course->thumb_image);
             }
             return $course;
         });

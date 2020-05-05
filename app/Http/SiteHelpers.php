@@ -70,4 +70,12 @@ class SiteHelpers
 
         return '/course/' . $course->course_slug . '/file/' . $video->video_title . '.' . $video->video_type;
     }
+
+    public static function getCourseFileUrl($course_id, $file)
+    {
+
+        $course = Course::where('id', $course_id)->first();
+
+        return '/course/' . $course->course_slug . '/file/' . $file->file_name . '.' . $file->file_type;
+    }
 }

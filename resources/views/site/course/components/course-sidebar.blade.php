@@ -8,7 +8,7 @@
             </a>
             @endif
             <div class="course-image">
-                <img src="@if(Storage::exists($course->course_image)){{ Storage::url($course->course_image) }}@else{{ asset('backend/assets/images/course_detail.jpg') }}@endif">
+                <img src="@if(Storage::disk('public')->exists($course->course_image)){{ Storage::disk('public')->url($course->course_image) }}@else{{ asset('backend/assets/images/course_detail.jpg') }}@endif">
             </div>
         </div>
         <div class="course-feature-content">
@@ -36,12 +36,12 @@
                     @include('admin/components/link',
                     ['link' => $btn_route, 'text' => $btn_label, 'large' => true])
                     <div class="mt-1"></div>
-                    
-                    @if($is_subscribed)
-                        @include('admin/components/link',
-                        ['secondary' => true, 'text' => 'Deixe uma classificação', 'icon' => 'fa fa-star', 'large' => false, 'modal' => '#rateModal'])
 
-                        @include('site/course/components/course-rating')
+                    @if($is_subscribed)
+                    @include('admin/components/link',
+                    ['secondary' => true, 'text' => 'Deixe uma classificação', 'icon' => 'fa fa-star', 'large' => false, 'modal' => '#rateModal'])
+
+                    @include('site/course/components/course-rating')
                     @endif
                 </div>
             </div>
@@ -54,7 +54,16 @@
     </section>
 
     <div class="lity-hide">
-        @include('site/course/components/course-video', ['video' => $video,
-        'id' => 'course-video-preview', 'is_modal' => true])
+
+        @if($video)
+            @php
+                $file_name = 'course/'.$video->course_id.'/'.$video->video_title.'.'.$video->video_type;
+            @endphp
+            @if(Storage::disk('public')->exists($file_name))
+                @include('site/course/components/course-video', ['video_url' => Storage::disk('public')->url($file_name),
+                                                                'id' => 'course-video-preview', 
+                                                                'is_modal' => true])
+            @endif
+        @endif
     </div>
 </div>

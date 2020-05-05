@@ -5,8 +5,8 @@
         <div class="d-flex">
 
             <div class="lecture_title">
-                <p>{!! $file_title !!}</p>
-                <span>{!! $duration !!}</span>
+                <p>{!! $audio->file_title !!}</p>
+                <span>{!! $audio->duration !!}</span>
                 <p><span class="cclickable aud_preview text-default" data-id="{!! $lecturequiz->lecture_quiz_id !!}"><i class="fa fa-play"></i> {!! Lang::get('curriculum.Audio_Preview')!!}</span></p>
             </div>
 
@@ -15,11 +15,11 @@
         </div>
 
         <div class="media_preview" id="audio_preview{!! $lecturequiz->lecture_quiz_id !!}">
-            @if($processed == 0)
+            @if($audio->processed == 0)
             {!! Lang::get('curriculum.lecture_process') !!}
             @else
             <audio controls>
-                <source src="{{ Storage::url('app/public/course/'.$course_id.'/'.$file_name . '.' . $file_type) }}" type="audio/mpeg">{!! Lang::get('curriculum.browser_support')!!}</audio>
+                <source src="{{ SiteHelpers::getCourseFileUrl($course_id, $audio) }}" type="audio/mpeg">{!! Lang::get('curriculum.browser_support')!!}</audio>
             @endif
         </div>
     </div>

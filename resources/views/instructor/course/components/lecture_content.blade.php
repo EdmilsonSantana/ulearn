@@ -238,11 +238,7 @@ use App\Library\ulearnHelpers;
                                 @include('instructor/course/components/media_video', ['video' => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]])
                             
                             @elseif($lecturequiz->media_type == 1)
-                                @include('instructor/course/components/media_audio', ['file_title' => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]->file_title,
-                                                                                      'duration'   => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]->duration,
-                                                                                      'processed'  => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]->processed,
-                                                                                      'file_type'  => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]->file_type,
-                                                                                      'file_name'  => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]->file_name])
+                                @include('instructor/course/components/media_audio', ['audio' => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]])
                             @elseif($lecturequiz->media_type == 2)
                                 @include('instructor/course/components/media_file', ['pdfpages' => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]->duration,
                                                                                      'file_title' => $lecturesmedia[$section->section_id][$lecturequiz->lecture_quiz_id][0]->file_title])
