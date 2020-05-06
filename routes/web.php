@@ -62,17 +62,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:student'], function () {
 
         Route::get('course-enroll-api/{course_slug}/{lecture_slug}/{is_sidebar}', 'CourseController@courseEnrollAPI');
-        Route::get('readPDF/{file_id}', 'CourseController@readPDF');
+        
         Route::get('update-lecture-status/{course_id}/{lecture_id}/{status}', 'CourseController@updateLectureStatus');
 
         Route::get('my-courses', 'CourseController@myCourses')->name('my.courses');
 
         Route::post('course-rate', 'CourseController@courseRate')->name('course.rate');
+        
         Route::get('delete-rating/{raing_id}', 'CourseController@deleteRating')->name('delete.rating');
 
         Route::get('course-enroll-api/{course_slug}/{lecture_slug}/{is_sidebar}', 'CourseController@courseEnrollAPI');
-        Route::get('readPDF/{file_id}', 'CourseController@readPDF');
-
     });
 
     //Functions accessed by both student and instructor

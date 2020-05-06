@@ -1,6 +1,6 @@
 import React from "react";
 import VideoPlayer from "./VideoPlayer";
-//import PDFViewer from "pdf-viewer-reactjs";
+import PDFViewer from "pdf-viewer-reactjs";
 
 const Video = ({ lecture }) => (
   <div className="media-video col mb-5 mt-4 d-flex align-items-center justify-content-center">
@@ -12,7 +12,7 @@ const Video = ({ lecture }) => (
         fill: true,
         sources: [
           {
-            src: `${storage_url}/${lecture.course_id}/${lecture.video_title}.${lecture.video_type}`,
+            src: `/course/${course_slug}/file/${lecture.video_title}.${lecture.video_type}`,
             type: "video/mp4",
           },
         ],
@@ -29,7 +29,7 @@ const Audio = ({ lecture }) => (
       controlsList="nodownload"
     >
       <source
-        src={`${storage_url}/${lecture.course_id}/${lecture.file_name}.${lecture.file_extension}`}
+        src={`/course/${course_slug}/file/${lecture.file_name}.${lecture.file_extension}`}
         type="audio/mpeg"
       />
     </audio>
@@ -37,14 +37,13 @@ const Audio = ({ lecture }) => (
 );
 
 const Document = ({ lecture }) => (
-/* <div className="container col mb-5 mt-4">
-  <PDFViewer
-      navbarOnTop={true}
+  <div className="container col mb-5 mt-4">
+    <PDFViewer
       protectContent={true}
-      document={{ url: `${site_url}/readPDF/${lecture.media}` }}
+      scale={1.2}
+      document={{ url: `/course/${course_slug}/file/${lecture.file_name}.${lecture.file_extension}` }}
     />
-  </div>*/
-  <div></div>
+  </div>
 );
 
 const PlainText = ({ lecture }) => (
@@ -61,6 +60,7 @@ const Media = (props) => {
     <PlainText {...props} />,
   ];
 
+  console.log(props);
   return (
     <React.Fragment>{mediaTypes[props.lecture.media_type]}</React.Fragment>
   );

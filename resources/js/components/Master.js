@@ -38,7 +38,7 @@ export default class Master extends Component {
           console.log(response.data.sections);
           this.setState({
             sections: response.data.sections,
-            lecture_detail: response.data.lecture_details
+            lecture_detail: response.data.lecture_details,
           });
           console.log(this.state);
         })
