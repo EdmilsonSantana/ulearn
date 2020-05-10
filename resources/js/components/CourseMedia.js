@@ -1,6 +1,6 @@
 import React from "react";
 import VideoPlayer from "./VideoPlayer";
-import PDFViewer from "pdf-viewer-reactjs";
+import PDFViewer from "./PDFViewer";
 
 const Video = ({ lecture }) => (
   <div className="media-video col mb-5 mt-4 d-flex align-items-center justify-content-center">
@@ -37,11 +37,11 @@ const Audio = ({ lecture }) => (
 );
 
 const Document = ({ lecture }) => (
-  <div className="container col mb-5 mt-4">
-    <PDFViewer
-      protectContent={true}
-      scale={1.2}
-      document={{ url: `/course/${course_slug}/file/${lecture.file_name}.${lecture.file_extension}` }}
+  <div className="col mb-5 mt-4">
+    <iframe
+      width="100%"
+      height="100%"
+      src={`/course/${course_slug}/file/${lecture.file_name}.${lecture.file_extension}#toolbar=0&scrollbar=0&navpanes=1`}
     />
   </div>
 );

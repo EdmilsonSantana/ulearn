@@ -791,6 +791,13 @@
     "@babel/plugin-transform-react-jsx-self" "^7.9.0"
     "@babel/plugin-transform-react-jsx-source" "^7.9.0"
 
+"@babel/runtime@^7.0.0":
+  version "7.9.6"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.6.tgz#a9102eb5cadedf3f31d08a9ecf294af7827ea29f"
+  integrity sha512-64AF1xY3OAkFHqOb9s4jpgk1Mm5vDZ4L3acHvAml+53nO1XbXLuDodsVpO4OIUsmemlUHMxNdYMNJmsvOwLrvQ==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.4.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4":
   version "7.9.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
@@ -1627,16 +1634,6 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
-
-bulma-helpers@^0.3.10:
-  version "0.3.10"
-  resolved "https://registry.yarnpkg.com/bulma-helpers/-/bulma-helpers-0.3.10.tgz#a0ab518b44343bb708339ade721f7355d159a547"
-  integrity sha512-dgJB8LreVzAHJfcbYUUONA0oo/cdWxhFt1b/DlmTLaukYTjkdM5GP9A7DRyssjuRhcozIqzTm//BLLR313Xw3Q==
-
-bulma@^0.8.1:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.8.2.tgz#5d928f16ed4a84549c2873f95c92c38c69c631a7"
-  integrity sha512-vMM/ijYSxX+Sm+nD7Lmc1UgWDy2JcL2nTKqwgEqXuOMU+IGALbXd5MLt/BcjBAPLIx36TtzhzBcSnOP974gcqA==
 
 bytes@3.0.0:
   version "3.0.0"
@@ -4291,6 +4288,11 @@ lodash.memoize@^4.1.2:
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
 
+lodash.once@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
+  integrity sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=
+
 lodash.restparam@^3.0.0:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
@@ -4360,6 +4362,11 @@ make-dir@^2.0.0:
     pify "^4.0.1"
     semver "^5.6.0"
 
+make-event-props@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/make-event-props/-/make-event-props-1.2.0.tgz#96b87d88919533b8f8934b58b4c3d5679459a0cf"
+  integrity sha512-BmWFkm/jZzVH9A0tEBdkjAARUz/eha+5IRyfOndeSMKRadkgR5DawoBHoRwLxkYmjJOI5bHkXKpaZocxj+dKgg==
+
 map-age-cleaner@^0.1.1:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/map-age-cleaner/-/map-age-cleaner-0.1.3.tgz#7d583a7306434c055fe474b0f45078e6e1b4b92a"
@@ -4378,11 +4385,6 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
-
-material-design-icons@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/material-design-icons/-/material-design-icons-3.0.1.tgz#9a71c48747218ebca51e51a66da682038cdcb7bf"
-  integrity sha1-mnHEh0chjrylHlGmbaaCA4zct78=
 
 md5.js@^1.3.4:
   version "1.3.5"
@@ -4441,6 +4443,11 @@ memory-fs@^0.5.0:
   dependencies:
     errno "^0.1.3"
     readable-stream "^2.0.1"
+
+merge-class-names@^1.1.1:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/merge-class-names/-/merge-class-names-1.3.0.tgz#c4cdc1a981a81dd9afc27aa4287e912a337c5dee"
+  integrity sha512-k0Qaj36VBpKgdc8c188LEZvo6v/zzry/FUufwopWbMSp6/knfVFU/KIB55/hJjeIpg18IH2WskXJCRnM/1BrdQ==
 
 merge-descriptors@1.0.1:
   version "1.0.1"
@@ -5124,21 +5131,10 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-pdf-viewer-reactjs@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/pdf-viewer-reactjs/-/pdf-viewer-reactjs-2.0.6.tgz#fa610861fd0913afffbe2492c6d6394b51f6e8cc"
-  integrity sha512-w2C4R+JTsS5kY2L90RA9lMovGMRPgEYB8W+biFNjNfRDLOx9bffYw96TdiR/CsnEUiO9MLY3z63qqV8k+pAoug==
-  dependencies:
-    bulma "^0.8.1"
-    bulma-helpers "^0.3.10"
-    material-design-icons "^3.0.1"
-    pdfjs-dist "^2.3.200"
-    prop-types "^15.7.2"
-
-pdfjs-dist@^2.3.200:
-  version "2.3.200"
-  resolved "https://registry.yarnpkg.com/pdfjs-dist/-/pdfjs-dist-2.3.200.tgz#2920dc28ae7f2b8313cd6d6223c97ae85ac07eac"
-  integrity sha512-+8wBjU5h8LPZOIvR9X2uCrp/8xWQG1DRDKMLg5lzGN1qyIAZlYUxA0KQyy12Nw5jN7ozulC6v97PMaDcLgAcFg==
+pdfjs-dist@2.1.266:
+  version "2.1.266"
+  resolved "https://registry.yarnpkg.com/pdfjs-dist/-/pdfjs-dist-2.1.266.tgz#cded02268b389559e807f410d2a729db62160026"
+  integrity sha512-Jy7o1wE3NezPxozexSbq4ltuLT0Z21ew/qrEiAEeUZzHxMHGk4DUV1D7RuCXg5vJDvHmjX1YssN+we9QfRRgXQ==
   dependencies:
     node-ensure "^0.0.0"
     worker-loader "^2.0.0"
@@ -5769,6 +5765,18 @@ react-modal@^3.11.1:
     prop-types "^15.5.10"
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
+
+react-pdf@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-pdf/-/react-pdf-4.1.0.tgz#fcb874f28050fe9593c4e04652c7bff94bb1acf9"
+  integrity sha512-SYwkWc+vRQHfrpDls3DOgn4G+wT0mYGJRor20e28GPRW8VB+6o8WqZ4QZxsl50z+dKM7UscXFnK/02eN3NXi2g==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    lodash.once "^4.1.1"
+    make-event-props "^1.1.0"
+    merge-class-names "^1.1.1"
+    pdfjs-dist "2.1.266"
+    prop-types "^15.6.2"
 
 react-perfect-scrollbar@^1.5.6:
   version "1.5.8"
